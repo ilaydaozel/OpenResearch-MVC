@@ -1,7 +1,5 @@
 package model;
 
-import interfaces.Observer;
-import interfaces.Observable;
 import java.util.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,12 +12,12 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
-public class Researcher implements Observable {
+public class Researcher extends java.util.Observable {
 	private String name;
 	private String password;
 	private String[] followingResearcherNames;
 	private String[] followerResearcherNames;
-	private List<Observer> observers = new ArrayList<>();
+	//private List<Observer> observers = new ArrayList<>();
 	
 	public Researcher() {
 		this.followerResearcherNames = new String[5];
@@ -32,7 +30,7 @@ public class Researcher implements Observable {
 	public void setName(String name) {
 		System.out.println("set name / researcher");
 		this.name = name;
-		//setChanged();
+		setChanged();	
 		notifyObservers();
 	}
 
@@ -40,7 +38,10 @@ public class Researcher implements Observable {
 		return password;
 	}
 	public void setPassword(String password) {
+		System.out.println("set password / researcher");
 		this.password = password;
+		setChanged();	
+		notifyObservers();
 	}
 	public String[] getFollowingResearcherNames() {
 		return followingResearcherNames;
@@ -54,6 +55,7 @@ public class Researcher implements Observable {
 	public void setFollowerResearcherNames(String[] followerResearcherNames) {
 		this.followerResearcherNames = followerResearcherNames;
 	}
+	/*
     public void addObserver(Observer observer) {
 	   System.out.println("add observers / researcher");
         observers.add(observer);
@@ -69,7 +71,7 @@ public class Researcher implements Observable {
             observer.update(this);
         }
     }
-    
+    */
     public boolean isValidUser() {
         try {
             File inputFile = new File("users.xml");

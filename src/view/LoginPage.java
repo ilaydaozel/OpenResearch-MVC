@@ -10,7 +10,7 @@ import interfaces.Observable;
 import interfaces.Observer;
 
 
-public class LoginPage extends JFrame implements Observer {
+public class LoginPage extends JFrame implements java.util.Observer {
     public static boolean isLoggedIn = false;
     
     private JLabel pageLabel = new JLabel("Welcome to OpenResearch!");
@@ -108,6 +108,7 @@ public class LoginPage extends JFrame implements Observer {
     }
 
 
+    /*
 	@Override
 	public void update(Observable observable) {
 		// TODO Auto-generated method stub
@@ -116,7 +117,7 @@ public class LoginPage extends JFrame implements Observer {
 		
 		this.username.setText(data);
 		
-	}
+	}*/
 	public String getUsernameInput() {
 		System.out.println("get username inp loginpage");
 		return this.usernameInput.getText();
@@ -130,6 +131,16 @@ public class LoginPage extends JFrame implements Observer {
     	System.out.println("login / loginpage");
     	loginButton.addActionListener(actionListener);
     }
+
+	@Override
+	public void update(java.util.Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		System.out.println("update loginpage");
+		String data = ((Researcher)o).getName();
+		
+		this.username.setText(data);
+		
+	}
     
     
 

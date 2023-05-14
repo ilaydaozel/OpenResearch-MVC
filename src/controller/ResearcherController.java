@@ -5,10 +5,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import com.cruds.db.AdminDAO;
-import com.cruds.gui.MainFrame;
-import com.cruds.model.Admin;
-
 import model.Researcher;
 import view.LoginPage;
 

@@ -6,9 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class LoginPage extends JFrame implements java.util.Observer {
-    public static boolean isLoggedIn = false;
-    
+public class LoginPage extends JFrame implements java.util.Observer {    
     private JLabel pageLabel = new JLabel("Welcome to OpenResearch!");
     private JLabel usernameLabel = new JLabel("Username");
     private JLabel passLabel = new JLabel("Password");
@@ -82,17 +80,6 @@ public class LoginPage extends JFrame implements java.util.Observer {
         pack();
     }
     
-
-    /*
-	@Override
-	public void update(Observable observable) {
-		// TODO Auto-generated method stub
-		System.out.println("update loginpage");
-		String data = ((Researcher)observable).getName();
-		
-		this.username.setText(data);
-		
-	}*/
 	public String getUsernameInput() {
 		System.out.println("get usernameinput / loginpage");
 		return this.usernameInput.getText();
@@ -100,14 +87,6 @@ public class LoginPage extends JFrame implements java.util.Observer {
 	public String getPasswordInput() {
 		System.out.println("get passwordinput / loginpage");
 		return this.passInput.getText();
-	}
-	
-    public static boolean isLoggedIn() {
-		return isLoggedIn;
-	}
-
-	public static void setLoggedIn(boolean isLoggedIn) {
-		LoginPage.isLoggedIn = isLoggedIn;
 	}
 
 	public void login(ActionListener actionListener) {
@@ -123,7 +102,7 @@ public class LoginPage extends JFrame implements java.util.Observer {
 	
 	public void changeToMainPage() {
         System.out.println("Logged in successfully");
-        new MainPage().setVisible(true);
+        new AccountPage(model).setVisible(true);
         this.dispose();
 	}
 	public void changeToErrorPage() {

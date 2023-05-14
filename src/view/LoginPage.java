@@ -6,10 +6,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import interfaces.Observable;
-import interfaces.Observer;
-
-
 public class LoginPage extends JFrame implements java.util.Observer {
     public static boolean isLoggedIn = false;
     
@@ -19,7 +15,6 @@ public class LoginPage extends JFrame implements java.util.Observer {
     private JTextField usernameInput  = new JTextField(20);
     private JTextField passInput = new JTextField(20);
     private JButton loginButton = new JButton("Login");
-    private JButton tryButton = new JButton("deneme");
     private Font bigFont = new Font("", Font.BOLD, 18);
     private Color orange = new Color(251, 133, 0);
     private Researcher model;
@@ -29,7 +24,7 @@ public class LoginPage extends JFrame implements java.util.Observer {
     	//this.model.addObserver(this);
     	initComponents();
     }
-    private JLabel username = new JLabel("a");
+
     private void initComponents() {
     	
 		loginButton.setPreferredSize(new Dimension(240, 40));
@@ -80,21 +75,6 @@ public class LoginPage extends JFrame implements java.util.Observer {
         
         add(loginButton, gridBagConstraints);
         
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.insets = buttonInset;
-        
-        add(tryButton, gridBagConstraints);
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.insets = labelInset;
-        /*username.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
-            }
-        });*/
-        add(username, gridBagConstraints);
-        
 		this.pack();
 		this.setTitle("Welcome to OpenResearch");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -102,11 +82,6 @@ public class LoginPage extends JFrame implements java.util.Observer {
         pack();
     }
     
-    public void pressButton(ActionListener actionListener) {
-    	System.out.println("pressbutton loginpage");
-    	tryButton.addActionListener(actionListener);
-    }
-
 
     /*
 	@Override
@@ -119,15 +94,23 @@ public class LoginPage extends JFrame implements java.util.Observer {
 		
 	}*/
 	public String getUsernameInput() {
-		System.out.println("get username inp loginpage");
+		System.out.println("get usernameinput / loginpage");
 		return this.usernameInput.getText();
 	}
 	public String getPasswordInput() {
-		System.out.println("get username inp loginpage");
+		System.out.println("get passwordinput / loginpage");
 		return this.passInput.getText();
 	}
+	
+    public static boolean isLoggedIn() {
+		return isLoggedIn;
+	}
 
-    public void login(ActionListener actionListener) {
+	public static void setLoggedIn(boolean isLoggedIn) {
+		LoginPage.isLoggedIn = isLoggedIn;
+	}
+
+	public void login(ActionListener actionListener) {
     	System.out.println("login / loginpage");
     	loginButton.addActionListener(actionListener);
     }
@@ -135,13 +118,20 @@ public class LoginPage extends JFrame implements java.util.Observer {
 	@Override
 	public void update(java.util.Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		System.out.println("update loginpage");
-		String data = ((Researcher)o).getName();
-		
-		this.username.setText(data);
+		System.out.println("update/ loginpage");
+	}
+	
+	public void changeToMainPage() {
+        System.out.println("Logged in successfully");
+        new MainPage().setVisible(true);
+        this.dispose();
+	}
+	public void changeToErrorPage() {
+		 JOptionPane.showMessageDialog(this, "Please enter a valid email and password", "Error", JOptionPane.ERROR_MESSAGE);
 		
 	}
-    
+	
+	
     
 
 

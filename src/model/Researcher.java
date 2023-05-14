@@ -17,6 +17,7 @@ public class Researcher extends java.util.Observable {
 	private String password;
 	private String[] followingResearcherNames;
 	private String[] followerResearcherNames;
+	private boolean loggedIn;
 	//private List<Observer> observers = new ArrayList<>();
 	
 	public Researcher() {
@@ -35,6 +36,7 @@ public class Researcher extends java.util.Observable {
 	}
 
 	public String getPassword() {
+		System.out.println("set password / researcher");
 		return password;
 	}
 	public void setPassword(String password) {
@@ -55,24 +57,8 @@ public class Researcher extends java.util.Observable {
 	public void setFollowerResearcherNames(String[] followerResearcherNames) {
 		this.followerResearcherNames = followerResearcherNames;
 	}
-	/*
-    public void addObserver(Observer observer) {
-	   System.out.println("add observers / researcher");
-        observers.add(observer);
-    }
 
-    public void removeObserver(Observer observer) {
-        observers.remove(observer);
-    }
-
-    public void notifyObservers() {
-    	System.out.println("notify observers / researcher");
-        for (Observer observer : observers) {
-            observer.update(this);
-        }
-    }
-    */
-    public boolean isValidUser() {
+    public void isValidUser() {
         try {
             File inputFile = new File("users.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -90,56 +76,25 @@ public class Researcher extends java.util.Observable {
                   String username =  eElement.getElementsByTagName("researcher_name").item(0).getTextContent();
                   String password = eElement.getElementsByTagName("password").item(0).getTextContent();
                   if (username.equals(this.name) && password.equals(this.password)) {
-                	  return true;
+                	  loggedIn = true;
                   }
                }
             }
          } catch (Exception e) {
             e.printStackTrace();
          }
-        return false;
-        /*        String filePath = "users.txt";
-        try {
-            File inputFile = new File("users.xml");
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(inputFile);
-            doc.getDocumentElement().normalize();
-            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-            NodeList nList = doc.getElementsByTagName("researcher");
-            System.out.println("----------------------------");
-            
-            for (int temp = 0; temp < nList.getLength(); temp++) {
-               Node nNode = nList.item(temp);
-               System.out.println("\nCurrent Element :" + nNode.getNodeName());
-               
-               if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                  Element eElement = (Element) nNode;
-
-                  System.out.println("researcher_name : " 
-                     + eElement
-                     .getElementsByTagName("researcher_name")
-                     .item(0)
-                     .getTextContent());
-                  System.out.println("password : " 
-                     + eElement
-                     .getElementsByTagName("password")
-                     .item(0)
-                     .getTextContent());
-                  System.out.println("following_researcher_names : " 
-                     + eElement
-                     .getElementsByTagName("following_researcher_names")
-                     .item(0)
-                     .getTextContent());
-                  System.out.println("follower_researcher_names : " 
-                     + eElement
-                     .getElementsByTagName("follower_researcher_names")
-                     .item(0)
-                     .getTextContent());
-               }
-            }
-         } catch (Exception e) {
-            e.printStackTrace();
-         }*/
+        System.out.println("is valid /researcher");
+        System.out.println("loggedIn: "+ loggedIn);
+		setChanged();	
+		notifyObservers();
     }
+	public boolean getLoggedIn() {
+		return loggedIn;
+	}
+	public void setLoggedIn(boolean loggedIn) {
+		this.loggedIn = loggedIn;
+		System.out.println("setloggedin /researcher");
+		setChanged();	
+		notifyObservers();
+	}
 }

@@ -18,9 +18,11 @@ public class Researcher implements Observable {
 		this.followingResearcherNames = new String[5];
 	}
 	public String getName() {
+		System.out.println("get name / researcher");
 		return name;
 	}
 	public void setName(String name) {
+		System.out.println("set name / researcher");
 		this.name = name;
 		//setChanged();
 		notifyObservers();
@@ -44,16 +46,17 @@ public class Researcher implements Observable {
 	public void setFollowerResearcherNames(String[] followerResearcherNames) {
 		this.followerResearcherNames = followerResearcherNames;
 	}
-   public void addObserver(Observer observer) {
+    public void addObserver(Observer observer) {
+	   System.out.println("add observers / researcher");
         observers.add(observer);
     }
 
-  
     public void removeObserver(Observer observer) {
         observers.remove(observer);
     }
 
     public void notifyObservers() {
+    	System.out.println("notify observers / researcher");
         for (Observer observer : observers) {
             observer.update(this);
         }

@@ -103,7 +103,7 @@ public class LoginPage extends JFrame implements Observer {
     }
     
     public void pressButton(ActionListener actionListener) {
-    	System.out.println("btn action");
+    	System.out.println("pressbutton loginpage");
     	loginButton.addActionListener(actionListener);
     }
 
@@ -111,12 +111,14 @@ public class LoginPage extends JFrame implements Observer {
 	@Override
 	public void update(Observable observable) {
 		// TODO Auto-generated method stub
+		System.out.println("update loginpage");
 		String data = ((Researcher)observable).getName();
 		
 		this.username.setText(data);
 		
 	}
 	public String getUsernameInput() {
+		System.out.println("get username inp loginpage");
 		return this.usernameInput.getText();
 	}
 

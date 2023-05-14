@@ -1,6 +1,7 @@
 package controller;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import model.Researcher;
 import view.LoginPage;
@@ -13,12 +14,15 @@ public class ResearcherController {
 		this.model = model;
 		this.view = view;
 		model.addObserver(view);
-	    this.view.pressButton(e -> {
-	    	actionPerformed(e);
-	    });
+		view.pressButton(new HandlePressButton());
+
 	}
 	
-	public void actionPerformed(ActionEvent evt) {
-		this.model.setName(this.view.getUsernameInput());
+
+	class HandlePressButton implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("action performed controller");
+			model.setName(view.getUsernameInput());
+		}
 	}
 }

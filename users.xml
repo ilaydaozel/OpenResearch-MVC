@@ -1,0 +1,16 @@
+<?xml version = "1.0"?>
+<researchers>
+   <researcher>
+	<researcher_name>İlayda</researcher_name>
+	<password>123</password>
+	<following_researcher_names></following_researcher_names>
+	<follower_researcher_names></follower_researcher_names>
+   </researcher>
+   <researcher>
+	<researcher_name>Mert</researcher_name>
+	<password>123</password>
+	<following_researcher_names></following_researcher_names>
+	<follower_researcher_names></follower_researcher_names>
+   </researcher>
+
+</researchers>

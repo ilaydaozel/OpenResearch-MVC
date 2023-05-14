@@ -11,14 +11,15 @@ import interfaces.Observer;
 
 
 public class LoginPage extends JFrame implements Observer {
-    public static boolean loggedIn = false;
-
+    public static boolean isLoggedIn = false;
+    
     private JLabel pageLabel = new JLabel("Welcome to OpenResearch!");
     private JLabel usernameLabel = new JLabel("Username");
     private JLabel passLabel = new JLabel("Password");
     private JTextField usernameInput  = new JTextField(20);
-    private JPasswordField passInput = new JPasswordField(20);
+    private JTextField passInput = new JTextField(20);
     private JButton loginButton = new JButton("Login");
+    private JButton tryButton = new JButton("deneme");
     private Font bigFont = new Font("", Font.BOLD, 18);
     private Color orange = new Color(251, 133, 0);
     private Researcher model;
@@ -76,17 +77,16 @@ public class LoginPage extends JFrame implements Observer {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.insets = buttonInset;
-        /*
-        loginButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
-            }
-        });*/
         
         add(loginButton, gridBagConstraints);
         
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
+        gridBagConstraints.insets = buttonInset;
+        
+        add(tryButton, gridBagConstraints);
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.insets = labelInset;
         /*username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,7 +104,7 @@ public class LoginPage extends JFrame implements Observer {
     
     public void pressButton(ActionListener actionListener) {
     	System.out.println("pressbutton loginpage");
-    	loginButton.addActionListener(actionListener);
+    	tryButton.addActionListener(actionListener);
     }
 
 
@@ -121,7 +121,17 @@ public class LoginPage extends JFrame implements Observer {
 		System.out.println("get username inp loginpage");
 		return this.usernameInput.getText();
 	}
+	public String getPasswordInput() {
+		System.out.println("get username inp loginpage");
+		return this.passInput.getText();
+	}
 
+    public void login(ActionListener actionListener) {
+    	System.out.println("login / loginpage");
+    	loginButton.addActionListener(actionListener);
+    }
+    
+    
 
 
 

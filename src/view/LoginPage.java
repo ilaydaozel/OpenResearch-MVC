@@ -14,21 +14,21 @@ public class LoginPage extends JFrame implements java.util.Observer {
     private JTextField passInput = new JTextField(20);
     private JButton loginButton = new JButton("Login");
     private Font bigFont = new Font("", Font.BOLD, 18);
-    private Color orange = new Color(251, 133, 0);
+    private Color blue = new Color(144, 219, 244);
+    private Color white = new Color(255, 255, 255);
+    private Container container = getContentPane();
     private Researcher model;
 
     public LoginPage( Researcher model) {
     	this.model = model;
-    	//this.model.addObserver(this);
     	initComponents();
     }
 
     private void initComponents() {
-    	
+    	container.setBackground(white);
 		loginButton.setPreferredSize(new Dimension(240, 40));
-		loginButton.setBackground(orange);
+		loginButton.setBackground(blue);
 		
-
         Insets fieldsInset = new Insets(0, 10, 10, 0);
         Insets buttonInset = new Insets(20,10,20,10);
         Insets labelInset = new Insets(10,10,10,10);
@@ -41,7 +41,7 @@ public class LoginPage extends JFrame implements java.util.Observer {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = GridBagConstraints.CENTER;
         pageLabel.setFont(bigFont);
-        pageLabel.setForeground(orange);
+        pageLabel.setForeground(blue);
         gridBagConstraints.insets = labelInset;
         add(pageLabel, gridBagConstraints);
         
@@ -97,14 +97,15 @@ public class LoginPage extends JFrame implements java.util.Observer {
 	@Override
 	public void update(java.util.Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		System.out.println("update/ loginpage");
+		System.out.println("UPDATE LOGIN");
+		System.out.println("username: " + model.getName());
+		System.out.println("password: " + model.getPassword());
+		System.out.println("-------------------- ");
+		/*usernameInput.setText(model.getName());
+		passInput.setText(model.getPassword());*/
 	}
 	
-	public void changeToMainPage() {
-        System.out.println("Logged in successfully");
-        new AccountPage(model).setVisible(true);
-        this.dispose();
-	}
+
 	public void changeToErrorPage() {
 		 JOptionPane.showMessageDialog(this, "Please enter a valid email and password", "Error", JOptionPane.ERROR_MESSAGE);
 		

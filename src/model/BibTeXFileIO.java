@@ -102,7 +102,7 @@ public class BibTeXFileIO implements IFileReader{
     
     public static void main(String[] args) {
     	List<Map<String, String>> dataList = new ArrayList<>();
-        
+
         
     	IFileReader BibReader = new BibTeXFileIO();
     	dataList= BibReader.readAllFilesInSameDirectory("OpenResearch-MVC/src/data/");

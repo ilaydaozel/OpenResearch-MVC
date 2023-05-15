@@ -36,7 +36,7 @@ public class Researcher extends java.util.Observable {
 	}
 
 	public String getPassword() {
-		System.out.println("set password / researcher");
+		System.out.println("get password / researcher");
 		return password;
 	}
 	public void setPassword(String password) {
@@ -57,7 +57,15 @@ public class Researcher extends java.util.Observable {
 	public void setFollowerResearcherNames(String[] followerResearcherNames) {
 		this.followerResearcherNames = followerResearcherNames;
 	}
-
+	public void reset() {
+		System.out.println("reset");
+		this.name="";
+		this.password ="";
+		this.followerResearcherNames = new String[5];
+		this.followingResearcherNames = new String[5];
+		setChanged();	
+		notifyObservers();
+	}
     public void isValidUser() {
         try {
             File inputFile = new File("users.xml");

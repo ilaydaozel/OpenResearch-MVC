@@ -1,30 +1,42 @@
 package model;
+
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class BibTeXFile {
     public static Map<String, String> readArticleFile(String filePath) {
-        Map<String, String> articleData = new HashMap<>();
+        Map<String, String> articleData = new LinkedHashMap<>(); // Use LinkedHashMap to maintain the order
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath),
+                StandardCharsets.UTF_8))) {
             String line;
             StringBuilder content = new StringBuilder();
 
             while ((line = reader.readLine()) != null) {
                 content.append(line);
             }
-
+            
             // Extracting fields using regular expressions
-            extractField(articleData, "title", content.toString());
             extractField(articleData, "author", content.toString());
+            extractField(articleData, "title", content.toString());
             extractField(articleData, "year", content.toString());
+            extractField(articleData, "issue_date", content.toString());
+            extractField(articleData, "publisher", content.toString());
+            extractField(articleData, "address", content.toString());
+            extractField(articleData, "volume", content.toString());
+            extractField(articleData, "number", content.toString());
+            extractField(articleData, "issn", content.toString());
             extractField(articleData, "abstract", content.toString());
             extractField(articleData, "journal", content.toString());
+            extractField(articleData, "month", content.toString());
             extractField(articleData, "pages", content.toString());
             extractField(articleData, "numpages", content.toString());
             extractField(articleData, "keywords", content.toString());
@@ -47,19 +59,12 @@ public class BibTeXFile {
     }
 
     public static void main(String[] args) {
-        String filePath = "src/data/A_2005_Introducing Test Automation and Test-Driven Development.bib";
+        String filePath = "article.txt";
         Map<String, String> data = readArticleFile(filePath);
-        
 
-		
         // Access the extracted information
-        System.out.println(data.get("title"));
-        System.out.println(data.get("author"));
-        System.out.println(data.get("year"));
-        System.out.println(data.get("abstract"));
-        System.out.println(data.get("journal"));
-        System.out.println(data.get("pages"));
-        System.out.println(data.get("numpages"));
-        System.out.println(data.get("keywords"));
+        for (Map.Entry<String, String> entry : data.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
     }
 }

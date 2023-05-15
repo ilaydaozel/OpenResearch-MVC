@@ -32,7 +32,7 @@ public class BibTeXFileIO implements IFileReader{
 
             String[] fieldNames = {
                     "author", "title", "year", "issue_date", "publisher", "address", "volume", "number",
-                    "issn", "abstract", "journal", "month", "pages", "numpages", "keywords"
+                    "issn", "abstract", "journal", "month", "pages", "numpages", "keywords","doi","series"
             };
 
             // Extract fields using regular expressions
@@ -48,12 +48,15 @@ public class BibTeXFileIO implements IFileReader{
     }
 
     private void extractField(Map<String, String> articleData, String field, String content) {
-        Pattern pattern = Pattern.compile(field + "\\s*=\\s*\\{([^}]*)}");
+        Pattern pattern = Pattern.compile(field + "\\s*=\\s*\\{([^}]*)}", Pattern.DOTALL);
+        
         Matcher matcher = pattern.matcher(content);
         
         if (matcher.find()) {
             String value = matcher.group(1);
+            value= value.replaceAll("[{}'\\\\]", "");
             value = value.replace("\u2013", "-"); // Replace Unicode hyphen with ASCII hyphen
+            
             articleData.put(field, value);
         }
     }
@@ -87,7 +90,7 @@ public class BibTeXFileIO implements IFileReader{
     public static void main(String[] args) {
     	
         
-    	BibTeXFileIO reader = new BibTeXFileIO();
+    	IFileReader reader = new BibTeXFileIO();
     	reader.readAllFilesInSameDirectory("OpenResearch-MVC/src/data/");
     	
     

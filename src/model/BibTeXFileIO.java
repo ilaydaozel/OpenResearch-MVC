@@ -5,18 +5,20 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import interfaces.IFileReader;
+
 import java.io.File;
 
-public class BibTeXFileIO {
+public class BibTeXFileIO implements IFileReader{
 	
 	
-	
-    public Map<String, String> readArticleFile(String filePath) {
+	@Override
+    public Map<String, String> readFile(String filePath) {
         Map<String, String> articleData = new LinkedHashMap<>(); // Use LinkedHashMap to maintain the order
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath),
@@ -55,8 +57,8 @@ public class BibTeXFileIO {
             articleData.put(field, value);
         }
     }
-
-    private void readAllFilesInSameDirectory(String directoryPath){
+    @Override
+    public void readAllFilesInSameDirectory(String directoryPath){
         File directory = new File(directoryPath);
         
         if (directory.isDirectory()) {
@@ -65,10 +67,9 @@ public class BibTeXFileIO {
             if (files != null) {
                 for (File file : files) {
                     if (file.isFile() && file.getName().endsWith(".bib")) {
-                    	if(file.getName().startsWith("A")) {System.out.println("Adayim");}
                         String filePath = file.getAbsolutePath();
                     	
-                        Map<String, String> data = readArticleFile(filePath);
+                        Map<String, String> data = readFile(filePath);
                         System.out.println("--------------------------------- ");
                         
                         for (Map.Entry<String, String> entry : data.entrySet()) {
@@ -87,7 +88,7 @@ public class BibTeXFileIO {
     	
         
     	BibTeXFileIO reader = new BibTeXFileIO();
-    	reader.readAllFilesInSameDirectory("src/data/");
+    	reader.readAllFilesInSameDirectory("OpenResearch-MVC/src/data/");
     	
     
 

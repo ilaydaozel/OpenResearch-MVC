@@ -9,9 +9,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 
 import interfaces.IFileReader;
-
+import interfaces.IFileWriter;
 import java.io.File;
 
 public class BibTeXFileIO implements IFileReader{
@@ -31,8 +35,7 @@ public class BibTeXFileIO implements IFileReader{
             }
 
             String[] fieldNames = {
-                    "author", "title", "year", "issue_date", "publisher", "address", "volume", "number",
-                    "issn", "abstract", "journal", "month", "pages", "numpages", "keywords"
+            		"author", "title","year", "volume", "number", "DOI", "journal","booktitle","doi" 
             };
 
             // Extract fields using regular expressions
@@ -48,18 +51,26 @@ public class BibTeXFileIO implements IFileReader{
     }
 
     private void extractField(Map<String, String> articleData, String field, String content) {
-        Pattern pattern = Pattern.compile(field + "\\s*=\\s*\\{([^}]*)}");
-        Matcher matcher = pattern.matcher(content);
         
+    	Pattern pattern = Pattern.compile(field + "\\s*=\\s*\\{([^}]*)}", Pattern.DOTALL);
+        
+        Matcher matcher = pattern.matcher(content);
+        if(content.charAt(1)=='a') {
+        	articleData.put("type", "article");
+        }
+        else {articleData.put("type", "conference paper");}
         if (matcher.find()) {
             String value = matcher.group(1);
+            value= value.replaceAll("[{}'\\\\]", "");
             value = value.replace("\u2013", "-"); // Replace Unicode hyphen with ASCII hyphen
+            
             articleData.put(field, value);
         }
     }
-    @Override
-    public void readAllFilesInSameDirectory(String directoryPath){
+    
+    public List<Map<String, String>> readAllFilesInSameDirectory(String directoryPath){
         File directory = new File(directoryPath);
+        List<Map<String, String>> dataList = new ArrayList<>();
         
         if (directory.isDirectory()) {
             File[] files = directory.listFiles();
@@ -67,14 +78,17 @@ public class BibTeXFileIO implements IFileReader{
             if (files != null) {
                 for (File file : files) {
                     if (file.isFile() && file.getName().endsWith(".bib")) {
+                    	
+                    	
                         String filePath = file.getAbsolutePath();
                     	
                         Map<String, String> data = readFile(filePath);
-                        System.out.println("--------------------------------- ");
                         
-                        for (Map.Entry<String, String> entry : data.entrySet()) {
+                        dataList.add(data);
+                        
+                       /* for (Map.Entry<String, String> entry : data.entrySet()) {
                             System.out.println(entry.getKey() + ": " + entry.getValue());
-                        }
+                        }*/
                  
                     }
                 }
@@ -83,14 +97,17 @@ public class BibTeXFileIO implements IFileReader{
         else {
         	System.out.println("directory not found");
         }
+        return dataList;
     }
-    public static void main(String[] args) {
-    	
-        
-    	BibTeXFileIO reader = new BibTeXFileIO();
-    	reader.readAllFilesInSameDirectory("src/data/");
-    	
     
+    public static void main(String[] args) {
+    	List<Map<String, String>> dataList = new ArrayList<>();
+
+        
+    	IFileReader BibReader = new BibTeXFileIO();
+    	dataList= BibReader.readAllFilesInSameDirectory("OpenResearch-MVC/src/data/");
+    	IFileWriter csvWriter = new CsvFileIO();
+    	csvWriter.writeAllPapers(dataList);
 
     }
 }

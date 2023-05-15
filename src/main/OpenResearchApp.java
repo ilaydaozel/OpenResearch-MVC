@@ -1,16 +1,24 @@
 package main;
 
-import model.Researcher;
-import view.LoginPage;
-import controller.AuthController;
+import model.*;
+import view.*;
+import controller.*;
 
 public class OpenResearchApp {
 	public static void main(String[] args) {
 		Researcher model = new Researcher();
-		LoginPage view = new LoginPage(model);
-		@SuppressWarnings("unused")
-		AuthController controller = new AuthController(model,view);
+		LoginPage loginView = new LoginPage(model);
+		//MainPage mainView = new MainPage(model);
 		
-		view.setVisible(true);
+		@SuppressWarnings("unused")
+		AuthController controller = new AuthController(model,loginView);
+
+		
+		//mainView.setVisible(true);
+		loginView.setVisible(true);
+    	//BibTeXFileIO reader = new BibTeXFileIO();
+    	//reader.readAllFilesInSameDirectory("src/data/");
+    	
+
 	}
 }

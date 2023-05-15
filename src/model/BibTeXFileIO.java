@@ -88,7 +88,7 @@ public class BibTeXFileIO implements IFileReader{
     	
         
     	BibTeXFileIO reader = new BibTeXFileIO();
-    	reader.readAllFilesInSameDirectory("OpenResearch-MVC/src/data/");
+    	reader.readAllFilesInSameDirectory("src/data/");
     	
     
 

@@ -2,12 +2,12 @@ package model;
 
 //Article.java
 public class Article extends Paper {
- private int volume;
- private int number;
+ private String volume;
+ private String number;
  private String journal;
 
- public Article(String[] authors, String title, int year, String doi, int volume, int number, String journal) {
-     super(authors, title, year, doi);
+ public Article(String authors, String title, String year, String doi, String volume, String number, String journal,int downloadNumber) {
+     super(authors, title, year, doi, downloadNumber);
      this.volume = volume;
      this.number = number;
      this.journal = journal;
@@ -15,19 +15,19 @@ public class Article extends Paper {
 
  // Getters and setters
 
- public int getVolume() {
+ public String getVolume() {
      return volume;
  }
 
- public void setVolume(int volume) {
+ public void setVolume(String volume) {
      this.volume = volume;
  }
 
- public int getNumber() {
+ public String getNumber() {
      return number;
  }
 
- public void setNumber(int number) {
+ public void setNumber(String number) {
      this.number = number;
  }
 

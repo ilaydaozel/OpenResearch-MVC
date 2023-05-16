@@ -16,24 +16,18 @@ public class AccountPage extends JPanel implements java.util.Observer{
 
     public AccountPage( Researcher model) {
     	this.model = model;
-    	//this.navbar = new Navbar(model);
     	initComponents();
     }
 
     private void initComponents() {
-
-        // uses Grid Bag Layout
         setLayout(new GridBagLayout());
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
         gridBagConstraints.fill = GridBagConstraints.NONE;
-
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
 
         add(label, gridBagConstraints);
-
-
     }
 
 	@Override

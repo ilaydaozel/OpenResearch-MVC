@@ -61,7 +61,7 @@ public class LoginPage extends JFrame implements java.util.Observer {
 
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-
+        usernameInput.setText("İlayda");
         add(usernameInput, gridBagConstraints);
 
         gridBagConstraints.gridx = 0;
@@ -72,6 +72,7 @@ public class LoginPage extends JFrame implements java.util.Observer {
 
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
+        passInput.setText("123");
 
         add(passInput, gridBagConstraints);
 
@@ -80,6 +81,8 @@ public class LoginPage extends JFrame implements java.util.Observer {
         gridBagConstraints.insets = buttonInset;
         
         add(loginButton, gridBagConstraints);
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
         
 		this.pack();
 		this.setTitle("Welcome to OpenResearch");

@@ -3,10 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import model.Researcher;
+import model.*;
 import view.*;
 
 
@@ -18,6 +15,7 @@ public class AuthController {
 	private AccountPage accountView;
 	private ResearchersPage researchersView;
 	private PapersPage papersView;
+	private ResearcherCollection researcherCollection = new ResearcherCollection() ;
 	
 	public AuthController(LoginPage loginView) {
 		//System.out.println("model name ain authcontroller beginning: " + model.getUsername());
@@ -47,7 +45,8 @@ public class AuthController {
 	    		//PageController pageController = new PageController(model, mainView);
 	    		mainView.getNavbar().logout(new LogoutListener());
 	    		accountView= new AccountPage(model);
-	    		researchersView= new ResearchersPage(model);
+	    		ResearcherCollection researcherCollection = new ResearcherCollection();
+	    		researchersView= new ResearchersPage();
 	    		papersView= new PapersPage(model);
 	    		mainView.getNavbar().showAccountPage(  new ShowAccountPageListener());
 	    		mainView.getNavbar().showResearchersPage(  new ShowResearchersPageListener());
@@ -67,8 +66,9 @@ public class AuthController {
 	}
 	class ShowResearchersPageListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("rseacrhers");
+			System.out.println("reseacrhers");
 			mainView.setContent(researchersView);
+			ResearcherController researcherController = new ResearcherController(researchersView);
 		}
 	}
 	class ShowPapersPageListener implements ActionListener{
@@ -88,7 +88,7 @@ public class AuthController {
 			
 			LoginPage newLogin = new LoginPage();
 			(newLogin).setVisible(true);
-			loginView = newLogin;
+			AuthController newController = new AuthController(newLogin);
 
 		}
 	}

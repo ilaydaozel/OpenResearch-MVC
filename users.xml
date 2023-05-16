@@ -13,7 +13,19 @@
 	<follower_researcher_names></follower_researcher_names>
    </researcher>
    <researcher>
-	<researcher_name>a</researcher_name>
+	<researcher_name>tugkantuglular</researcher_name>
+	<password>1</password>
+	<following_researcher_names></following_researcher_names>
+	<follower_researcher_names></follower_researcher_names>
+   </researcher>
+   <researcher>
+	<researcher_name>serhatcaner</researcher_name>
+	<password>1</password>
+	<following_researcher_names></following_researcher_names>
+	<follower_researcher_names></follower_researcher_names>
+   </researcher>
+   <researcher>
+	<researcher_name>dilekozturk</researcher_name>
 	<password>1</password>
 	<following_researcher_names></following_researcher_names>
 	<follower_researcher_names></follower_researcher_names>

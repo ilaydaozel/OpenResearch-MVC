@@ -17,18 +17,15 @@ public class PapersPage extends JPanel implements java.util.Observer{
 
     public PapersPage( Researcher model) {
     	this.model = model;
-    	//this.navbar = new Navbar(model);
     	initComponents();
     }
 
     private void initComponents() {
 
-        // uses Grid Bag Layout
         setLayout(new GridBagLayout());
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
         gridBagConstraints.fill = GridBagConstraints.NONE;
-
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
 

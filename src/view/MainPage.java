@@ -26,6 +26,7 @@ public class MainPage extends JFrame implements IPage, java.util.Observer{
     }
 
     private void initComponents() {
+    	setMinimumSize(new Dimension(1000, 600));
     	container.setLayout(new GridBagLayout());
     	GridBagConstraints containerConstraints = new GridBagConstraints();    	
     	containerConstraints.fill = GridBagConstraints.HORIZONTAL;
@@ -33,10 +34,17 @@ public class MainPage extends JFrame implements IPage, java.util.Observer{
     	containerConstraints.anchor = GridBagConstraints.PAGE_START; 
     	containerConstraints.gridx = 0;     
     	containerConstraints.gridy = 0; 
+
     	container.add(navbarPanel, containerConstraints);
     	containerConstraints.gridy = 1;
+    	containerConstraints.gridx = 0;     
+    	containerConstraints.gridy = 1; 
+
     	container.add(contentPanel, containerConstraints);
-    	setHeading();
+		navbarPanel.removeAll();
+		navbarPanel.add(navbar);	
+		navbarPanel.repaint();
+		navbarPanel.revalidate();	
     	setContent(new AccountPage(model));
 		this.pack();
 		this.setTitle("Main Page");
@@ -65,15 +73,6 @@ public class MainPage extends JFrame implements IPage, java.util.Observer{
 		this.navbar = navbar;
 	}
 
-
-	@Override
-	public void setHeading() {
-		//removeAll();
-		navbarPanel.add(navbar);
-		//repaint();
-		//revalidate();	
-	}
-
 	@Override
 	public void setContent(Component page) {
 		System.out.println("set content in mainpage");
@@ -83,11 +82,5 @@ public class MainPage extends JFrame implements IPage, java.util.Observer{
 		contentPanel.repaint();
 		contentPanel.revalidate();	
 	}
-
-	/*public void showAccountPage(ActionListener actionListener) {
-		// TODO Auto-generated method stub
-		
-		
-	}*/
 	
 }

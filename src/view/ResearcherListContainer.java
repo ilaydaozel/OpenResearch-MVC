@@ -1,31 +1,28 @@
 package view;
 
-import java.awt.Color;
-import javax.swing.JList;
-import javax.swing.JPanel;
+import java.awt.*;
+import javax.swing.*;
 import javax.swing.ListSelectionModel;
 
 import model.ResearcherCollection;
 
+@SuppressWarnings("serial")
 public class ResearcherListContainer extends JPanel {
 	private ResearcherCollection researcherList = new ResearcherCollection();
-    private JList list = new JList(researcherList.getResearchersList().toArray());
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	private JList list = new JList(researcherList.getResearchersList().toArray());
     
     public ResearcherListContainer() {
     	initComponents();
     }
     
     private void initComponents() {
-    	//setPreferredSize(new Dimension(600,400));
-    	setSize(960, 685);
-    	setBackground(new Color(255,0,100));
-		
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-        //list.setPreferredSize(new Dimension(300,400));
+        list.setLayoutOrientation(JList.VERTICAL);
         list.setVisibleRowCount(-1);
-        //JScrollPane listScroller = new JScrollPane(list);  
-        add(list);
+        JScrollPane listScroller = new JScrollPane(list);  
+        listScroller.setPreferredSize(new Dimension(300,200));
+        add(listScroller);
     }
 
 	public ResearcherCollection getResearcherList() {
@@ -34,10 +31,11 @@ public class ResearcherListContainer extends JPanel {
 	public void setResearcherList(ResearcherCollection researcherList) {
 		this.researcherList = researcherList;
 	}
+	@SuppressWarnings("rawtypes")
 	public JList getList() {
 		return list;
 	}
-	public void setList(JList list) {
+	public void setList(@SuppressWarnings("rawtypes") JList list) {
 		this.list = list;
 	}
 }

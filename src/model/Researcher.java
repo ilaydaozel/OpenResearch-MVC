@@ -107,4 +107,7 @@ public class Researcher extends java.util.Observable {
 	public void removeReadingList(ReadingList readingList) {
 		readingLists.remove(readingList);
 	}
+	public String toString() {
+		return username;
+	}
 }

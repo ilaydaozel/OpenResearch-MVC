@@ -11,31 +11,24 @@ import model.Researcher;
 import model.ResearcherCollection;
 
 public class ResearchersPage extends JPanel implements java.util.Observer{
-
-    private ResearcherCollection model;
     private JLabel label = new JLabel("Researchers Page");
-    private JButton viewButton = new JButton("view more");
+    private JButton viewButton = new JButton("View more");
     private JLabel selected = new JLabel("a");
     private ResearcherListContainer listContainer = new ResearcherListContainer();
-
-	 
-    //private JPanel contentPanel = new JPanel();
-
+    private Color blue = new Color(144, 219, 244);
+    
     public ResearchersPage() {
-    	this.model = model;
     	initComponents();
     }
 
     private void initComponents() {
-    	//setPreferredSize(new Dimension(600,400));
-    	setSize(960, 685);
-    	setBackground(new Color(255,255,255));
+    	setPreferredSize(new Dimension(600,400));
         setLayout(new GridBagLayout());
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-
+        label.setFont(new Font("", Font.BOLD, 20));
         add(label, gridBagConstraints);
 	
         gridBagConstraints.gridx = 0;
@@ -45,6 +38,8 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
         
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
+        viewButton.setBackground(blue);
+        viewButton.setPreferredSize(new Dimension(200,30));
         add(viewButton, gridBagConstraints);
         
         gridBagConstraints.gridx = 0;

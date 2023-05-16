@@ -14,12 +14,10 @@ public class Navbar extends JPanel implements java.util.Observer{
     private JButton accountButton = new JButton("My Account");
     private JButton papersButton = new JButton("Papers");
     private JButton researchersButton = new JButton("Researchers");
-    private JButton logoutButton = new JButton("Log out");
-    private Font bigFont = new Font("", Font.BOLD, 18);    
+    private JButton logoutButton = new JButton("Log out");  
     private Color blue = new Color(144, 219, 244);
-    private Color white = new Color(255, 255, 255);
+    JLabel name;
     private Researcher model;
-
 
     public Navbar( Researcher model) {
     	this.model = model;
@@ -27,7 +25,6 @@ public class Navbar extends JPanel implements java.util.Observer{
     }
 
     private void initComponents() {
-
     	papersButton.setPreferredSize(new Dimension(200, 30));
     	papersButton.setBackground(blue);
     	researchersButton.setPreferredSize(new Dimension(200, 30));
@@ -36,13 +33,12 @@ public class Navbar extends JPanel implements java.util.Observer{
     	accountButton.setBackground(blue);
     	logoutButton.setPreferredSize(new Dimension(200, 30));
     	logoutButton.setBackground(blue);
-    	System.out.println("model in main page: "+ model.getUsername());
-        JLabel name = new JLabel("User: "+ model.getUsername());
-    	setPreferredSize(new Dimension(1000,600));
+
     	setLayout(new GridBagLayout());
     	GridBagConstraints pageConstraints = new GridBagConstraints();    	
     	navbar.setLayout(new GridBagLayout());
-
+    	name = new JLabel("Welcome "+ model.getUsername()+ " !");
+    	name.setFont(new Font("", Font.BOLD, 16));
 		GridBagConstraints navbarConstraints = new GridBagConstraints();
 		//pageConstraints.fill = GridBagConstraints.PAGE_START;
     	navbar.add(papersButton, navbarConstraints);
@@ -53,6 +49,7 @@ public class Navbar extends JPanel implements java.util.Observer{
     	navbarConstraints.gridx = 3;
     	navbar.add(logoutButton, navbarConstraints);
     	navbarConstraints.gridx = 4;
+    	navbarConstraints.insets = new Insets(10, 10, 0, 10);
     	navbar.add(name, navbarConstraints);
 
     	pageConstraints.fill = GridBagConstraints.HORIZONTAL;

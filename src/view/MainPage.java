@@ -26,6 +26,7 @@ public class MainPage extends JFrame implements IPage, java.util.Observer{
     }
 
     private void initComponents() {
+    	setMinimumSize(new Dimension(1000, 600));
     	container.setLayout(new GridBagLayout());
     	GridBagConstraints containerConstraints = new GridBagConstraints();    	
     	containerConstraints.fill = GridBagConstraints.HORIZONTAL;
@@ -33,10 +34,12 @@ public class MainPage extends JFrame implements IPage, java.util.Observer{
     	containerConstraints.anchor = GridBagConstraints.PAGE_START; 
     	containerConstraints.gridx = 0;     
     	containerConstraints.gridy = 0; 
+
     	container.add(navbarPanel, containerConstraints);
     	containerConstraints.gridy = 1;
     	containerConstraints.gridx = 0;     
     	containerConstraints.gridy = 1; 
+
     	container.add(contentPanel, containerConstraints);
     	setHeading();
     	setContent(new AccountPage(model));

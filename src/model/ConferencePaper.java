@@ -5,8 +5,8 @@ package model;
 public class ConferencePaper extends Paper {
  private String bookTitle;
 
- public ConferencePaper(String[] authors, String title, int year, String doi, String bookTitle) {
-     super(authors, title, year, doi);
+ public ConferencePaper(String authors, String title, String year, String doi, String bookTitle,int downloadNumber) {
+     super(authors, title, year, doi, downloadNumber);
      this.bookTitle = bookTitle;
  }
 

@@ -6,67 +6,42 @@ import java.util.Observable;
 import javax.swing.*;
 
 
+import interfaces.IPage;
 import model.Researcher;
 
-public class MainPage extends JFrame implements java.util.Observer{
-	private JPanel navbar = new JPanel();
-    private JButton accountButton = new JButton("My Account");
-    private JButton paperListButton = new JButton("Paper List");
-    private JButton researcherListButton = new JButton("Researcher List");
-    private JButton logoutButton = new JButton("Log out");
-    private Font bigFont = new Font("", Font.BOLD, 18);    
-    private Color blue = new Color(144, 219, 244);
-    private Color white = new Color(255, 255, 255);
-    private Researcher model;
+public class MainPage extends JFrame implements IPage, java.util.Observer{
 
-    private Container container = getContentPane();
+    private Researcher model;
+    private Navbar navbar;
+    private JPanel navbarPanel = new JPanel();
+    private JPanel contentPanel = new JPanel();
+	private Container container = getContentPane();
+	private Component AccountPage;
 
     public MainPage( Researcher model) {
     	this.model = model;
+    	this.navbar = new Navbar(model);
+    	this.AccountPage = new AccountPage(model);
     	initComponents();
     }
 
     private void initComponents() {
-    	container.setBackground(white);
-    	paperListButton.setPreferredSize(new Dimension(200, 30));
-    	paperListButton.setBackground(blue);
-    	researcherListButton.setPreferredSize(new Dimension(200, 30));
-    	researcherListButton.setBackground(blue);
-    	accountButton.setPreferredSize(new Dimension(200, 30));
-    	accountButton.setBackground(blue);
-    	logoutButton.setPreferredSize(new Dimension(200, 30));
-    	logoutButton.setBackground(blue);
-    	System.out.println("model in main page: "+ model.getName());
-        JLabel name = new JLabel("User: "+ model.getName());
-    	setPreferredSize(new Dimension(1000,600));
-    	setLayout(new GridBagLayout());
-    	GridBagConstraints pageConstraints = new GridBagConstraints();    	
-    	navbar.setLayout(new GridBagLayout());
-
-		GridBagConstraints navbarConstraints = new GridBagConstraints();
-		//pageConstraints.fill = GridBagConstraints.PAGE_START;
-    	navbar.add(paperListButton, navbarConstraints);
-    	navbarConstraints.gridx = 1;
-    	navbar.add(researcherListButton, navbarConstraints);
-    	navbarConstraints.gridx = 2;
-    	navbar.add(accountButton, navbarConstraints);
-    	navbarConstraints.gridx = 3;
-    	navbar.add(logoutButton, navbarConstraints);
-    	navbarConstraints.gridx = 4;
-    	navbar.add(name, navbarConstraints);
-
-    	pageConstraints.fill = GridBagConstraints.HORIZONTAL;
-    	pageConstraints.weighty = 1.0;  
-    	pageConstraints.anchor = GridBagConstraints.PAGE_START; 
-    	pageConstraints.gridx = 0;     
-    	pageConstraints.gridy = 0;       
-        add(navbar, pageConstraints);
-
+    	container.setLayout(new GridBagLayout());
+    	GridBagConstraints containerConstraints = new GridBagConstraints();    	
+    	containerConstraints.fill = GridBagConstraints.HORIZONTAL;
+    	containerConstraints.weighty = 1.0;  
+    	containerConstraints.anchor = GridBagConstraints.PAGE_START; 
+    	containerConstraints.gridx = 0;     
+    	containerConstraints.gridy = 0; 
+    	container.add(navbarPanel, containerConstraints);
+    	containerConstraints.gridy = 1;
+    	container.add(contentPanel, containerConstraints);
+    	setHeading();
+    	setContent(new AccountPage(model));
 		this.pack();
 		this.setTitle("Main Page");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        pack();
     }
 
 	@Override
@@ -76,13 +51,43 @@ public class MainPage extends JFrame implements java.util.Observer{
 		
 	}
     
-    public void logout(ActionListener actionListener) {
-    	System.out.println("logout / mainpage");
-    	logoutButton.addActionListener(actionListener);
-    }
 	
     public void setModel(Researcher model) {
     	System.out.println("Model set!!!");
     	this.model= model;
     }
+
+    public Navbar getNavbar() {
+		return navbar;
+	}
+
+	public void setNavbar(Navbar navbar) {
+		this.navbar = navbar;
+	}
+
+
+	@Override
+	public void setHeading() {
+		//removeAll();
+		navbarPanel.add(navbar);
+		//repaint();
+		//revalidate();	
+	}
+
+	@Override
+	public void setContent(Component page) {
+		System.out.println("set content in mainpage");
+
+		contentPanel.removeAll();
+		contentPanel.add(page);	
+		contentPanel.repaint();
+		contentPanel.revalidate();	
+	}
+
+	/*public void showAccountPage(ActionListener actionListener) {
+		// TODO Auto-generated method stub
+		
+		
+	}*/
+	
 }

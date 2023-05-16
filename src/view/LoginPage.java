@@ -19,12 +19,20 @@ public class LoginPage extends JFrame implements java.util.Observer {
     private Container container = getContentPane();
     private Researcher model;
 
-    public LoginPage( Researcher model) {
-    	this.model = model;
+    public LoginPage() {
+    	//this.model = model;
     	initComponents();
     }
 
-    private void initComponents() {
+    public Researcher getModel() {
+		return model;
+	}
+
+	public void setModel(Researcher model) {
+		this.model = model;
+	}
+
+	private void initComponents() {
     	container.setBackground(white);
 		loginButton.setPreferredSize(new Dimension(240, 40));
 		loginButton.setBackground(blue);
@@ -77,7 +85,6 @@ public class LoginPage extends JFrame implements java.util.Observer {
 		this.setTitle("Welcome to OpenResearch");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        pack();
     }
     
 	public String getUsernameInput() {
@@ -98,7 +105,7 @@ public class LoginPage extends JFrame implements java.util.Observer {
 	public void update(java.util.Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		System.out.println("UPDATE LOGIN");
-		System.out.println("username: " + model.getName());
+		System.out.println("username: " + model.getUsername());
 		System.out.println("password: " + model.getPassword());
 		System.out.println("-------------------- ");
 		/*usernameInput.setText(model.getName());

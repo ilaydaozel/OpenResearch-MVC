@@ -80,6 +80,8 @@ public class LoginPage extends JFrame implements java.util.Observer {
         gridBagConstraints.insets = buttonInset;
         
         add(loginButton, gridBagConstraints);
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
         
 		this.pack();
 		this.setTitle("Welcome to OpenResearch");

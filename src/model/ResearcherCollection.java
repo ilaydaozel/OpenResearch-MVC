@@ -11,7 +11,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class ResearcherCollection extends java.util.Observable  {
+public class ResearcherCollection  {
 	private ArrayList<Researcher> researchersList;
 	
 	public ResearcherCollection() {

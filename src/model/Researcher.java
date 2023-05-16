@@ -1,13 +1,6 @@
 package model;
 
 import java.util.*;
-import java.io.File;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
-import org.w3c.dom.Element;
 
 public class Researcher extends java.util.Observable {
 	private String username;
@@ -97,7 +90,6 @@ public class Researcher extends java.util.Observable {
 		setChanged();	
 		notifyObservers();
     }
-
 	
 	public void follow(Researcher researcher) {
 		//implement later

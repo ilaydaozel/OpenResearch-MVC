@@ -6,19 +6,16 @@ import controller.*;
 
 public class OpenResearchApp {
 	public static void main(String[] args) {
-		Researcher model = new Researcher();
-		LoginPage loginView = new LoginPage(model);
+		//Researcher model = new Researcher();
+		LoginPage loginView = new LoginPage();	
 		//MainPage mainView = new MainPage(model);
-		
 		@SuppressWarnings("unused")
-		AuthController controller = new AuthController(model,loginView);
-
-		
+		AuthController controller = new AuthController(loginView);	
 		//mainView.setVisible(true);
 		loginView.setVisible(true);
-    	//BibTeXFileIO reader = new BibTeXFileIO();
-    	//reader.readAllFilesInSameDirectory("src/data/");
-    	
+		
+		/*ResearchersList researcherView = new ResearchersList(new ResearcherCollection());
+		researcherView.setVisible(true);*/
 
 	}
 }

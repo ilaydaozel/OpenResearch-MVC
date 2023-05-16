@@ -3,8 +3,11 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import controller.PageController.ShowAccountPageListener;
+import controller.PageController.ShowResearchersPageListener;
 import model.Researcher;
 import view.*;
 
@@ -13,13 +16,16 @@ public class AuthController {
 	private Researcher model;
 	private LoginPage loginView;
 	private MainPage mainView;
+	private Navbar navbar;
+	private AccountPage accountView;
+	private ResearchersPage researchersView;
+	private PapersPage papersView;
 	
 	public AuthController(Researcher model , LoginPage loginView) {
 		System.out.println("model name ain authcontroller beginning: " + model.getName());
 		this.model = model;
 		this.loginView = loginView;
 		model.addObserver(loginView);
-
 		loginView.login(new LoginListener());
 	}
 	
@@ -38,7 +44,14 @@ public class AuthController {
 	            curMainView.setVisible(true);
 	            mainView = curMainView;
 	    		model.addObserver(mainView);
-	    		mainView.logout(new LogoutListener());
+	    		//PageController pageController = new PageController(model, mainView);
+	    		mainView.getNavbar().logout(new LogoutListener());
+	    		accountView= new AccountPage(model);
+	    		researchersView= new ResearchersPage(model);
+	    		papersView= new PapersPage(model);
+	    		mainView.getNavbar().showAccountPage(  new ShowAccountPageListener());
+	    		mainView.getNavbar().showResearchersPage(  new ShowResearchersPageListener());
+	    		mainView.getNavbar().showPapersPage(  new ShowPapersPageListener());
 
 	        }else {
 	        	loginView.changeToErrorPage();
@@ -46,7 +59,23 @@ public class AuthController {
 			
 		}
 	}
-	
+	class ShowAccountPageListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("account");
+			mainView.setContent(accountView);
+		}
+	}
+	class ShowResearchersPageListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("rseacrhers");
+			mainView.setContent(researchersView);
+		}
+	}
+	class ShowPapersPageListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			mainView.setContent(papersView);
+		}
+	}
 	class LogoutListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("logout");
@@ -55,10 +84,11 @@ public class AuthController {
 			System.out.println("name:" + model.getName());
 			mainView.dispose();	
 			System.out.println("*****************************new login");
-			loginView.setVisible(true);
-			/*LoginPage newLogin = new LoginPage(model);
+			//loginView.setVisible(true);
+			
+			LoginPage newLogin = new LoginPage(model);
 			(newLogin).setVisible(true);
-			loginView = newLogin;*/
+			loginView = newLogin;
 
 		}
 	}

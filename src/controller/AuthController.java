@@ -87,7 +87,7 @@ public class AuthController {
 			
 			LoginPage newLogin = new LoginPage();
 			(newLogin).setVisible(true);
-			loginView = newLogin;
+			AuthController newController = new AuthController(newLogin);
 
 		}
 	}

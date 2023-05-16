@@ -6,8 +6,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import controller.PageController.ShowAccountPageListener;
-import controller.PageController.ShowResearchersPageListener;
 import model.Researcher;
 import view.*;
 

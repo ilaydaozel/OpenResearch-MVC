@@ -25,7 +25,7 @@ public class ResearcherController {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("SelectResearcherListener / researcherController");
 			//objeyi değiştir
-			Object selected = researchersView.getList().getSelectedValue();
+			Object selected = researchersView.getListContainer().getList().getSelectedValue();
 			if(selected!= null) {
 				researchersView.getSelected().setText(selected.toString());
 			}

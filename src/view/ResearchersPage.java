@@ -16,9 +16,9 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
     private JLabel label = new JLabel("Researchers Page");
     private JButton viewButton = new JButton("view more");
     private JLabel selected = new JLabel("a");
+    private ResearcherListContainer listContainer = new ResearcherListContainer();
 
-	private ResearcherCollection researcherList = new ResearcherCollection();
-    private JList list = new JList(researcherList.getResearchersList().toArray()); 
+	 
     //private JPanel contentPanel = new JPanel();
 
     public ResearchersPage() {
@@ -28,6 +28,7 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
 
     private void initComponents() {
     	//setPreferredSize(new Dimension(600,400));
+    	setSize(960, 685);
     	setBackground(new Color(255,255,255));
         setLayout(new GridBagLayout());
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
@@ -36,17 +37,11 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
         gridBagConstraints.gridy = 0;
 
         add(label, gridBagConstraints);
-		
-        this.list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-        //list.setPreferredSize(new Dimension(300,400));
-        list.setVisibleRowCount(-1);
-        JScrollPane listScroller = new JScrollPane(list);
-        //listScroller.setPreferredSize(new Dimension(250, 80));
+	
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
 
-        add(list, gridBagConstraints);
+        add(listContainer, gridBagConstraints);
         
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -57,6 +52,14 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
         add(selected, gridBagConstraints);
         
     }
+
+	public ResearcherListContainer getListContainer() {
+		return listContainer;
+	}
+
+	public void setListContainer(ResearcherListContainer listContainer) {
+		this.listContainer = listContainer;
+	}
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -84,12 +87,6 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
 	public void setSelected(JLabel selected) {
 		this.selected = selected;
 	}
-    public JList getList() {
-		return list;
-	}
 
-	public void setList(JList list) {
-		this.list = list;
-	}
 
 }

@@ -22,7 +22,7 @@ public class AccountPage extends JPanel implements java.util.Observer{
 
     private void initComponents() {
 
-        // uses Grid Bag Layout
+    	setBackground(new Color(255,255,255));
         setLayout(new GridBagLayout());
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
 

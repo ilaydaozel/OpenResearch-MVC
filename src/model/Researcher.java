@@ -65,6 +65,15 @@ public class Researcher extends java.util.Observable {
 	public void setReadingLists(ArrayList<ReadingList> readingLists) {
 		this.readingLists = readingLists;
 	}
+	public boolean getLoggedIn() {
+		return loggedIn;
+	}
+	public void setLoggedIn(boolean loggedIn) {
+		this.loggedIn = loggedIn;
+		System.out.println("setloggedin /researcher");
+		setChanged();	
+		notifyObservers();
+	}
 
 	public void reset() {
 		System.out.println("reset");
@@ -105,13 +114,22 @@ public class Researcher extends java.util.Observable {
 		setChanged();	
 		notifyObservers();
     }
-	public boolean getLoggedIn() {
-		return loggedIn;
+
+	
+	public void follow(Researcher researcher) {
+		//implement later
 	}
-	public void setLoggedIn(boolean loggedIn) {
-		this.loggedIn = loggedIn;
-		System.out.println("setloggedin /researcher");
-		setChanged();	
-		notifyObservers();
+	
+	
+	public void unfollow(Researcher researcher) {
+		//implement later
+	}
+	
+	public void addNewReadingList(String name) {
+		readingLists.add(new ReadingList(name, this));
+	}
+	
+	public void removeReadingList(ReadingList readingList) {
+		readingLists.remove(readingList);
 	}
 }

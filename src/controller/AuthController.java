@@ -21,20 +21,22 @@ public class AuthController {
 	private ResearchersPage researchersView;
 	private PapersPage papersView;
 	
-	public AuthController(Researcher model , LoginPage loginView) {
-		System.out.println("model name ain authcontroller beginning: " + model.getName());
-		this.model = model;
+	public AuthController(LoginPage loginView) {
+		//System.out.println("model name ain authcontroller beginning: " + model.getUsername());
+		//this.model = model;
 		this.loginView = loginView;
-		model.addObserver(loginView);
 		loginView.login(new LoginListener());
 	}
 	
 
 	class LoginListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			model.setName(loginView.getUsernameInput());
+			model = new Researcher(loginView.getUsernameInput(), loginView.getPasswordInput());
+			loginView.setModel(model);
+			model.addObserver(loginView);
+			//model.setUsername();
 			System.out.println("------------- login view passw input " + loginView.getPasswordInput());
-			model.setPassword(loginView.getPasswordInput());
+			//model.setPassword(loginView.getPasswordInput());
 			model.isValidUser();
 
 	        if(model.getLoggedIn())
@@ -81,12 +83,12 @@ public class AuthController {
 			System.out.println("logout");
 			model.setLoggedIn(false);
 			model.reset();
-			System.out.println("name:" + model.getName());
+			System.out.println("name:" + model.getUsername());
 			mainView.dispose();	
 			System.out.println("*****************************new login");
 			//loginView.setVisible(true);
 			
-			LoginPage newLogin = new LoginPage(model);
+			LoginPage newLogin = new LoginPage();
 			(newLogin).setVisible(true);
 			loginView = newLogin;
 

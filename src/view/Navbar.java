@@ -36,8 +36,8 @@ public class Navbar extends JPanel implements java.util.Observer{
     	accountButton.setBackground(blue);
     	logoutButton.setPreferredSize(new Dimension(200, 30));
     	logoutButton.setBackground(blue);
-    	System.out.println("model in main page: "+ model.getName());
-        JLabel name = new JLabel("User: "+ model.getName());
+    	System.out.println("model in main page: "+ model.getUsername());
+        JLabel name = new JLabel("User: "+ model.getUsername());
     	setPreferredSize(new Dimension(1000,600));
     	setLayout(new GridBagLayout());
     	GridBagConstraints pageConstraints = new GridBagConstraints();    	

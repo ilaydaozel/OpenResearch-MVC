@@ -2,21 +2,26 @@ package model;
 
 public class ReadingList {
 	private int readingListId;
-	private String creatorResearcherName;
 	private String readingListName;
+	private Researcher creatorResearcher;	
 	private int numOfPapers;
 	private String[] nameOfPapers;
+	
+	public ReadingList(String name, Researcher researcher) {
+		this.readingListName = name;
+		this.creatorResearcher = researcher;
+	}
 	public int getReadingListId() {
 		return readingListId;
 	}
 	public void setReadingListId(int readingListId) {
 		this.readingListId = readingListId;
 	}
-	public String getCreatorResearcherName() {
-		return creatorResearcherName;
+	public Researcher getCreatorResearcher() {
+		return creatorResearcher;
 	}
-	public void setCreatorResearcherName(String creatorResearcherName) {
-		this.creatorResearcherName = creatorResearcherName;
+	public void setCreatorResearcherName(Researcher creatorResearcher) {
+		this.creatorResearcher = creatorResearcher;
 	}
 	public String getReadingListName() {
 		return readingListName;

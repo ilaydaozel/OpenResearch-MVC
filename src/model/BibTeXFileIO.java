@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.ArrayList;
@@ -78,17 +79,12 @@ public class BibTeXFileIO implements IFileReader{
             if (files != null) {
                 for (File file : files) {
                     if (file.isFile() && file.getName().endsWith(".bib")) {
-                    	
-                    	
+                    
                         String filePath = file.getAbsolutePath();
                     	
                         Map<String, String> data = readFile(filePath);
                         
                         dataList.add(data);
-                        
-                       /* for (Map.Entry<String, String> entry : data.entrySet()) {
-                            System.out.println(entry.getKey() + ": " + entry.getValue());
-                        }*/
                  
                     }
                 }
@@ -100,6 +96,39 @@ public class BibTeXFileIO implements IFileReader{
         return dataList;
     }
     
+    public PaperCollection CreateCollection(List<Map<String, String>> allPapers) {
+    	PaperCollection papers = new PaperCollection();
+    	Random random = new Random();
+    	
+    	for (Map<String, String> data : allPapers) {
+    		
+    		if(data.get("type")=="article") {
+    			Paper article = new Article(
+    					data.getOrDefault("author", "no-authors"),
+    					data.getOrDefault("title", "no-title"),
+    					data.getOrDefault("year", "no-year"),
+    					data.getOrDefault("doi", "no-doi"),
+    					data.getOrDefault("volume", "no-volume"),
+    					data.getOrDefault("number", "no-number"),
+    					data.getOrDefault("journal","no-journal"),
+    					random.nextInt(1501));
+    			papers.addPaper(article);
+    		}
+    		else {
+    			ConferencePaper cPaper = new ConferencePaper(
+    					data.getOrDefault("author", "no-authors"),
+    					data.getOrDefault("title", "no-title"),
+    					data.getOrDefault("year", "no-year"),
+    					data.getOrDefault("doi", "no-doi"),
+    					data.getOrDefault("booktitle", "no-booktitle"),
+    					random.nextInt(1501));
+    			papers.addPaper(cPaper);
+    		}
+    		
+            
+        }
+    	return papers;
+    }
     public static void main(String[] args) {
     	List<Map<String, String>> dataList = new ArrayList<>();
 
@@ -108,6 +137,31 @@ public class BibTeXFileIO implements IFileReader{
     	dataList= BibReader.readAllFilesInSameDirectory("OpenResearch-MVC/src/data/");
     	IFileWriter csvWriter = new CsvFileIO();
     	csvWriter.writeAllPapers(dataList);
+    	BibTeXFileIO BibCreator = new BibTeXFileIO();
+    	
+    	PaperCollection papers = BibCreator.CreateCollection(dataList);
+    	
+    	for (Paper paper : papers.getPapers()) {
+            System.out.println("Title: " + paper.getTitle());
+            System.out.println("Authors: " + paper.getAuthors());
+            System.out.println("Year: " + paper.getYear());
+            System.out.println("DOI: " + paper.getDoi());
+            System.out.println("downloads : " + paper.getDownloadNumber());
+
+            if (paper instanceof ConferencePaper) {
+                ConferencePaper conferencePaper = (ConferencePaper) paper;
+                System.out.println("Book Title: " + conferencePaper.getBookTitle());
+                
+            } else if (paper instanceof Article) {
+                Article article = (Article) paper;
+                System.out.println("Volume: " + article.getVolume());
+                System.out.println("Number: " + article.getNumber());
+                System.out.println("Journal: " + article.getJournal());
+            }
+
+            System.out.println("---------------------");
+
+    }
 
     }
 }

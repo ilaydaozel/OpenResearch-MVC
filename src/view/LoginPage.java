@@ -77,7 +77,6 @@ public class LoginPage extends JFrame implements java.util.Observer {
 		this.setTitle("Welcome to OpenResearch");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        pack();
     }
     
 	public String getUsernameInput() {

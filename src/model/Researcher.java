@@ -1,9 +1,6 @@
 package model;
 
 import java.util.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.File;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
@@ -13,24 +10,28 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
 public class Researcher extends java.util.Observable {
-	private String name;
+	private String username;
 	private String password;
-	private String[] followingResearcherNames;
-	private String[] followerResearcherNames;
-	private boolean loggedIn;
-	//private List<Observer> observers = new ArrayList<>();
+	private ArrayList<Researcher> followingResearchers;
+	private ArrayList<Researcher> followerResearchers;
+	private ArrayList<ReadingList> readingLists;
+	private boolean loggedIn = false;
 	
-	public Researcher() {
-		this.followerResearcherNames = new String[5];
-		this.followingResearcherNames = new String[5];
-	}
-	public String getName() {
+	public Researcher(String username, String password) {
+		this.username = username;
+		this.password = password;
+		this.followingResearchers = new ArrayList<Researcher>();
+		this.followerResearchers = new ArrayList<Researcher>();
+		this.readingLists = new ArrayList<ReadingList>();
+		
+	};
+	public String getUsername() {
 		System.out.println("get name / researcher");
-		return name;
+		return username;
 	}
-	public void setName(String name) {
+	public void setUsername(String name) {
 		System.out.println("set name / researcher");
-		this.name = name;
+		this.username = name;
 		setChanged();	
 		notifyObservers();
 	}
@@ -45,27 +46,35 @@ public class Researcher extends java.util.Observable {
 		setChanged();	
 		notifyObservers();
 	}
-	public String[] getFollowingResearcherNames() {
-		return followingResearcherNames;
+
+	public ArrayList<Researcher> getFollowingResearchers() {
+		return followingResearchers;
 	}
-	public void setFollowingResearcherNames(String[] followingResearcherNames) {
-		this.followingResearcherNames = followingResearcherNames;
+	public void setFollowingResearchers(ArrayList<Researcher> followingResearchers) {
+		this.followingResearchers = followingResearchers;
 	}
-	public String[] getFollowerResearcherNames() {
-		return followerResearcherNames;
+	public ArrayList<Researcher> getFollowerResearchers() {
+		return followerResearchers;
 	}
-	public void setFollowerResearcherNames(String[] followerResearcherNames) {
-		this.followerResearcherNames = followerResearcherNames;
+	public void setFollowerResearchers(ArrayList<Researcher> followerResearchers) {
+		this.followerResearchers = followerResearchers;
 	}
+	public ArrayList<ReadingList> getReadingLists() {
+		return readingLists;
+	}
+	public void setReadingLists(ArrayList<ReadingList> readingLists) {
+		this.readingLists = readingLists;
+	}
+
 	public void reset() {
 		System.out.println("reset");
-		this.name="";
+		this.username="";
 		this.password ="";
-		this.followerResearcherNames = new String[5];
-		this.followingResearcherNames = new String[5];
+		//following follower ekle
 		setChanged();	
 		notifyObservers();
 	}
+	
     public void isValidUser() {
         try {
             File inputFile = new File("users.xml");
@@ -83,7 +92,7 @@ public class Researcher extends java.util.Observable {
 
                   String username =  eElement.getElementsByTagName("researcher_name").item(0).getTextContent();
                   String password = eElement.getElementsByTagName("password").item(0).getTextContent();
-                  if (username.equals(this.name) && password.equals(this.password)) {
+                  if (username.equals(this.username) && password.equals(this.password)) {
                 	  loggedIn = true;
                   }
                }

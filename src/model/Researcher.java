@@ -85,30 +85,13 @@ public class Researcher extends java.util.Observable {
 	}
 	
     public void isValidUser() {
-        try {
-            File inputFile = new File("users.xml");
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(inputFile);
-            doc.getDocumentElement().normalize();
-            NodeList nList = doc.getElementsByTagName("researcher");
-            
-            for (int temp = 0; temp < nList.getLength(); temp++) {
-               Node nNode = nList.item(temp);
-            
-               if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                  Element eElement = (Element) nNode;
-
-                  String username =  eElement.getElementsByTagName("researcher_name").item(0).getTextContent();
-                  String password = eElement.getElementsByTagName("password").item(0).getTextContent();
-                  if (username.equals(this.username) && password.equals(this.password)) {
-                	  loggedIn = true;
-                  }
-               }
-            }
-         } catch (Exception e) {
-            e.printStackTrace();
-         }
+    	ResearcherCollection researcherList = new ResearcherCollection();
+    	System.out.println(" researcherList:" + researcherList.getResearchersList());
+    	for (Researcher researcher : researcherList.getResearchersList()) {
+    		 if (researcher.getUsername().equals(this.username) && researcher.getPassword().equals(this.password)) {
+           	  loggedIn = true;
+             }
+    	}
         System.out.println("is valid /researcher");
         System.out.println("loggedIn: "+ loggedIn);
 		setChanged();	

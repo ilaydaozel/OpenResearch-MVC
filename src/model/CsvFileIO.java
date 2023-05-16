@@ -1,14 +1,17 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import interfaces.IFileReader;
 import interfaces.IFileWriter;
-
+import java.util.Random;
 public class CsvFileIO implements IFileReader,IFileWriter{
 
 	@Override
@@ -25,10 +28,10 @@ public class CsvFileIO implements IFileReader,IFileWriter{
                
                 String value = entry.getValue();
                 // Create a new FileWriter object to write to the CSV file
-                
+
                 writer.append(value)
                 .append(";");
-                System.out.println("Value: " + value);
+           
             }
             writer.append("\n");
         }
@@ -47,17 +50,24 @@ public class CsvFileIO implements IFileReader,IFileWriter{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 
+	
 	@Override
 	public List<Map<String, String>> readAllFilesInSameDirectory(String directoryPath) {
 		return null;
 		// TODO Auto-generated method stub
 		
 	}
+	 public static void main(String[] args) {
+	    	List<Map<String, String>> dataList = new ArrayList<>();
+	    	PaperCollection papers = new PaperCollection();
+	        
+	    	IFileReader BibReader = new BibTeXFileIO();
+	    	dataList= BibReader.readAllFilesInSameDirectory("OpenResearch-MVC/src/data/");
+	    	IFileWriter csvWriter = new CsvFileIO();
+	    	csvWriter.writeAllPapers(dataList);
+	    	
 
-
-	
-	
-	
-
-}
+	 }
+	 }

@@ -29,7 +29,7 @@ public class ResearcherCollection  {
 
 	public void readAndAddAllResearchersFromXML() {
 		try {
-            File inputFile = new File("users.xml");
+            File inputFile = new File("OpenResearch-MVC/users.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputFile);

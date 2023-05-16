@@ -1,29 +1,60 @@
 package model;
 
-import java.util.Map;
-
+// Paper.java
 public abstract class Paper {
-    protected final String[] fieldNames = {
-    		"author", "title", "year", "issue_date", "publisher", "address", "volume", "number",
-            "issn", "abstract", "journal", "month", "pages", "numpages", "keywords","doi","series"
-    };
-    protected Map<String, String> content;
+    private String authors;
+    private String title;
+    private String year;
+    private String doi;
+    private int downloadNumber;
     
-    // Constructors, getters, and setters
-    
-    public Paper() {
-        
+    public Paper(String authors, String title, String year, String doi, int downloadNumber) {
+        this.authors = authors;
+        this.title = title;
+        this.year = year;
+        this.doi = doi;
+        this.downloadNumber = downloadNumber;
     }
-    
-    // Methods for accessing and modifying content
-    
-    public void setContent(String fieldName, String fieldValue) {
-        content.put(fieldName, fieldValue);
-    }
-    
-    public Map<String, String> getContent(String fieldName) {
-        return content;
-    }
-    
 
+    // Getters and setters
+
+    public String getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(String authors) {
+        this.authors = authors;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getDoi() {
+        return doi;
+    }
+
+    public void setDoi(String doi) {
+        this.doi = doi;
+    }
+
+	public int getDownloadNumber() {
+		return downloadNumber;
+	}
+
+	public void setDownloadNumber(int downloadNumber) {
+		this.downloadNumber = downloadNumber;
+	}
 }

@@ -5,16 +5,16 @@ import java.util.*;
 public class Researcher extends java.util.Observable {
 	private String username;
 	private String password;
-	private ArrayList<Researcher> followingResearchers;
-	private ArrayList<Researcher> followerResearchers;
+	private ArrayList<String> followingResearchers;
+	private ArrayList<String> followerResearchers;
 	private ArrayList<ReadingList> readingLists;
 	private boolean loggedIn = false;
 	
 	public Researcher(String username, String password) {
 		this.username = username;
 		this.password = password;
-		this.followingResearchers = new ArrayList<Researcher>();
-		this.followerResearchers = new ArrayList<Researcher>();
+		this.followingResearchers = new ArrayList<String>();
+		this.followerResearchers = new ArrayList<String>();
 		this.readingLists = new ArrayList<ReadingList>();
 		
 	};
@@ -40,16 +40,16 @@ public class Researcher extends java.util.Observable {
 		notifyObservers();
 	}
 
-	public ArrayList<Researcher> getFollowingResearchers() {
+	public ArrayList<String> getFollowingResearchers() {
 		return followingResearchers;
 	}
-	public void setFollowingResearchers(ArrayList<Researcher> followingResearchers) {
+	public void setFollowingResearchers(ArrayList<String> followingResearchers) {
 		this.followingResearchers = followingResearchers;
 	}
-	public ArrayList<Researcher> getFollowerResearchers() {
+	public ArrayList<String> getFollowerResearchers() {
 		return followerResearchers;
 	}
-	public void setFollowerResearchers(ArrayList<Researcher> followerResearchers) {
+	public void setFollowerResearchers(ArrayList<String> followerResearchers) {
 		this.followerResearchers = followerResearchers;
 	}
 	public ArrayList<ReadingList> getReadingLists() {

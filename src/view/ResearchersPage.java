@@ -13,8 +13,9 @@ import model.ResearcherCollection;
 public class ResearchersPage extends JPanel implements java.util.Observer{
     private JLabel label = new JLabel("Researchers Page");
     private JButton viewButton = new JButton("View more");
-    private JLabel selected = new JLabel("a");
     private ResearcherListContainer listContainer = new ResearcherListContainer();
+    private ResearcherDetailedContainer detailedContainer;
+    private GridBagConstraints gridBagConstraints = new GridBagConstraints();
     private Color blue = new Color(144, 219, 244);
     
     public ResearchersPage() {
@@ -22,30 +23,33 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
     }
 
     private void initComponents() {
-    	setPreferredSize(new Dimension(600,400));
+
         setLayout(new GridBagLayout());
-        GridBagConstraints gridBagConstraints = new GridBagConstraints();
+        
+        JPanel researchersList = new JPanel();
+        researchersList.setLayout(new GridBagLayout());
+        GridBagConstraints listGridBagConstraints = new GridBagConstraints();
+
+        listGridBagConstraints.gridx = 0;
+        listGridBagConstraints.gridy = 0;
+        label.setFont(new Font("", Font.BOLD, 20));
+        researchersList.add(label, listGridBagConstraints);
+	
+        listGridBagConstraints.gridx = 0;
+        listGridBagConstraints.gridy = 1;
+
+        researchersList.add(listContainer, listGridBagConstraints);
+        
+        listGridBagConstraints.gridx = 0;
+        listGridBagConstraints.gridy = 2;
+        viewButton.setBackground(blue);
+        viewButton.setPreferredSize(new Dimension(150,30));
+        listGridBagConstraints.anchor = listGridBagConstraints.EAST;
+        researchersList.add(viewButton, listGridBagConstraints);       
 
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        label.setFont(new Font("", Font.BOLD, 20));
-        add(label, gridBagConstraints);
-	
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-
-        add(listContainer, gridBagConstraints);
-        
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        viewButton.setBackground(blue);
-        viewButton.setPreferredSize(new Dimension(200,30));
-        add(viewButton, gridBagConstraints);
-        
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        add(selected, gridBagConstraints);
-        
+        add(researchersList, gridBagConstraints);       
     }
 
 	public ResearcherListContainer getListContainer() {
@@ -55,7 +59,18 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
 	public void setListContainer(ResearcherListContainer listContainer) {
 		this.listContainer = listContainer;
 	}
-
+	public void addDetailedContainer(Researcher selectedResearcher) {
+		if(detailedContainer != null) {
+			remove(detailedContainer);
+		}
+		detailedContainer = new ResearcherDetailedContainer(selectedResearcher);
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new Insets(20, 0, 10, 0);
+		add(detailedContainer, gridBagConstraints);
+		SwingUtilities.updateComponentTreeUI(this);
+		
+	}
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
@@ -75,13 +90,6 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
 		this.viewButton = viewButton;
 	}
 
-	public JLabel getSelected() {
-		return selected;
-	}
-
-	public void setSelected(JLabel selected) {
-		this.selected = selected;
-	}
 
 
 }

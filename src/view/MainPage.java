@@ -41,7 +41,10 @@ public class MainPage extends JFrame implements IPage, java.util.Observer{
     	containerConstraints.gridy = 1; 
 
     	container.add(contentPanel, containerConstraints);
-    	setHeading();
+		navbarPanel.removeAll();
+		navbarPanel.add(navbar);	
+		navbarPanel.repaint();
+		navbarPanel.revalidate();	
     	setContent(new AccountPage(model));
 		this.pack();
 		this.setTitle("Main Page");
@@ -68,16 +71,6 @@ public class MainPage extends JFrame implements IPage, java.util.Observer{
 
 	public void setNavbar(Navbar navbar) {
 		this.navbar = navbar;
-	}
-
-
-	@Override
-	public void setHeading() {
-		navbarPanel.removeAll();
-		navbarPanel.add(navbar);	
-		navbarPanel.repaint();
-		navbarPanel.revalidate();	
-
 	}
 
 	@Override

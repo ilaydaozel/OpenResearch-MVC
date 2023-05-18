@@ -8,6 +8,7 @@ public class PaperCollection {
 
     public PaperCollection() {
         papers = new ArrayList<>();
+
     }
 
     public void addPaper(Paper paper) {

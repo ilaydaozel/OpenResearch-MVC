@@ -45,7 +45,7 @@ public class MainPage extends JFrame implements IPage, java.util.Observer{
 		navbarPanel.add(navbar);	
 		navbarPanel.repaint();
 		navbarPanel.revalidate();	
-    	setContent(new AccountPage(model));
+    	changeContent(new AccountPage(model)); // the starting landing page
 		this.pack();
 		this.setTitle("Main Page");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,7 +74,7 @@ public class MainPage extends JFrame implements IPage, java.util.Observer{
 	}
 
 	@Override
-	public void setContent(Component page) {
+	public void changeContent(Component page) {
 		System.out.println("set content in mainpage");
 
 		contentPanel.removeAll();

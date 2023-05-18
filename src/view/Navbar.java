@@ -35,6 +35,7 @@ public class Navbar extends JPanel implements java.util.Observer{
     	logoutButton.setBackground(blue);
 
     	setLayout(new GridBagLayout());
+    	setBackground(Color.white);
     	GridBagConstraints pageConstraints = new GridBagConstraints();    	
     	navbar.setLayout(new GridBagLayout());
     	name = new JLabel("Welcome "+ model.getUsername()+ " !");

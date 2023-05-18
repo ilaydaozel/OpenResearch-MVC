@@ -61,19 +61,19 @@ public class AuthController {
 	class ShowAccountPageListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("account");
-			mainView.setContent(accountView);
+			mainView.changeContent(accountView);
 		}
 	}
 	class ShowResearchersPageListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("reseacrhers");
-			mainView.setContent(researchersView);
+			mainView.changeContent(researchersView);
 			ResearcherController researcherController = new ResearcherController(researchersView);
 		}
 	}
 	class ShowPapersPageListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			mainView.setContent(papersView);
+			mainView.changeContent(papersView);
 		}
 	}
 	class LogoutListener implements ActionListener{

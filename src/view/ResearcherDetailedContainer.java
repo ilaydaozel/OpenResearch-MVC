@@ -34,14 +34,14 @@ public class ResearcherDetailedContainer extends JPanel {
         usernamePanel.setBackground(Color.white);
         usernamePanel.add(usernameLabel);
         usernamePanel.add(new JLabel(model.getUsername()));
-        //gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        //gridBagConstraints.anchor = gridBagConstraints.EAST;
+        gridBagConstraints.anchor = gridBagConstraints.WEST;
         add(usernamePanel, gridBagConstraints);
         
         
         JPanel followPanel = new JPanel();
         followPanel.setLayout(new FlowLayout()); 
+        followPanel.setBackground(Color.white);
         
         JPanel followerPanel = new JPanel();
         followerPanel.setLayout(new FlowLayout());
@@ -57,13 +57,9 @@ public class ResearcherDetailedContainer extends JPanel {
         
         followPanel.add(followerPanel);
         followPanel.add(followingPanel);
-        
-        
-
-        
+ 
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        //gridBagConstraints.anchor = gridBagConstraints.EAST;
         add(followPanel, gridBagConstraints);
         
         
@@ -71,6 +67,7 @@ public class ResearcherDetailedContainer extends JPanel {
         gridBagConstraints.gridy = 2;
         
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.white);
         followButton.setBackground(Color.white);
         followButton.setPreferredSize(new Dimension(100,20));
         buttonPanel.add(followButton);

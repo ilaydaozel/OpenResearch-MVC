@@ -17,7 +17,7 @@ public class ResearcherController {
 	class SelectResearcherListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("SelectResearcherListener / researcherController");
-			Object selected = researchersView.getListContainer().getList().getSelectedValue();
+			Object selected = researchersView.getResearcherListWrapper().getListContainer().getList().getSelectedValue();
 			if(selected!= null) {
 				researchersView.addDetailedContainer((Researcher) selected);
 			}

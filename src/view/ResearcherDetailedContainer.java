@@ -37,8 +37,7 @@ public class ResearcherDetailedContainer extends JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = gridBagConstraints.WEST;
         add(usernamePanel, gridBagConstraints);
-        
-        
+    
         JPanel followPanel = new JPanel();
         followPanel.setLayout(new FlowLayout()); 
         followPanel.setBackground(Color.white);
@@ -78,8 +77,6 @@ public class ResearcherDetailedContainer extends JPanel {
         
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        //gridBagConstraints.insets = new Insets(0, 10, 0, 0);
-        //gridBagConstraints.anchor = gridBagConstraints.PAGE_END;
         add(buttonPanel, gridBagConstraints); 
 
     }

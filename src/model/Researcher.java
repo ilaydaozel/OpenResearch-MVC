@@ -102,7 +102,7 @@ public class Researcher extends java.util.Observable {
 		
 	public void unfollow(Researcher researcher) {
 		this.followingResearchers.remove(researcher.getUsername());
-		researcher.getFollowerResearchers().add(username);
+		researcher.getFollowerResearchers().remove(username);
 	}
 	
 	public void addNewReadingList(String name) {

@@ -49,7 +49,8 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
 
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        add(researchersList, gridBagConstraints);       
+        add(researchersList, gridBagConstraints);    
+        addDetailedContainer(new Researcher());
     }
 
 	public ResearcherListContainer getListContainer() {

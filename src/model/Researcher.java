@@ -10,6 +10,10 @@ public class Researcher extends java.util.Observable {
 	private ArrayList<ReadingList> readingLists;
 	private boolean loggedIn = false;
 	
+	public Researcher() {
+		
+	}
+	
 	public Researcher(String username, String password) {
 		this.username = username;
 		this.password = password;
@@ -92,12 +96,13 @@ public class Researcher extends java.util.Observable {
     }
 	
 	public void follow(Researcher researcher) {
-		//implement later
+		this.followingResearchers.add(researcher.getUsername());
+		researcher.getFollowerResearchers().add(username);
 	}
-	
-	
+		
 	public void unfollow(Researcher researcher) {
-		//implement later
+		this.followingResearchers.remove(researcher.getUsername());
+		researcher.getFollowerResearchers().add(username);
 	}
 	
 	public void addNewReadingList(String name) {

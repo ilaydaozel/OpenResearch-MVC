@@ -20,17 +20,16 @@ public class PaperController {
 	protected Paper selectedPaper;
 	protected PaperCollection paperList;
 	
-	public PaperController(PapersPage papersView) {
+	public PaperController(PapersPage papersView, PaperCollection paperList) {
 		this.papersView = papersView;
 		papersView.selectPaper(new SelectPaperListener());
-		System.out.println("papercontroller");
 		papersView.downloadFile(new DownloadPaperListener());
 	}
 
 	class SelectPaperListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			selectedPaper = (Paper) papersView.getPaperListWrapper().getListContainer().getList().getSelectedValue();
-			//paperList =  (PaperCollection) papersView.getPaperListWrapper().getListContainer().getElementList();
+			System.out.println("selectpaperListener: " + selectedPaper);
 			if(selectedPaper!= null) {
 				papersView.addDetailedContainer(selectedPaper);
 			}
@@ -39,10 +38,11 @@ public class PaperController {
 	}
 	class DownloadPaperListener implements ActionListener {
 	    public void actionPerformed(ActionEvent e) {
+	    	System.out.println("selectedPaper: "+selectedPaper);
 	    	if (selectedPaper != null) {
 	            try {
 	                String fileName = selectedPaper.toString().replace(":", "") + ".pdf";
-	                Path source = Paths.get("OpenResearch-MVC/src/data/" + fileName);
+	                Path source = Paths.get("src/data/" + fileName);
 	                Path destination = Paths.get("copy_" + fileName);
 	                if(Files.exists(destination)) {
 	                	int response = JOptionPane.showConfirmDialog(papersView, "This file already exists. Do you want to download again?", "File Exists", JOptionPane.YES_NO_OPTION);

@@ -1,6 +1,8 @@
 package main;
 
 import controller.*;
+import model.Collection;
+import model.PaperCollection;
 import store.UserStore;
 import view.*;
 
@@ -11,6 +13,7 @@ public class Manager {
 	private AccountPage accountView;
 	private ResearchersPage researcherView;
 	private PapersPage paperView;
+	private Collection paperCollection;
 	
 	public void initialize() {
 		//initializing login
@@ -23,7 +26,6 @@ public class Manager {
 	public void onLogin(UserStore session) {
 		if(session.getUser()!= null) {
 			//creating homepage after login
-			System.out.println("user in startup: " + session.getUser());
 			this.navbar = new Navbar(session);
 			NavbarController navbarController = new NavbarController(navbar, this);
 			this.homeView = new HomePage(navbar);
@@ -32,8 +34,9 @@ public class Manager {
 			//Account accountController = new AccountPage();
 			this.researcherView = new ResearchersPage(session.getUser());
 			ResearcherController researcherController = new ResearcherController(researcherView);
-			this.paperView = new PapersPage();
-			PaperController paperController = new PaperController(paperView);
+			this.paperCollection = new PaperCollection();
+			this.paperView = new PapersPage(paperCollection);
+			PaperController paperController = new PaperController(paperView, (PaperCollection) paperCollection);
 			
 		}
 	}

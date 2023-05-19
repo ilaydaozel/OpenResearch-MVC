@@ -12,13 +12,12 @@ public class ResearcherController {
 	public ResearcherController(ResearchersPage researchersView) {
 		this.researchersView = researchersView;
 		researchersView.selectResearcher(new SelectResearcherListener());
-		researchersView.getDetailedContainer().followResearcher(new FollowListener());
-		researchersView.getDetailedContainer().unfollowResearcher(new UnfollowListener());
+		researchersView.followResearcher(new FollowListener());
+		researchersView.unfollowResearcher(new UnfollowListener());
 	}
 
 	class SelectResearcherListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("SelectResearcherListener / researcherController");
 			Object selected = researchersView.getResearcherListWrapper().getListContainer().getList().getSelectedValue();
 			if(selected!= null) {
 				researchersView.addDetailedContainer((Researcher) selected);
@@ -28,7 +27,6 @@ public class ResearcherController {
 	}
 	class FollowListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			//userı alma yerini düşün
 			Object selected = researchersView.getResearcherListWrapper().getListContainer().getList().getSelectedValue();
 			if(selected!= null) {
 				System.out.println(selected + "followed / controller");
@@ -39,7 +37,6 @@ public class ResearcherController {
 	}
 	class UnfollowListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			//userı alma yerini düşün
 			Object selected = researchersView.getResearcherListWrapper().getListContainer().getList().getSelectedValue();
 			if(selected!= null) {
 				System.out.println(selected + "unfollowed / controller");

@@ -3,6 +3,7 @@ package view;
 import javax.swing.*;
 
 import model.Article;
+import model.Collection;
 import model.Paper;
 import model.PaperCollection;
 
@@ -11,8 +12,9 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class PapersPage extends JPanel implements java.util.Observer {
-    private List<Object> paperList =  new PaperCollection().getCollection();
-    private ListWrapper paperListWrapper = new ListWrapper("Papers", paperList, 700, 100);
+	private Collection paperCollection;
+    private List<Object> paperList;
+    private ListWrapper paperListWrapper;
     private GridBagConstraints gridBagConstraints = new GridBagConstraints();
     private JPanel detailedContainer = new JPanel();
 	private Paper _paper ;
@@ -20,10 +22,11 @@ public class PapersPage extends JPanel implements java.util.Observer {
 	private JLabel bookTitle = new JLabel();
     private Color blue = new Color(144, 219, 244);
     private JButton downloadButton = new JButton("Download File");
-    //private Researcher model;
     
-    public PapersPage() {
-    	//this.model = model;
+    public PapersPage(Collection paperCollection) {
+    	this.paperCollection = paperCollection;
+    	this.paperList = paperCollection.getCollection();
+    	this.paperListWrapper = new ListWrapper("Papers", paperList, 700, 100);
     	initComponents();
     }
 

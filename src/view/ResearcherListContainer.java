@@ -2,6 +2,8 @@ package view;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.*;
 
 import model.Researcher;
@@ -9,11 +11,11 @@ import model.Researcher;
 
 @SuppressWarnings("serial")
 public class ResearcherListContainer extends JPanel{
-	private ArrayList<Researcher> objectList;
+	private List<Object> objectList;
 	private JList list;
 	
-    public ResearcherListContainer(ArrayList<Researcher> objectList, int width, int heigth) {
-    	this.objectList = objectList;
+    public ResearcherListContainer(List<Object> researcherList, int width, int heigth) {
+    	this.objectList = researcherList;
     	createList(width, heigth);
     }
     
@@ -35,11 +37,11 @@ public class ResearcherListContainer extends JPanel{
 		this.list = list;
 	}
 
-	public ArrayList<Researcher> getObjectList() {
+	public List<Object> getObjectList() {
 		return objectList;
 	}
 
-	public void setObjectList(ArrayList<Researcher> objectList) {
+	public void setObjectList(List<Object> objectList) {
 		this.objectList = objectList;
 	}
 

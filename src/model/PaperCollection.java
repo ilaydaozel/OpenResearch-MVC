@@ -23,7 +23,7 @@ public class PaperCollection {
     	List<Map<String, String>> allPapers;
 
     	this.bibReader = new BibTeXFileIO();
-    	allPapers = bibReader.readAllFilesInSameDirectory("OpenResearch-MVC/src/data/");
+    	allPapers = bibReader.readAllElements("OpenResearch-MVC/src/data/");
 
     	for (Map<String, String> data : allPapers) {
     		papers.add(createPaper(data));

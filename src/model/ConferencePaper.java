@@ -19,4 +19,9 @@ public class ConferencePaper extends Paper {
  public void setBookTitle(String bookTitle) {
      this.bookTitle = bookTitle;
  }
+ @Override
+ public String toString() {
+	 
+	 return "IP_" +getYear() +"_" +getTitle();
+ }
 }

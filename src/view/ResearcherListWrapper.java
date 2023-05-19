@@ -19,7 +19,7 @@ public class ResearcherListWrapper extends JPanel {
     private JLabel label = new JLabel("Researchers Page");
     private Color blue = new Color(144, 219, 244);
     private List<Object> researcherList =  new ResearcherCollection().getCollection();
-    private ResearcherListContainer listContainer = new ResearcherListContainer(researcherList, 500, 100);
+	private ListContainer listContainer = new ListContainer(researcherList, 500, 100);
     private JButton viewButton = new JButton("View more");
     
 	public ResearcherListWrapper() {
@@ -58,15 +58,15 @@ public class ResearcherListWrapper extends JPanel {
     public void selectResearcher(ActionListener actionListener) {
     	viewButton.addActionListener(actionListener);
     }
-
-
-	public ResearcherListContainer getListContainer() {
+    public ListContainer getListContainer() {
 		return listContainer;
 	}
 
-	public void setListContainer(ResearcherListContainer listContainer) {
+	public void setListContainer(ListContainer listContainer) {
 		this.listContainer = listContainer;
 	}
+
+
 
 
 }

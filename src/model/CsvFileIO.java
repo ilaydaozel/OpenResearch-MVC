@@ -12,28 +12,57 @@ import java.util.Map;
 import interfaces.IFileReader;
 import interfaces.IFileWriter;
 import java.util.Random;
-public class CsvFileIO implements IFileReader,IFileWriter{
+public class CsvFileIO implements IFileWriter{
 
 	@Override
 	public void write() {
-	
 		
 	}
 	@Override
-	public void writeAllPapers(List<Map<String, String>> allPapers) {
+	public void writeAllPapers(List<Paper> allPapers) {
 		try {
 			FileWriter writer = new FileWriter("OpenResearch-MVC/src/data/papers.csv");
-		for (Map<String, String> data : allPapers) {
-            for (Map.Entry<String, String> entry : data.entrySet()) {
-               
-                String value = entry.getValue();
-                // Create a new FileWriter object to write to the CSV file
-
-                writer.append(value)
-                .append(";");
-           
+		for (Paper paper : allPapers) {
+			
+			if (paper instanceof ConferencePaper) {
+                ConferencePaper conferencePaper = (ConferencePaper) paper;
+                writer.append("conference paper")
+                .append(";")
+                .append(conferencePaper.getAuthors())
+                .append(";")
+                .append(conferencePaper.getTitle())
+                .append(";")
+                .append(conferencePaper.getYear())
+                .append(";")
+                .append(conferencePaper.getDoi())
+                .append(";")
+                .append(conferencePaper.getBookTitle())
+                .append(";")
+                .append(String.valueOf(conferencePaper.getDownloadNumber()))
+                .append("\n");
+                
+            } else if (paper instanceof Article) {
+                Article article = (Article) paper;
+                writer.append("article")
+                .append(";")
+                .append(article.getAuthors())
+                .append(";")
+                .append(article.getTitle())
+                .append(";")
+                .append(article.getYear())
+                .append(";")
+                .append(article.getVolume())
+                .append(";")
+                .append(article.getNumber())
+                .append(";")
+                .append(article.getDoi())
+                .append(";")
+                .append(article.getJournal())
+                .append(";")
+                .append(String.valueOf(article.getDownloadNumber()))
+                .append("\n");
             }
-            writer.append("\n");
+
         }
         // Flush and close the FileWriter object
         writer.flush();
@@ -45,29 +74,5 @@ public class CsvFileIO implements IFileReader,IFileWriter{
         }	
 	}
 
-	@Override
-	public Map<String, String> readFile(String filePath) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 
-	
-	@Override
-	public List<Map<String, String>> readAllFilesInSameDirectory(String directoryPath) {
-		return null;
-		// TODO Auto-generated method stub
-		
-	}
-	 public static void main(String[] args) {
-	    	List<Map<String, String>> dataList = new ArrayList<>();
-	    	PaperCollection papers = new PaperCollection();
-	        
-	    	IFileReader BibReader = new BibTeXFileIO();
-	    	dataList= BibReader.readAllFilesInSameDirectory("OpenResearch-MVC/src/data/");
-	    	IFileWriter csvWriter = new CsvFileIO();
-	    	csvWriter.writeAllPapers(dataList);
-	    	
-
-	 }
-	 }
+}

@@ -1,6 +1,9 @@
 package view;
 
 import model.Researcher;
+import model.ResearcherCollection;
+import store.UserStore;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -19,8 +22,8 @@ public class LoginPage extends JFrame implements java.util.Observer {
     private Container container = getContentPane();
     private Researcher model;
 
+
     public LoginPage() {
-    	//this.model = model;
     	initComponents();
     }
 
@@ -91,31 +94,21 @@ public class LoginPage extends JFrame implements java.util.Observer {
     }
     
 	public String getUsernameInput() {
-		System.out.println("get usernameinput / loginpage");
 		return this.usernameInput.getText();
 	}
 	public String getPasswordInput() {
-		System.out.println("get passwordinput / loginpage");
 		return this.passInput.getText();
 	}
 
 	public void login(ActionListener actionListener) {
-    	System.out.println("login / loginpage");
     	loginButton.addActionListener(actionListener);
     }
-
+    
 	@Override
 	public void update(java.util.Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		System.out.println("UPDATE LOGIN");
-		System.out.println("username: " + model.getUsername());
-		System.out.println("password: " + model.getPassword());
-		System.out.println("-------------------- ");
-		/*usernameInput.setText(model.getName());
-		passInput.setText(model.getPassword());*/
 	}
 	
-
 	public void changeToErrorPage() {
 		 JOptionPane.showMessageDialog(this, "Please enter a valid email and password", "Error", JOptionPane.ERROR_MESSAGE);
 		

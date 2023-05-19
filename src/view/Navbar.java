@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import interfaces.IPage;
 import model.Researcher;
+import store.UserStore;
 
 public class Navbar extends JPanel implements java.util.Observer{
 	private JPanel navbar = new JPanel();
@@ -19,8 +20,9 @@ public class Navbar extends JPanel implements java.util.Observer{
     JLabel name;
     private Researcher model;
 
-    public Navbar( Researcher model) {
-    	this.model = model;
+    public Navbar( UserStore session) {
+    	this.model = session.getUser();
+    	System.out.println("Navbar user: "+ model);
     	initComponents();
     }
 

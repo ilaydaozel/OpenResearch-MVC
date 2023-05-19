@@ -3,27 +3,23 @@ package view;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.Observable;
 import javax.swing.*;
 
 import model.Researcher;
 import store.UserStore;
 
-public class Navbar extends JPanel implements java.util.Observer{
+public class Navbar extends JPanel {
 	private JPanel navbar = new JPanel();
     private JButton accountButton = new JButton("My Account");
     private JButton papersButton = new JButton("Papers");
     private JButton researchersButton = new JButton("Researchers");
     private JButton logoutButton = new JButton("Log out");  
-    private Color blue = new Color(144, 219, 244);
-    JLabel name;
-    private Researcher model;
+    private JLabel name;
     private UserStore userStore ;
+    private Color blue = new Color(144, 219, 244);
 
     public Navbar( UserStore session) {
     	this.userStore = session;
-    	this.model = session.getUser();
-    	System.out.println("Navbar user: "+ model);
     	initComponents();
     }
 
@@ -41,7 +37,7 @@ public class Navbar extends JPanel implements java.util.Observer{
     	setBackground(Color.white);
     	GridBagConstraints pageConstraints = new GridBagConstraints();    	
     	navbar.setLayout(new GridBagLayout());
-    	name = new JLabel("Welcome "+ model.getUsername()+ " !");
+    	name = new JLabel("Welcome "+ userStore.getUser().getUsername()+ " !");
     	name.setFont(new Font("", Font.BOLD, 16));
 		GridBagConstraints navbarConstraints = new GridBagConstraints();
 		//pageConstraints.fill = GridBagConstraints.PAGE_START;
@@ -65,13 +61,6 @@ public class Navbar extends JPanel implements java.util.Observer{
 
     }
 
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		System.out.println("update/ mainpage");
-		
-	}
-
     public void navigate(ActionListener actionListener) {
     	System.out.println("press button in navbar");
     	researchersButton.addActionListener(actionListener);
@@ -82,11 +71,6 @@ public class Navbar extends JPanel implements java.util.Observer{
     public void logout(ActionListener actionListener) {
     	System.out.println("logout / mainpage");
     	logoutButton.addActionListener(actionListener);
-    }
-	
-    public void setModel(Researcher model) {
-    	System.out.println("Model set!!!");
-    	this.model= model;
     }
 
 	public UserStore getUserStore() {

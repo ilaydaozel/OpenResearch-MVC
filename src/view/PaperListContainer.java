@@ -18,16 +18,16 @@ import model.PaperCollection;
 public class PaperListContainer extends JPanel {
 	
 	private PaperCollection paperList = new PaperCollection();
-	
+
     @SuppressWarnings({ "unchecked", "rawtypes" })
-	private JList list = new JList(paperList.getPapers().toArray());
+	private JList list = new JList(paperList.getCollection().toArray());
     
     public PaperListContainer() {
     	initComponents();
     }
     
     private void initComponents() {
-    	
+    	System.out.println("paperlist: " + paperList.getCollection().toArray());
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
         list.setVisibleRowCount(-1);
@@ -36,11 +36,11 @@ public class PaperListContainer extends JPanel {
         add(listScroller);
     }
 
-	public PaperCollection getResearcherList() {
+	public PaperCollection getPaperList() {
 		return paperList;
 	}
-	public void setResearcherList(PaperCollection researcherList) {
-		this.paperList = researcherList;
+	public void setPaperList(PaperCollection paperList) {
+		this.paperList = paperList;
 	}
 	@SuppressWarnings("rawtypes")
 	public JList getList() {

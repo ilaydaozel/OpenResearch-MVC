@@ -7,5 +7,5 @@ import model.Paper;
 
 public interface IFileWriter {
 	public void write();
-	public void writeAllPapers(List<Paper> allPapers); 
+	public void writeAllPapers(List<Object> list); 
 }

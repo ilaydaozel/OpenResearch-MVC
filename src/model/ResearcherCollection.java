@@ -11,23 +11,18 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class ResearcherCollection extends Collection  {
-	
+public class ResearcherCollection extends Collection  {	
 	
 	public ResearcherCollection() {
-		//setCollection(new ArrayList<>());
 		setReader(new XmlFileIO());
-		System.out.println("createcollection");
 		createCollection();
 	}
 	
-
-
 	@Override
 	public void createCollection() {
 		List<Map<String, String>> allResearchers;
 
-		allResearchers = getReader().readAllElements("OpenResearch-MVC/src/users.xml");
+		allResearchers = getReader().readAllElements("users.xml");
 
     	for (Map<String, String> data : allResearchers) {
     		System.out.println("inside "+ data);

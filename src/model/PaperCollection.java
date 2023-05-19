@@ -1,36 +1,30 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import interfaces.IFileReader;
 import interfaces.IFileWriter;
 
-public class PaperCollection {
-    private List<Paper> papers;
-    private IFileReader bibReader;
+public class PaperCollection extends Collection{
     private IFileWriter csvWriter = new CsvFileIO();
     
     public PaperCollection() {
-        papers = new ArrayList<>();
-        createCollection();
-        csvWriter.writeAllPapers(papers);
+		setReader(new BibTeXFileIO());
+		createCollection();
+        csvWriter.writeAllPapers(getCollection());
     }
     
     public void createCollection() {
     	List<Map<String, String>> allPapers;
-
-    	this.bibReader = new BibTeXFileIO();
-    	allPapers = bibReader.readAllElements("OpenResearch-MVC/src/data/");
+    	allPapers = getReader().readAllElements("src/data/");
 
     	for (Map<String, String> data : allPapers) {
-    		papers.add(createPaper(data));
+    		addToCollection(createCollectionElement(data));
         }   	
     }
     
-    public Paper createPaper(Map<String, String> data) {
+    public Object createCollectionElement(Map<String, String> data) {
     	Random random = new Random();
     	if(data.get("type")=="article") {
 			Paper article = new Article(
@@ -55,10 +49,5 @@ public class PaperCollection {
 			return conferencePaper;
 		}
     }
-    
 
-
-    public List<Paper> getPapers() {
-        return papers;
-    }
 }

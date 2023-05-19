@@ -19,11 +19,11 @@ public class CsvFileIO implements IFileWriter{
 		
 	}
 	@Override
-	public void writeAllPapers(List<Paper> allPapers) {
+	public void writeAllPapers(List<Object> allPapers) {
 		try {
-			FileWriter writer = new FileWriter("OpenResearch-MVC/src/data/papers.csv");
-		for (Paper paper : allPapers) {
-			
+			FileWriter writer = new FileWriter("src/data/papers.csv");
+		for (Object paper : allPapers) {
+			paper = (Paper) paper;
 			if (paper instanceof ConferencePaper) {
                 ConferencePaper conferencePaper = (ConferencePaper) paper;
                 writer.append("conference paper")

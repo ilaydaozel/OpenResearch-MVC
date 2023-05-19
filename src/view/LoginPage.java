@@ -1,16 +1,13 @@
 package view;
 
-import model.Researcher;
-import model.ResearcherCollection;
-import store.UserStore;
-
 import java.awt.*;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class LoginPage extends JFrame implements java.util.Observer {    
-    private JLabel pageLabel = new JLabel("Welcome to OpenResearch!");
+@SuppressWarnings("serial")
+public class LoginPage extends JFrame {    
+	private JLabel pageLabel = new JLabel("Welcome to OpenResearch!");
     private JLabel usernameLabel = new JLabel("Username");
     private JLabel passLabel = new JLabel("Password");
     private JTextField usernameInput  = new JTextField(20);
@@ -20,20 +17,10 @@ public class LoginPage extends JFrame implements java.util.Observer {
     private Color blue = new Color(144, 219, 244);
     private Color white = new Color(255, 255, 255);
     private Container container = getContentPane();
-    private Researcher model;
-
-
+    
     public LoginPage() {
     	initComponents();
     }
-
-    public Researcher getModel() {
-		return model;
-	}
-
-	public void setModel(Researcher model) {
-		this.model = model;
-	}
 
 	private void initComponents() {
     	container.setBackground(white);
@@ -103,11 +90,6 @@ public class LoginPage extends JFrame implements java.util.Observer {
 	public void login(ActionListener actionListener) {
     	loginButton.addActionListener(actionListener);
     }
-    
-	@Override
-	public void update(java.util.Observable o, Object arg) {
-		// TODO Auto-generated method stub
-	}
 	
 	public void changeToErrorPage() {
 		 JOptionPane.showMessageDialog(this, "Please enter a valid email and password", "Error", JOptionPane.ERROR_MESSAGE);

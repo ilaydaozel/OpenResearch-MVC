@@ -7,7 +7,7 @@ import javax.swing.*;
 import model.Researcher;
 import store.UserStore;
 
-public class HomePage extends JFrame implements java.util.Observer{
+public class HomePage extends JFrame{
 
     private Navbar navbar;
     private JPanel navbarPanel = new JPanel();
@@ -61,10 +61,4 @@ public class HomePage extends JFrame implements java.util.Observer{
 		contentPanel.revalidate();	
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }

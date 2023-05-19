@@ -1,82 +1,105 @@
 package view;
 
 import javax.swing.*;
+
+import model.Article;
+import model.Paper;
+import model.PaperCollection;
+
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.List;
 
 public class PapersPage extends JPanel implements java.util.Observer {
-    private JLabel label = new JLabel("Papers Page");
-    private JButton viewButton = new JButton("View more");
-    private JButton downloadButton = new JButton("Download File");
-    private PaperListContainer listContainer = new PaperListContainer();
+    private List<Object> paperList =  new PaperCollection().getCollection();
+    //private PaperDetailedContainer detailedContainer;
+    private ListWrapper paperListWrapper = new ListWrapper("Papers", paperList, 700, 100);
     private GridBagConstraints gridBagConstraints = new GridBagConstraints();
+    private JPanel detailedContainer = new JPanel();
+	private Paper _paper ;
+	private JLabel bookLabel = new JLabel("Book Title:");
+	private JLabel bookTitle = new JLabel();
     private Color blue = new Color(144, 219, 244);
-
+    private JButton downloadButton = new JButton("Download File");
+    //private Researcher model;
+    
     public PapersPage() {
-        initComponents();
+    	//this.model = model;
+    	initComponents();
     }
 
     private void initComponents() {
         setLayout(new GridBagLayout());
-
-        JPanel papersList = new JPanel();
-        papersList.setLayout(new GridBagLayout());
-        GridBagConstraints listGridBagConstraints = new GridBagConstraints();
-
-        listGridBagConstraints.gridx = 0;
-        listGridBagConstraints.gridy = 0;
-        label.setFont(new Font("", Font.BOLD, 20));
-        papersList.add(label, listGridBagConstraints);
-
-        listGridBagConstraints.gridx = 0;
-        listGridBagConstraints.gridy = 1;
-
-        papersList.add(listContainer, listGridBagConstraints);
-
-        listGridBagConstraints.gridx = 0;
-        listGridBagConstraints.gridy = 2;
-        viewButton.setBackground(blue);
-        viewButton.setPreferredSize(new Dimension(150, 30));
-        listGridBagConstraints.anchor = listGridBagConstraints.EAST;
-        papersList.add(viewButton, listGridBagConstraints);
-
-        listGridBagConstraints.gridx = 0;
-        listGridBagConstraints.gridy = 3;
-        downloadButton.setBackground(blue);
-        downloadButton.setPreferredSize(new Dimension(150, 30));
-        listGridBagConstraints.anchor = listGridBagConstraints.EAST;
-        papersList.add(downloadButton, listGridBagConstraints);
-
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        add(papersList, gridBagConstraints);
-
+        add(paperListWrapper, gridBagConstraints);    
+        addDetailedContainer(new Article("", "", "", "", "", "", "", 0));
     }
 
-    @Override
-    public void update(java.util.Observable o, Object arg) {
-        System.out.println("update/ mainpage");
-
-    }
-
-    public void selectPaper(ActionListener actionListener) {
-        viewButton.addActionListener(actionListener);
-    }
-
+	public void addDetailedContainer(Paper selectedPaper) {
+		/*if(detailedContainer != null) {
+			remove(detailedContainer);
+		}
+		detailedContainer = new PaperDetailedContainer(selectedPaper);*/
+		detailedContainer.removeAll();
+		detailedContainer.setBackground(Color.white);
+		detailedContainer.setPreferredSize(new Dimension(900,300));
+		detailedContainer.setLayout(new GridBagLayout());
+        GridBagConstraints gridBagConstraints = new GridBagConstraints();
+        JPanel bookTitlePanel = new JPanel();
+        bookTitlePanel.setLayout(new FlowLayout());
+        bookTitlePanel.setBackground(Color.white);
+        bookTitlePanel.add(bookLabel);
+        bookTitlePanel.add(new JLabel(selectedPaper.getTitle()));
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = gridBagConstraints.WEST;
+        detailedContainer.add(bookTitlePanel, gridBagConstraints);
+    
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.white);
+        buttonPanel.add(downloadButton);
+     
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        detailedContainer.add(buttonPanel, gridBagConstraints); 
+        
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new Insets(20, 0, 10, 0);
+		add(detailedContainer, gridBagConstraints);
+		SwingUtilities.updateComponentTreeUI(this);
+		
+	}
+	
     public void downloadFile(ActionListener actionListener) {
+    	System.out.println("Press Download");
         downloadButton.addActionListener(actionListener);
     }
-
-    public JButton getViewButton() {
-        return viewButton;
+    
+    @Override
+    public void update(java.util.Observable o, Object arg) {
+		// TODO Auto-generated method stub
+    }
+	public void selectPaper(ActionListener actionListener) {
+    	paperListWrapper.getViewButton().addActionListener(actionListener);
     }
 
-    public void setViewButton(JButton viewButton) {
-        this.viewButton = viewButton;
-    }
+	public List<Object> getPaperList() {
+		return paperList;
+	}
+
+	public void setPaperList(List<Object> paperList) {
+		this.paperList = paperList;
+	}
+
+
+	public ListWrapper getPaperListWrapper() {
+		return paperListWrapper;
+	}
+
+	public void setPaperListWrapper(ListWrapper paperListWrapper) {
+		this.paperListWrapper = paperListWrapper;
+	}
+
+
 }

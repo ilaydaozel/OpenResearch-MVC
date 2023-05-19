@@ -38,4 +38,9 @@ public class Article extends Paper {
  public void setJournal(String journal) {
      this.journal = journal;
  }
+ @Override
+ public String toString() {
+	 
+	 return "A_" +getYear() +"_" +getTitle();
+ }
 }

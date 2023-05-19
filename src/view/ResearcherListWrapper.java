@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
 import java.util.Observable;
@@ -17,7 +18,7 @@ import model.ResearcherCollection;
 public class ResearcherListWrapper extends JPanel {
     private JLabel label = new JLabel("Researchers Page");
     private Color blue = new Color(144, 219, 244);
-    private ArrayList<Researcher> researcherList = (ArrayList<Researcher>) new ResearcherCollection().getResearchersList();
+    private List<Object> researcherList =  new ResearcherCollection().getCollection();
     private ResearcherListContainer listContainer = new ResearcherListContainer(researcherList, 500, 100);
     private JButton viewButton = new JButton("View more");
     

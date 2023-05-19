@@ -11,11 +11,12 @@ import interfaces.IFileWriter;
 public class PaperCollection {
     private List<Paper> papers;
     private IFileReader bibReader;
-    private IFileWriter csvWriter;
+    private IFileWriter csvWriter = new CsvFileIO();
     
     public PaperCollection() {
         papers = new ArrayList<>();
         createCollection();
+        csvWriter.writeAllPapers(papers);
     }
     
     public void createCollection() {

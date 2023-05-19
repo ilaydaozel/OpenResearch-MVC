@@ -69,8 +69,8 @@ public class BibTeXFileIO implements IFileReader{
             articleData.put(field, value);
         }
     }
-    
-    public List<Map<String, String>> readAllFilesInSameDirectory(String directoryPath){
+    @Override
+    public List<Map<String, String>> readAllElements(String directoryPath){
         File directory = new File(directoryPath);
         List<Map<String, String>> dataList = new ArrayList<>();
         

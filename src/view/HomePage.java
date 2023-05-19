@@ -1,27 +1,26 @@
 package view;
 
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.util.Observable;
+
 import javax.swing.*;
 
 
 import interfaces.IPage;
 import model.Researcher;
+import store.UserStore;
 
-public class MainPage extends JFrame implements IPage, java.util.Observer{
+public class HomePage extends JFrame implements IPage, java.util.Observer{
 
     private Researcher model;
     private Navbar navbar;
     private JPanel navbarPanel = new JPanel();
     private JPanel contentPanel = new JPanel();
 	private Container container = getContentPane();
-	private Component AccountPage;
 
-    public MainPage( Researcher model) {
-    	this.model = model;
-    	this.navbar = new Navbar(model);
-    	this.AccountPage = new AccountPage(model);
+    public HomePage(Navbar navbar) {
+    	this.model = UserStore.getUser();
+    	this.navbar = navbar;
     	initComponents();
     }
 
@@ -39,29 +38,20 @@ public class MainPage extends JFrame implements IPage, java.util.Observer{
     	containerConstraints.gridy = 1;
     	containerConstraints.gridx = 0;     
     	containerConstraints.gridy = 1; 
-
+    	contentPanel.add(new JLabel("Welcome to Homepage!"));
     	container.add(contentPanel, containerConstraints);
 		navbarPanel.removeAll();
 		navbarPanel.add(navbar);	
 		navbarPanel.repaint();
 		navbarPanel.revalidate();	
-    	changeContent(new AccountPage(model)); // the starting landing page
+
 		this.pack();
 		this.setTitle("Main Page");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
-
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		System.out.println("update/ mainpage");
-		
-	}
-    
 	
     public void setModel(Researcher model) {
-    	System.out.println("Model set!!!");
     	this.model= model;
     }
 
@@ -75,12 +65,16 @@ public class MainPage extends JFrame implements IPage, java.util.Observer{
 
 	@Override
 	public void changeContent(Component page) {
-		System.out.println("set content in mainpage");
-
 		contentPanel.removeAll();
 		contentPanel.add(page);	
 		contentPanel.repaint();
 		contentPanel.revalidate();	
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

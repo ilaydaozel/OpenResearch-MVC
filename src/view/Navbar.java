@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import interfaces.IPage;
 import model.Researcher;
+import store.UserStore;
 
 public class Navbar extends JPanel implements java.util.Observer{
 	private JPanel navbar = new JPanel();
@@ -18,9 +19,12 @@ public class Navbar extends JPanel implements java.util.Observer{
     private Color blue = new Color(144, 219, 244);
     JLabel name;
     private Researcher model;
+    private UserStore userStore ;
 
-    public Navbar( Researcher model) {
-    	this.model = model;
+    public Navbar( UserStore session) {
+    	this.userStore = session;
+    	this.model = session.getUser();
+    	System.out.println("Navbar user: "+ model);
     	initComponents();
     }
 
@@ -68,20 +72,14 @@ public class Navbar extends JPanel implements java.util.Observer{
 		System.out.println("update/ mainpage");
 		
 	}
-    
-    public void showAccountPage(ActionListener actionListener) {
+
+    public void navigate(ActionListener actionListener) {
+    	System.out.println("press button in navbar");
+    	researchersButton.addActionListener(actionListener);
+    	papersButton.addActionListener(actionListener);
     	accountButton.addActionListener(actionListener);
     }
-    public void showResearchersPage(ActionListener actionListener) {
-    	System.out.println("press researchers button in navbar");
-    	researchersButton.addActionListener(actionListener);
-    }
-    public void showPapersPage(ActionListener actionListener) {
-    	System.out.println("press researchers button in navbar");
-    	papersButton.addActionListener(actionListener);
-    }
-    
-    
+ 
     public void logout(ActionListener actionListener) {
     	System.out.println("logout / mainpage");
     	logoutButton.addActionListener(actionListener);
@@ -91,5 +89,15 @@ public class Navbar extends JPanel implements java.util.Observer{
     	System.out.println("Model set!!!");
     	this.model= model;
     }
+
+	public UserStore getUserStore() {
+		return userStore;
+	}
+
+	public void setUserStore(UserStore userStore) {
+		this.userStore = userStore;
+	}
+    
+    
 }
     

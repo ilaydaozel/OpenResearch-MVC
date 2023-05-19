@@ -3,23 +3,20 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import main.Manager;
 import model.*;
+import store.UserStore;
 import view.*;
 
 
 public class AuthController {
-	private Researcher model;
 	private LoginPage loginView;
-	private MainPage mainView;
-	private Navbar navbar;
-	private AccountPage accountView;
-	private ResearchersPage researchersView;
-	private PapersPage papersView;
-	private ResearcherCollection researcherCollection = new ResearcherCollection() ;
+    private UserStore userStore;
+	private Manager manager = new Manager();
+
 	
-	public AuthController(LoginPage loginView) {
-		//System.out.println("model name ain authcontroller beginning: " + model.getUsername());
-		//this.model = model;
+	public AuthController(LoginPage loginView, UserStore session) {
+    	this.userStore = session;
 		this.loginView = loginView;
 		loginView.login(new LoginListener());
 	}
@@ -27,70 +24,33 @@ public class AuthController {
 
 	class LoginListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			model = new Researcher(loginView.getUsernameInput(), loginView.getPasswordInput());
-			loginView.setModel(model);
-			model.addObserver(loginView);
-			//model.setUsername();
-			System.out.println("------------- login view passw input " + loginView.getPasswordInput());
-			//model.setPassword(loginView.getPasswordInput());
-			model.isValidUser();
-
-	        if(model.getLoggedIn())
-	        {	System.out.println("login listener loggedIn: " +model.getLoggedIn());
+			isValidUser(loginView.getUsernameInput(), loginView.getPasswordInput());
+	        if(userStore.getUser() != null)
+	        {	System.out.println("Logged in User: "+ userStore.getUser());
 	            loginView.dispose();
-	            MainPage curMainView = new MainPage(model);
-	            curMainView.setVisible(true);
-	            mainView = curMainView;
-	    		model.addObserver(mainView);
-	    		//PageController pageController = new PageController(model, mainView);
-	    		mainView.getNavbar().logout(new LogoutListener());
-	    		accountView= new AccountPage(model);
-	    		ResearcherCollection researcherCollection = new ResearcherCollection();
-
-	    		researchersView= new ResearchersPage();
-	    		papersView= new PapersPage();
-	    		mainView.getNavbar().showAccountPage(  new ShowAccountPageListener());
-	    		mainView.getNavbar().showResearchersPage(  new ShowResearchersPageListener());
-	    		mainView.getNavbar().showPapersPage(  new ShowPapersPageListener());
-
+	            manager.onLogin(userStore);
+	            
 	        }else {
 	        	loginView.changeToErrorPage();
 	        }
 			
 		}
 	}
-	class ShowAccountPageListener implements ActionListener{
-		public void actionPerformed(ActionEvent e) {
-			System.out.println("account");
-			mainView.changeContent(accountView);
-		}
-	}
-	class ShowResearchersPageListener implements ActionListener{
-		public void actionPerformed(ActionEvent e) {
-			System.out.println("reseacrhers");
-			mainView.changeContent(researchersView);
-			ResearcherController researcherController = new ResearcherController(researchersView);
-		}
-	}
-	class ShowPapersPageListener implements ActionListener{
-		public void actionPerformed(ActionEvent e) {
-			mainView.changeContent(papersView);
-		}
-	}
-	class LogoutListener implements ActionListener{
-		public void actionPerformed(ActionEvent e) {
-			System.out.println("logout");
-			model.setLoggedIn(false);
-			model.reset();
-			System.out.println("name:" + model.getUsername());
-			mainView.dispose();	
-			System.out.println("*****************************new login");
-			//loginView.setVisible(true);
-			
-			LoginPage newLogin = new LoginPage();
-			(newLogin).setVisible(true);
-			AuthController newController = new AuthController(newLogin);
+	
+    public void isValidUser(String username, String password) {
+    	ResearcherCollection researcherList = new ResearcherCollection();
+    	for (Researcher researcher : researcherList.getResearchersList()) {
+    		 if (researcher.getUsername().equals(username) && researcher.getPassword().equals(password)) {
+           	  	this.userStore.setUser(researcher);
+             }
+    	}
+    }
 
-		}
+	public UserStore getUserStore() {
+		return userStore;
 	}
+	public void setUserStore(UserStore userStore) {
+		this.userStore = userStore;
+	}
+	
 }

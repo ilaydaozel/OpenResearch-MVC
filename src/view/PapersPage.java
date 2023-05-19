@@ -12,7 +12,6 @@ import java.util.List;
 
 public class PapersPage extends JPanel implements java.util.Observer {
     private List<Object> paperList =  new PaperCollection().getCollection();
-    //private PaperDetailedContainer detailedContainer;
     private ListWrapper paperListWrapper = new ListWrapper("Papers", paperList, 700, 100);
     private GridBagConstraints gridBagConstraints = new GridBagConstraints();
     private JPanel detailedContainer = new JPanel();
@@ -37,10 +36,6 @@ public class PapersPage extends JPanel implements java.util.Observer {
     }
 
 	public void addDetailedContainer(Paper selectedPaper) {
-		/*if(detailedContainer != null) {
-			remove(detailedContainer);
-		}
-		detailedContainer = new PaperDetailedContainer(selectedPaper);*/
 		detailedContainer.removeAll();
 		detailedContainer.setBackground(Color.white);
 		detailedContainer.setPreferredSize(new Dimension(900,300));
@@ -72,7 +67,6 @@ public class PapersPage extends JPanel implements java.util.Observer {
 	}
 	
     public void downloadFile(ActionListener actionListener) {
-    	System.out.println("Press Download");
         downloadButton.addActionListener(actionListener);
     }
     

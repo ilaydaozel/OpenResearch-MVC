@@ -15,35 +15,54 @@ import view.*;
 
 public class PaperController {
 	private PapersPage papersView;
+	protected Paper selectedPaper;
 	
 	public PaperController(PapersPage papersView) {
 		this.papersView = papersView;
 		papersView.selectPaper(new SelectPaperListener());
+		System.out.println("papercontroller");
 		papersView.downloadFile(new DownloadPaperListener());
 	}
 
 	class SelectPaperListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("SelectResearcherListener / researcherController");
-			//Object selected = papersView.getListContainer().getList().getSelectedValue();
-			/*if(selected!= null) {
-				papersView.addDetailedContainer((Paper) selected);
-			}*/
+			selectedPaper = (Paper) papersView.getPaperListWrapper().getListContainer().getList().getSelectedValue();
+			if(selectedPaper!= null) {
+				papersView.addDetailedContainer(selectedPaper);
+			}
 
 		}
 	}
 	class DownloadPaperListener implements ActionListener {
 	    public void actionPerformed(ActionEvent e) {
-	        try {
-	            Path source = Paths.get("OpenResearch-MVC/src/data/A_2005_Introducing Test Automation and Test-Driven Development.pdf");
-	            Path destination = Paths.get("downloaded_file.pdf");
-	
-	            Files.copy(source, destination);
-	            JOptionPane.showMessageDialog(papersView, "File downloaded successfully!");
-	        } catch (IOException ex) {
-	            ex.printStackTrace();
-	            JOptionPane.showMessageDialog(papersView, "Error downloading file: " + ex.getMessage());
+	    	if (selectedPaper != null) {
+	            try {
+	                String fileName = selectedPaper.toString().replace(":", "") + ".pdf";
+	                Path source = Paths.get("src/data/" + fileName);
+	                Path destination = Paths.get("copy_" + fileName);
+	                if(Files.exists(destination)) {
+	                	int response = JOptionPane.showConfirmDialog(papersView, "This file already exists. Do you want to download again?", "File Exists", JOptionPane.YES_NO_OPTION);
+	                    if (response == JOptionPane.YES_OPTION) {
+	                    	Files.delete(destination);
+	                    }
+	                    else {
+	                    	return;
+	                    }
+	                	
+	                }
+	    	    	System.out.println("Downloading " + selectedPaper.toString());
+	                Files.copy(source, destination);
+	                JOptionPane.showMessageDialog(papersView, "File downloaded successfully!");
+	            } catch (IOException ex) {
+	                ex.printStackTrace();
+	                JOptionPane.showMessageDialog(papersView, "Error downloading file: " + ex.getMessage());
+	            }
+	        } else {
+	            JOptionPane.showMessageDialog(papersView, "No paper selected.");
 	        }
 	    }
+	}
+	
+	
 }
-}
+

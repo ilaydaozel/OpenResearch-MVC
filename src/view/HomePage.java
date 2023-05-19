@@ -8,8 +8,9 @@ import javax.swing.*;
 
 import interfaces.IPage;
 import model.Researcher;
+import store.UserStore;
 
-public class MainPage extends JFrame implements IPage, java.util.Observer{
+public class HomePage extends JFrame implements IPage, java.util.Observer{
 
     private Researcher model;
     private Navbar navbar;
@@ -18,9 +19,9 @@ public class MainPage extends JFrame implements IPage, java.util.Observer{
 	private Container container = getContentPane();
 	private Component AccountPage;
 
-    public MainPage( Researcher model) {
-    	this.model = model;
-    	this.navbar = new Navbar(model);
+    public HomePage(Navbar navbar) {
+    	this.model = UserStore.getUser();
+    	this.navbar = navbar;
     	this.AccountPage = new AccountPage(model);
     	initComponents();
     }

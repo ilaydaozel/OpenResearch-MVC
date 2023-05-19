@@ -11,52 +11,38 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class ResearcherCollection  {
-	private ArrayList<Researcher> researchersList;
-	//private ArrayList<String> researchersListNames;
+public class ResearcherCollection extends Collection  {
+	
 	
 	public ResearcherCollection() {
-		researchersList = readAllResearchersFromXML();
+		//setCollection(new ArrayList<>());
+		setReader(new XmlFileIO());
+		System.out.println("createcollection");
+		createCollection();
 	}
 	
-	public ArrayList<Researcher> getResearchersList() {
-		return researchersList;
+
+
+	@Override
+	public void createCollection() {
+		List<Map<String, String>> allResearchers;
+
+		allResearchers = getReader().readAllElements("OpenResearch-MVC/src/users.xml");
+
+    	for (Map<String, String> data : allResearchers) {
+    		System.out.println("inside "+ data);
+    		addToCollection(createCollectionElement(data));
+    		
+    		
+        }  
+		
 	}
 
-	public void setResearchersList(ArrayList<Researcher> researchersList) {
-		this.researchersList = researchersList;
+	@Override
+	public Researcher createCollectionElement(Map<String, String> data) {
+		Researcher researcher = new Researcher(data.get("username"), data.get("password"));
+		
+		return researcher;		
 	}
 
-	public ArrayList<Researcher> readAllResearchersFromXML() {
-		ArrayList<Researcher> researchersListFromXML = new ArrayList<Researcher>();
-		try {
-            File inputFile = new File("OpenResearch-MVC/src/users.xml");
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(inputFile);
-            doc.getDocumentElement().normalize();
-            NodeList nList = doc.getElementsByTagName("researcher");
-            
-            for (int temp = 0; temp < nList.getLength(); temp++) {
-               Node nNode = nList.item(temp);
-            
-               if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                  Element eElement = (Element) nNode;
-
-                  String username =  eElement.getElementsByTagName("researcher_name").item(0).getTextContent();
-                  String password = eElement.getElementsByTagName("password").item(0).getTextContent();
-                  //String following_researcher_names =  eElement.getElementsByTagName("following_researcher_names").item(0).getTextContent();
-                  //String follower_researcher_names = eElement.getElementsByTagName("follower_researcher_names").item(0).getTextContent();
-                  //liste olarak okumayı yap
-                  //researcherList in constructorını güncelle
-                  researchersListFromXML.add(new Researcher(username, password));
-               }
-            }
-         } catch (Exception e) {
-            e.printStackTrace();
-         }
-		return researchersListFromXML;
-	}
-	
-	
 }

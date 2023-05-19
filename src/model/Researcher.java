@@ -20,22 +20,18 @@ public class Researcher extends java.util.Observable{
 		
 	};
 	public String getUsername() {
-		System.out.println("get name / researcher");
 		return username;
 	}
 	public void setUsername(String name) {
-		System.out.println("set name / researcher");
 		this.username = name;
 		setChanged();	
 		notifyObservers();
 	}
 
 	public String getPassword() {
-		System.out.println("get password / researcher");
 		return password;
 	}
 	public void setPassword(String password) {
-		System.out.println("set password / researcher");
 		this.password = password;
 		setChanged();	
 		notifyObservers();

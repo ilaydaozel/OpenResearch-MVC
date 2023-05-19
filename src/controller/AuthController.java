@@ -39,9 +39,9 @@ public class AuthController {
 	
     public void isValidUser(String username, String password) {
     	ResearcherCollection researcherList = new ResearcherCollection();
-    	for (Researcher researcher : researcherList.getResearchersList()) {
-    		 if (researcher.getUsername().equals(username) && researcher.getPassword().equals(password)) {
-           	  	this.userStore.setUser(researcher);
+    	for (Object researcher : researcherList.getCollection()) {
+    		 if (((Researcher) researcher).getUsername().equals(username) && ((Researcher) researcher).getPassword().equals(password)) {
+           	  	this.userStore.setUser((Researcher) researcher);
              }
     	}
     }

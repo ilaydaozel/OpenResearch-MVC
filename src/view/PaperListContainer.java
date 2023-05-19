@@ -17,8 +17,7 @@ import model.PaperCollection;
 @SuppressWarnings("serial")
 public class PaperListContainer extends JPanel {
 	
-	BibTeXFileIO BibCreator = new BibTeXFileIO();
-	private PaperCollection paperList = BibCreator.handle();
+	private PaperCollection paperList = new PaperCollection();
 	
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	private JList list = new JList(paperList.getPapers().toArray());

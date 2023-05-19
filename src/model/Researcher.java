@@ -6,17 +6,17 @@ import java.util.*;
 public class Researcher extends java.util.Observable{
 	private String username;
 	private String password;
-	private ArrayList<String> followingResearchers;
-	private ArrayList<String> followerResearchers;
-	private ArrayList<ReadingList> readingLists;
+	private List<Object> followingResearchers;
+	private List<Object> followerResearchers;
+	private List<Object> readingLists;
 	
 	
 	public Researcher(String username, String password) {
 		this.username = username;
 		this.password = password;
-		this.followingResearchers = new ArrayList<String>();
-		this.followerResearchers = new ArrayList<String>();
-		this.readingLists = new ArrayList<ReadingList>();
+		this.followingResearchers = new ArrayList<>();
+		this.followerResearchers = new ArrayList<>();
+		this.readingLists = new ArrayList<>();
 		
 	};
 	public String getUsername() {
@@ -37,25 +37,6 @@ public class Researcher extends java.util.Observable{
 		notifyObservers();
 	}
 
-	public ArrayList<String> getFollowingResearchers() {
-		return followingResearchers;
-	}
-	public void setFollowingResearchers(ArrayList<String> followingResearchers) {
-		this.followingResearchers = followingResearchers;
-	}
-	public ArrayList<String> getFollowerResearchers() {
-		return followerResearchers;
-	}
-	public void setFollowerResearchers(ArrayList<String> followerResearchers) {
-		this.followerResearchers = followerResearchers;
-	}
-	public ArrayList<ReadingList> getReadingLists() {
-		return readingLists;
-	}
-	public void setReadingLists(ArrayList<ReadingList> readingLists) {
-		this.readingLists = readingLists;
-	}
-	
 	public void follow(Researcher researcher) {
 		this.followingResearchers.add(researcher.getUsername());
 		researcher.getFollowerResearchers().add(username);
@@ -80,4 +61,23 @@ public class Researcher extends java.util.Observable{
 	public String toString() {
 		return username;
 	}
+	public List<Object> getFollowingResearchers() {
+		return followingResearchers;
+	}
+	public void setFollowingResearchers(List<Object> followingResearchers) {
+		this.followingResearchers = followingResearchers;
+	}
+	public List<Object> getFollowerResearchers() {
+		return followerResearchers;
+	}
+	public void setFollowerResearchers(List<Object> followerResearchers) {
+		this.followerResearchers = followerResearchers;
+	}
+	public List<Object> getReadingLists() {
+		return readingLists;
+	}
+	public void setReadingLists(List<Object> readingLists) {
+		this.readingLists = readingLists;
+	}
+	
 }

@@ -8,10 +8,10 @@ import java.util.Map;
 import javax.swing.*;
 import javax.swing.ListSelectionModel;
 
+import fileIO.BibTeXFileIO;
+import fileIO.CsvFileIO;
 import interfaces.IFileReader;
 import interfaces.IFileWriter;
-import model.BibTeXFileIO;
-import model.CsvFileIO;
 import model.PaperCollection;
 
 @SuppressWarnings("serial")

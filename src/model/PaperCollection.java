@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import fileIO.BibTeXFileIO;
+import fileIO.CsvFileIO;
 import interfaces.IFileWriter;
 
 public class PaperCollection extends Collection{

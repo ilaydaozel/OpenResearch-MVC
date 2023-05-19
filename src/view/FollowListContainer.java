@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -14,7 +15,7 @@ public class FollowListContainer extends JPanel {
 	private JList list;
     
     @SuppressWarnings("unchecked")
-	public FollowListContainer(ArrayList<String> followList) {
+	public FollowListContainer(List<Object> followList) {
     	this.list = new JList(followList.toArray());
     	initComponents();
     }

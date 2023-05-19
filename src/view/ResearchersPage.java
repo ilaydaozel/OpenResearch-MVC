@@ -5,9 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import javax.swing.*;
-
 import model.Researcher;
-import model.ResearcherCollection;
+
 
 public class ResearchersPage extends JPanel implements java.util.Observer{
     private ResearcherDetailedContainer detailedContainer;

@@ -1,4 +1,4 @@
-package model;
+package fileIO;
 
 import java.io.File;
 import java.util.ArrayList;

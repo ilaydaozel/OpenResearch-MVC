@@ -1,4 +1,4 @@
-package model;
+package fileIO;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -11,6 +11,10 @@ import java.util.Map;
 
 import interfaces.IFileReader;
 import interfaces.IFileWriter;
+import model.Article;
+import model.ConferencePaper;
+import model.Paper;
+
 import java.util.Random;
 public class CsvFileIO implements IFileWriter{
 

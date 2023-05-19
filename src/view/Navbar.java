@@ -72,20 +72,14 @@ public class Navbar extends JPanel implements java.util.Observer{
 		System.out.println("update/ mainpage");
 		
 	}
-    
-    public void showAccountPage(ActionListener actionListener) {
+
+    public void navigate(ActionListener actionListener) {
+    	System.out.println("press button in navbar");
+    	researchersButton.addActionListener(actionListener);
+    	papersButton.addActionListener(actionListener);
     	accountButton.addActionListener(actionListener);
     }
-    public void showResearchersPage(ActionListener actionListener) {
-    	System.out.println("press researchers button in navbar");
-    	researchersButton.addActionListener(actionListener);
-    }
-    public void showPapersPage(ActionListener actionListener) {
-    	System.out.println("press researchers button in navbar");
-    	papersButton.addActionListener(actionListener);
-    }
-    
-    
+ 
     public void logout(ActionListener actionListener) {
     	System.out.println("logout / mainpage");
     	logoutButton.addActionListener(actionListener);

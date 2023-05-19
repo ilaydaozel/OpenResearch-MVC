@@ -4,22 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import main.Manager;
-import main.Startup;
 import model.*;
 import store.UserStore;
 import view.*;
 
 
 public class AuthController {
-	private Researcher researcherModel;
 	private LoginPage loginView;
     private UserStore userStore;
 	private Manager manager = new Manager();
 
-	private AccountPage accountView;
-	private ResearchersPage researchersView;
-	private PapersPage papersView;
-	private ResearcherCollection researcherCollection = new ResearcherCollection() ;
 	
 	public AuthController(LoginPage loginView, UserStore session) {
     	this.userStore = session;
@@ -30,16 +24,11 @@ public class AuthController {
 
 	class LoginListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			//researcherModel = new Researcher(loginView.getUsernameInput(), loginView.getPasswordInput());
-			//loginView.setModel(researcherModel);
-			//researcherModel.addObserver(loginView);
-
 			isValidUser(loginView.getUsernameInput(), loginView.getPasswordInput());
-
 	        if(userStore.getUser() != null)
 	        {	System.out.println("Logged in User: "+ userStore.getUser());
 	            loginView.dispose();
-	            manager.afterSuccessfulLogin(userStore);
+	            manager.onLogin(userStore);
 	            
 	        }else {
 	        	loginView.changeToErrorPage();
@@ -56,26 +45,6 @@ public class AuthController {
              }
     	}
     }
-    
-	class ShowAccountPageListener implements ActionListener{
-		public void actionPerformed(ActionEvent e) {
-			System.out.println("account");
-			//mainView.changeContent(accountView);
-		}
-	}
-	class ShowResearchersPageListener implements ActionListener{
-		public void actionPerformed(ActionEvent e) {
-			/*
-			System.out.println("reseacrhers");
-			mainView.changeContent(researchersView);
-			ResearcherController researcherController = new ResearcherController(researchersView);*/
-		}
-	}
-	class ShowPapersPageListener implements ActionListener{
-		public void actionPerformed(ActionEvent e) {
-			//mainView.changeContent(papersView);
-		}
-	}
 
 	public UserStore getUserStore() {
 		return userStore;

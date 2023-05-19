@@ -14,25 +14,19 @@ public class NavbarController {
 		this.navbar = navbar;
 		this.manager = manager;
 		navbar.logout(new LogoutListener());
-		/*
-		accountView= new AccountPage(researcherModel);
-		ResearcherCollection researcherCollection = new ResearcherCollection();
-		researchersView= new ResearchersPage(researcherModel);
-		papersView= new PapersPage();
-		mainView.getNavbar().showAccountPage(  new ShowAccountPageListener());
-		mainView.getNavbar().showResearchersPage(  new ShowResearchersPageListener());
-		mainView.getNavbar().showPapersPage(  new ShowPapersPageListener());
-		 */
+		navbar.navigate(new ChangePageListener());
 	}
 	class LogoutListener implements ActionListener{
-		public void actionPerformed(ActionEvent e) {			
-			System.out.println("logout");
-			//mainView.dispose();	
+		public void actionPerformed(ActionEvent e) {	
 			navbar.getUserStore().setUser(null);
-			manager.afterLogout(navbar.getUserStore());
-			//LoginPage newLogin = new LoginPage();
-			//(newLogin).setVisible(true);
-			//AuthController newController = new AuthController(newLogin);
+			manager.onLogout(navbar.getUserStore());
+		}
+	}
+	
+	class ChangePageListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			String destination = e.getActionCommand();
+			manager.changeHomeContent(destination);
 		}
 	}
 }

@@ -22,6 +22,7 @@ public class PaperController {
 	
 	public PaperController(PapersPage papersView, PaperCollection paperList) {
 		this.papersView = papersView;
+		this.paperList = paperList;
 		papersView.selectPaper(new SelectPaperListener());
 		papersView.downloadFile(new DownloadPaperListener());
 	}
@@ -29,7 +30,6 @@ public class PaperController {
 	class SelectPaperListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			selectedPaper = (Paper) papersView.getPaperListWrapper().getListContainer().getList().getSelectedValue();
-			System.out.println("selectpaperListener: " + selectedPaper);
 			if(selectedPaper!= null) {
 				papersView.addDetailedContainer(selectedPaper);
 			}
@@ -38,11 +38,11 @@ public class PaperController {
 	}
 	class DownloadPaperListener implements ActionListener {
 	    public void actionPerformed(ActionEvent e) {
-	    	System.out.println("selectedPaper: "+selectedPaper);
+
 	    	if (selectedPaper != null) {
 	            try {
 	                String fileName = selectedPaper.toString().replace(":", "") + ".pdf";
-	                Path source = Paths.get("src/data/" + fileName);
+	                Path source = Paths.get("OpenResearch-MVC/src/data/" + fileName);
 	                Path destination = Paths.get("copy_" + fileName);
 	                if(Files.exists(destination)) {
 	                	int response = JOptionPane.showConfirmDialog(papersView, "This file already exists. Do you want to download again?", "File Exists", JOptionPane.YES_NO_OPTION);
@@ -54,14 +54,12 @@ public class PaperController {
 	                    }
 	                	
 	                }
-	    	    	System.out.println("Downloading " + selectedPaper.toString());
 	                Files.copy(source, destination);
 	                JOptionPane.showMessageDialog(papersView, "File downloaded successfully!");
-	                System.out.println("before: "+selectedPaper.getDownloadNumber());
 	                selectedPaper.setDownloadNumber(selectedPaper.getDownloadNumber() + 1);
-	                System.out.println("after: "+selectedPaper.getDownloadNumber());
+	             
 	                // Update paperList if selectedPaper is in the list
-	               
+	                paperList.updateCsvFile();
 	                
 	            } catch (IOException ex) {
 	                ex.printStackTrace();

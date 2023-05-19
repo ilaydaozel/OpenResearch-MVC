@@ -5,18 +5,16 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
 import interfaces.IFileReader;
-import interfaces.IFileWriter;
 import java.io.File;
 
 public class BibTeXFileIO implements IFileReader{
@@ -97,43 +95,7 @@ public class BibTeXFileIO implements IFileReader{
         return dataList;
     }
     
-    
 
-    
-    
-    public static void main(String[] args) {
-    	List<Map<String, String>> dataList = new ArrayList<>();
-
-    	IFileReader BibReader = new BibTeXFileIO();
-    	dataList= BibReader.readAllFilesInSameDirectory("OpenResearch-MVC/src/data/");
-    	/*IFileWriter csvWriter = new CsvFileIO();
-    	csvWriter.writeAllPapers(dataList);
-    	BibTeXFileIO BibCreator = new BibTeXFileIO();*/
-    	
-    	/*PaperCollection papers = BibCreator.createCollection(dataList);
-    	
-    	for (Paper paper : papers.getPapers()) {
-            System.out.println("Title: " + paper.getTitle());
-            System.out.println("Authors: " + paper.getAuthors());
-            System.out.println("Year: " + paper.getYear());
-            System.out.println("DOI: " + paper.getDoi());
-            System.out.println("downloads : " + paper.getDownloadNumber());
-
-            if (paper instanceof ConferencePaper) {
-                ConferencePaper conferencePaper = (ConferencePaper) paper;
-                System.out.println("Book Title: " + conferencePaper.getBookTitle());
-                
-            } else if (paper instanceof Article) {
-                Article article = (Article) paper;
-                System.out.println("Volume: " + article.getVolume());
-                System.out.println("Number: " + article.getNumber());
-                System.out.println("Journal: " + article.getJournal());
-            }
-
-            System.out.println("---------------------");*/
-
-    }
-
-    }
+}
 
     

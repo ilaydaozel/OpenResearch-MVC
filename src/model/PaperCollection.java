@@ -19,7 +19,7 @@ public class PaperCollection extends Collection{
     
     public void createCollection() {
     	List<Map<String, String>> allPapers;
-    	allPapers = getReader().readAllElements("src/data/");
+    	allPapers = getReader().readAllElements("OpenResearch-MVC/src/data/");
 
     	for (Map<String, String> data : allPapers) {
     		addToCollection(createCollectionElement(data));
@@ -51,5 +51,9 @@ public class PaperCollection extends Collection{
 			return conferencePaper;
 		}
     }
+    public void updateCsvFile() {
+        csvWriter.writeAllPapers(getCollection());
+    }
+   
 
 }

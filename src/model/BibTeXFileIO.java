@@ -129,10 +129,21 @@ public class BibTeXFileIO implements IFileReader{
         }
     	return papers;
     }
+    public PaperCollection handle() {
+    	List<Map<String, String>> dataList = new ArrayList<>();
+
+    	IFileReader BibReader = new BibTeXFileIO();
+    	dataList= BibReader.readAllFilesInSameDirectory("OpenResearch-MVC/src/data/");
+    	IFileWriter csvWriter = new CsvFileIO();
+    	csvWriter.writeAllPapers(dataList);
+    	BibTeXFileIO BibCreator = new BibTeXFileIO();
+    	
+    	PaperCollection papers = BibCreator.CreateCollection(dataList);
+    	return papers;
+    }
     public static void main(String[] args) {
     	List<Map<String, String>> dataList = new ArrayList<>();
 
-        
     	IFileReader BibReader = new BibTeXFileIO();
     	dataList= BibReader.readAllFilesInSameDirectory("OpenResearch-MVC/src/data/");
     	IFileWriter csvWriter = new CsvFileIO();

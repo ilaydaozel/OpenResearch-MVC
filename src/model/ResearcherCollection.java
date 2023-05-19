@@ -30,7 +30,7 @@ public class ResearcherCollection  {
 	public ArrayList<Researcher> readAllResearchersFromXML() {
 		ArrayList<Researcher> researchersListFromXML = new ArrayList<Researcher>();
 		try {
-            File inputFile = new File("users.xml");
+            File inputFile = new File("OpenResearch-MVC/src/users.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputFile);

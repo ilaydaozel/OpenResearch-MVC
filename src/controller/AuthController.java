@@ -46,8 +46,9 @@ public class AuthController {
 	    		mainView.getNavbar().logout(new LogoutListener());
 	    		accountView= new AccountPage(model);
 	    		ResearcherCollection researcherCollection = new ResearcherCollection();
-	    		researchersView= new ResearchersPage(model);
-	    		papersView= new PapersPage(model);
+
+	    		researchersView= new ResearchersPage();
+	    		papersView= new PapersPage();
 	    		mainView.getNavbar().showAccountPage(  new ShowAccountPageListener());
 	    		mainView.getNavbar().showResearchersPage(  new ShowResearchersPageListener());
 	    		mainView.getNavbar().showPapersPage(  new ShowPapersPageListener());

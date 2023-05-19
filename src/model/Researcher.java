@@ -59,16 +59,6 @@ public class Researcher extends java.util.Observable{
 	public void setReadingLists(ArrayList<ReadingList> readingLists) {
 		this.readingLists = readingLists;
 	}
-
-	public void reset() {
-		System.out.println("reset");
-		this.username="";
-		this.password ="";
-		//following follower ekle
-		setChanged();	
-		notifyObservers();
-	}
-	
 	
 	public void follow(Researcher researcher) {
 		this.followingResearchers.add(researcher.getUsername());

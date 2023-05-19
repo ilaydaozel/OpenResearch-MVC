@@ -76,23 +76,6 @@ public class AuthController {
 			//mainView.changeContent(papersView);
 		}
 	}
-	class LogoutListener implements ActionListener{
-		public void actionPerformed(ActionEvent e) {
-			/*
-			System.out.println("logout");
-			//researcherModel.setLoggedIn(false);
-			researcherModel.reset();
-			System.out.println("name:" + researcherModel.getUsername());
-			mainView.dispose();	
-			System.out.println("*****************************new login");
-			//loginView.setVisible(true);
-			
-			LoginPage newLogin = new LoginPage();
-			(newLogin).setVisible(true);
-			AuthController newController = new AuthController(newLogin);
-*/
-		}
-	}
 
 	public UserStore getUserStore() {
 		return userStore;

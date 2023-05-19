@@ -19,8 +19,10 @@ public class Navbar extends JPanel implements java.util.Observer{
     private Color blue = new Color(144, 219, 244);
     JLabel name;
     private Researcher model;
+    private UserStore userStore ;
 
     public Navbar( UserStore session) {
+    	this.userStore = session;
     	this.model = session.getUser();
     	System.out.println("Navbar user: "+ model);
     	initComponents();
@@ -93,5 +95,15 @@ public class Navbar extends JPanel implements java.util.Observer{
     	System.out.println("Model set!!!");
     	this.model= model;
     }
+
+	public UserStore getUserStore() {
+		return userStore;
+	}
+
+	public void setUserStore(UserStore userStore) {
+		this.userStore = userStore;
+	}
+    
+    
 }
     

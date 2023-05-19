@@ -1,6 +1,5 @@
 package controller;
 
-import controller.AuthController.LogoutListener;
 import controller.AuthController.ShowAccountPageListener;
 import controller.AuthController.ShowPapersPageListener;
 import controller.AuthController.ShowResearchersPageListener;

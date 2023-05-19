@@ -27,7 +27,6 @@ public class PaperListContainer extends JPanel {
     }
     
     private void initComponents() {
-    	System.out.println("paperlist: " + paperList.getCollection().toArray());
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
         list.setVisibleRowCount(-1);

@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import javax.swing.*;
 
-import interfaces.IPage;
 import model.Researcher;
 import model.ResearcherCollection;
 

@@ -4,8 +4,6 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import javax.swing.*;
-
-import interfaces.IPage;
 import model.Researcher;
 
 public class AccountPage extends JPanel implements java.util.Observer{

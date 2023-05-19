@@ -4,22 +4,17 @@ import java.awt.*;
 import java.util.Observable;
 
 import javax.swing.*;
-
-
-import interfaces.IPage;
 import model.Researcher;
 import store.UserStore;
 
-public class HomePage extends JFrame implements IPage, java.util.Observer{
+public class HomePage extends JFrame implements java.util.Observer{
 
-    private Researcher model;
     private Navbar navbar;
     private JPanel navbarPanel = new JPanel();
     private JPanel contentPanel = new JPanel();
 	private Container container = getContentPane();
 
     public HomePage(Navbar navbar) {
-    	this.model = UserStore.getUser();
     	this.navbar = navbar;
     	initComponents();
     }
@@ -51,10 +46,6 @@ public class HomePage extends JFrame implements IPage, java.util.Observer{
 
     }
 	
-    public void setModel(Researcher model) {
-    	this.model= model;
-    }
-
     public Navbar getNavbar() {
 		return navbar;
 	}
@@ -63,7 +54,6 @@ public class HomePage extends JFrame implements IPage, java.util.Observer{
 		this.navbar = navbar;
 	}
 
-	@Override
 	public void changeContent(Component page) {
 		contentPanel.removeAll();
 		contentPanel.add(page);	

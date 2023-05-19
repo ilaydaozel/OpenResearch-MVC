@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import model.*;
@@ -16,6 +18,7 @@ import view.*;
 public class PaperController {
 	private PapersPage papersView;
 	protected Paper selectedPaper;
+	protected PaperCollection paperList;
 	
 	public PaperController(PapersPage papersView) {
 		this.papersView = papersView;
@@ -27,6 +30,7 @@ public class PaperController {
 	class SelectPaperListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			selectedPaper = (Paper) papersView.getPaperListWrapper().getListContainer().getList().getSelectedValue();
+			//paperList =  (PaperCollection) papersView.getPaperListWrapper().getListContainer().getElementList();
 			if(selectedPaper!= null) {
 				papersView.addDetailedContainer(selectedPaper);
 			}
@@ -38,7 +42,7 @@ public class PaperController {
 	    	if (selectedPaper != null) {
 	            try {
 	                String fileName = selectedPaper.toString().replace(":", "") + ".pdf";
-	                Path source = Paths.get("src/data/" + fileName);
+	                Path source = Paths.get("OpenResearch-MVC/src/data/" + fileName);
 	                Path destination = Paths.get("copy_" + fileName);
 	                if(Files.exists(destination)) {
 	                	int response = JOptionPane.showConfirmDialog(papersView, "This file already exists. Do you want to download again?", "File Exists", JOptionPane.YES_NO_OPTION);
@@ -53,6 +57,12 @@ public class PaperController {
 	    	    	System.out.println("Downloading " + selectedPaper.toString());
 	                Files.copy(source, destination);
 	                JOptionPane.showMessageDialog(papersView, "File downloaded successfully!");
+	                System.out.println("before: "+selectedPaper.getDownloadNumber());
+	                selectedPaper.setDownloadNumber(selectedPaper.getDownloadNumber() + 1);
+	                System.out.println("after: "+selectedPaper.getDownloadNumber());
+	                // Update paperList if selectedPaper is in the list
+	               
+	                
 	            } catch (IOException ex) {
 	                ex.printStackTrace();
 	                JOptionPane.showMessageDialog(papersView, "Error downloading file: " + ex.getMessage());

@@ -42,6 +42,8 @@ public class Researcher extends java.util.Observable{
 		researcher.getFollowerResearchers().add(username);
 		System.out.println(this.username + " Followed " + researcher.getUsername());
 		System.out.println(this.username + " Following list " + this.followingResearchers.toString());
+		setChanged();	
+		notifyObservers();
 	}
 		
 	public void unfollow(Researcher researcher) {
@@ -49,6 +51,8 @@ public class Researcher extends java.util.Observable{
 		researcher.getFollowerResearchers().remove(username);
 		System.out.println(this.username + " Unfollowed " + researcher.getUsername());
 		System.out.println(this.username + " Follower list " + this.followingResearchers.toString());
+		setChanged();	
+		notifyObservers();
 	}
 	
 	public void addNewReadingList(String name) {

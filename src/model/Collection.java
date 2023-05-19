@@ -2,10 +2,11 @@ package model;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 import java.util.ArrayList;
 import interfaces.IFileReader;
 
-public abstract class Collection {
+public abstract class Collection extends Observable {
     private List<Object> collection = new ArrayList<>();
     private IFileReader reader;
 

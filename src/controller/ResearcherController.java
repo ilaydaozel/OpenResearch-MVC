@@ -2,15 +2,22 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.SwingUtilities;
+
 import model.*;
 import view.*;
 
 
-public class ResearcherController {
+public class ResearcherController{
 	private ResearchersPage researchersView;
+	private ResearcherCollection researcherList;
+	private Researcher researcher;
 	
-	public ResearcherController(ResearchersPage researchersView) {
+	public ResearcherController(ResearchersPage researchersView, ResearcherCollection researcherCollection, Researcher researcher) {
 		this.researchersView = researchersView;
+		this.researcherList = researcherCollection;	
+		this.researcher = researcher;
 		researchersView.selectResearcher(new SelectResearcherListener());
 		researchersView.followResearcher(new FollowListener());
 		researchersView.unfollowResearcher(new UnfollowListener());
@@ -30,7 +37,8 @@ public class ResearcherController {
 			Object selected = researchersView.getResearcherListWrapper().getListContainer().getList().getSelectedValue();
 			if(selected!= null) {
 				System.out.println(selected + "followed / controller");
-				researchersView.getModel().follow((Researcher) selected);
+				researcher.follow((Researcher) selected);
+				researchersView.refresh();
 			}
 
 		}
@@ -40,7 +48,8 @@ public class ResearcherController {
 			Object selected = researchersView.getResearcherListWrapper().getListContainer().getList().getSelectedValue();
 			if(selected!= null) {
 				System.out.println(selected + "unfollowed / controller");
-				researchersView.getModel().unfollow((Researcher) selected);
+				researcher.unfollow((Researcher) selected);
+				//SwingUtilities.updateComponentTreeUI(researchersView);
 			}
 
 

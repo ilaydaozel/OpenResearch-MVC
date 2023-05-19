@@ -18,11 +18,11 @@ import view.*;
 public class PaperController {
 	private PapersPage papersView;
 	protected Paper selectedPaper;
-	protected PaperCollection paperList;
+	private PaperCollection paperList;
 	
-	public PaperController(PapersPage papersView, PaperCollection paperList) {
+	public PaperController(PapersPage papersView, Collection paperList) {
 		this.papersView = papersView;
-		this.paperList = paperList;
+		this.paperList = (PaperCollection) paperList;
 		papersView.selectPaper(new SelectPaperListener());
 		papersView.downloadFile(new DownloadPaperListener());
 	}
@@ -42,7 +42,7 @@ public class PaperController {
 	    	if (selectedPaper != null) {
 	            try {
 	                String fileName = selectedPaper.toString().replace(":", "") + ".pdf";
-	                Path source = Paths.get("OpenResearch-MVC/src/data/" + fileName);
+	                Path source = Paths.get("src/data/" + fileName);
 	                Path destination = Paths.get("copy_" + fileName);
 	                if(Files.exists(destination)) {
 	                	int response = JOptionPane.showConfirmDialog(papersView, "This file already exists. Do you want to download again?", "File Exists", JOptionPane.YES_NO_OPTION);

@@ -40,7 +40,7 @@ public class Manager {
 			this.researcherCollection = new ResearcherCollection();
 			this.researcherView = new ResearchersPage(researcherCollection);
 			ResearcherController researcherController 
-						= new ResearcherController(researcherView,(ResearcherCollection) researcherCollection);
+						= new ResearcherController(researcherView,(ResearcherCollection) researcherCollection, session.getUser());
 			
 			this.paperCollection = new PaperCollection();
 			this.paperView = new PapersPage(paperCollection);

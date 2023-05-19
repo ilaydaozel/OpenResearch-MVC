@@ -6,16 +6,19 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Observable;
 import javax.swing.*;
+
+import model.Collection;
 import model.Researcher;
 import model.ResearcherCollection;
 
 
 public class ResearchersPage extends JPanel implements java.util.Observer{
-    private List<Object> researcherList =  new ResearcherCollection().getCollection();
-    private ListWrapper researcherListWrapper = new ListWrapper("Researchers", researcherList,500, 100);
+	private Collection researcherCollection;
+    private List<Object> researcherList;
+    private ListWrapper researcherListWrapper;
     private GridBagConstraints gridBagConstraints = new GridBagConstraints();
     private JPanel detailedContainer = new JPanel();
-    private Researcher model;
+    //private Researcher model;
 	private JLabel usernameLabel = new JLabel("User:");
 	private JLabel username = new JLabel();
 	private JLabel followerLabel = new JLabel("Followers:");
@@ -26,8 +29,12 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
     private ListContainer followingList;
     private ListContainer followerList;
     
-    public ResearchersPage(Researcher model) {
-    	this.model = model;
+    public ResearchersPage(Collection researcherCollection) {
+    	this.researcherCollection = researcherCollection;
+    	this.researcherList = researcherCollection.getCollection();
+    	this.researcherListWrapper = new ListWrapper("Researchers", researcherList,500, 100);
+    	researcherCollection.addObserver(this);
+    	//this.model = model;
     	initComponents();
     }
 
@@ -41,8 +48,8 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
 
 	public void addDetailedContainer(Researcher selectedResearcher) {
 		detailedContainer.removeAll();
-		followerList = new ListContainer(model.getFollowerResearchers(), 200, 50);
-		followingList = new ListContainer(model.getFollowingResearchers(), 200, 50);
+		followerList = new ListContainer(selectedResearcher.getFollowerResearchers(), 200, 50);
+		followingList = new ListContainer(selectedResearcher.getFollowingResearchers(), 200, 50);
 		detailedContainer.setBackground(Color.white);
 		detailedContainer.setPreferredSize(new Dimension(900,300));
 		detailedContainer.setLayout(new GridBagLayout());
@@ -108,8 +115,7 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
 	
     public void followResearcher(ActionListener actionListener) {
     	followButton.addActionListener(actionListener);
-    	SwingUtilities.updateComponentTreeUI(this);
-    	System.out.println(model.getFollowingResearchers());
+
     }
     
     public void unfollowResearcher(ActionListener actionListener) {
@@ -117,8 +123,14 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
     	SwingUtilities.updateComponentTreeUI(this);
     }
     
+    public void refresh() {
+    	System.out.println();
+    	SwingUtilities.updateComponentTreeUI(this);
+    }
+    
 	@Override
 	public void update(Observable o, Object arg) {
+		System.out.println("updated researcher");
 		// TODO Auto-generated method stub
 	}
 	
@@ -133,15 +145,6 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
 	public void selectResearcher(ActionListener actionListener) {
     	researcherListWrapper.getViewButton().addActionListener(actionListener);
     }
-
-	public Researcher getModel() {
-		return model;
-	}
-
-	public void setModel(Researcher model) {
-		this.model = model;
-	}
-
 
 
 }

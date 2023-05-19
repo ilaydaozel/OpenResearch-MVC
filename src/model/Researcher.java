@@ -9,7 +9,6 @@ public class Researcher extends java.util.Observable{
 	private ArrayList<String> followingResearchers;
 	private ArrayList<String> followerResearchers;
 	private ArrayList<ReadingList> readingLists;
-	private boolean loggedIn = false;
 	
 	
 	public Researcher(String username, String password) {
@@ -60,15 +59,6 @@ public class Researcher extends java.util.Observable{
 	public void setReadingLists(ArrayList<ReadingList> readingLists) {
 		this.readingLists = readingLists;
 	}
-	public boolean getLoggedIn() {
-		return loggedIn;
-	}
-	public void setLoggedIn(boolean loggedIn) {
-		this.loggedIn = loggedIn;
-		System.out.println("setloggedin /researcher");
-		setChanged();	
-		notifyObservers();
-	}
 
 	public void reset() {
 		System.out.println("reset");
@@ -79,19 +69,6 @@ public class Researcher extends java.util.Observable{
 		notifyObservers();
 	}
 	
-    public void isValidUser() {
-    	ResearcherCollection researcherList = new ResearcherCollection();
-    	System.out.println(" researcherList:" + researcherList.getResearchersList());
-    	for (Researcher researcher : researcherList.getResearchersList()) {
-    		 if (researcher.getUsername().equals(this.username) && researcher.getPassword().equals(this.password)) {
-           	  loggedIn = true;
-             }
-    	}
-        System.out.println("is valid /researcher");
-        System.out.println("loggedIn: "+ loggedIn);
-		setChanged();	
-		notifyObservers();
-    }
 	
 	public void follow(Researcher researcher) {
 		this.followingResearchers.add(researcher.getUsername());

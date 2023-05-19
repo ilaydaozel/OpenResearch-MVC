@@ -1,17 +1,8 @@
 package view;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import javax.swing.*;
 import javax.swing.ListSelectionModel;
-
-import fileIO.BibTeXFileIO;
-import fileIO.CsvFileIO;
-import interfaces.IFileReader;
-import interfaces.IFileWriter;
 import model.PaperCollection;
 
 @SuppressWarnings("serial")

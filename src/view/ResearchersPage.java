@@ -3,14 +3,17 @@ package view;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.Observable;
 import javax.swing.*;
 import model.Researcher;
+import model.ResearcherCollection;
 
 
 public class ResearchersPage extends JPanel implements java.util.Observer{
+    private List<Object> researcherList =  new ResearcherCollection().getCollection();
     private ResearcherDetailedContainer detailedContainer;
-    private ResearcherListWrapper researcherListWrapper = new ResearcherListWrapper();
+    private ListWrapper researcherListWrapper = new ListWrapper("Researchers", researcherList,500, 100);
     private GridBagConstraints gridBagConstraints = new GridBagConstraints();
     private Researcher model;
 
@@ -46,11 +49,11 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
 		
 	}
 	
-    public ResearcherListWrapper getResearcherListWrapper() {
+    public ListWrapper getResearcherListWrapper() {
 		return researcherListWrapper;
 	}
 
-	public void setResearcherListWrapper(ResearcherListWrapper researcherListWrapper) {
+	public void setResearcherListWrapper(ListWrapper researcherListWrapper) {
 		this.researcherListWrapper = researcherListWrapper;
 	}
 

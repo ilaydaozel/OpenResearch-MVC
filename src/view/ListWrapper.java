@@ -6,23 +6,25 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
-import java.util.Observable;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 
-import model.Researcher;
 import model.ResearcherCollection;
 
-public class ResearcherListWrapper extends JPanel {
-    private JLabel label = new JLabel("Researchers Page");
+public class ListWrapper extends JPanel {
+	
+    private JLabel label;
     private Color blue = new Color(144, 219, 244);
-    private List<Object> researcherList =  new ResearcherCollection().getCollection();
-    private ResearcherListContainer listContainer = new ResearcherListContainer(researcherList, 500, 100);
+	private ListContainer listContainer; 
     private JButton viewButton = new JButton("View more");
     
-	public ResearcherListWrapper() {
+	public ListWrapper(String title, List<Object> elementList, int width, int heigth) {
+		label = new JLabel(title);
+		listContainer = new ListContainer(elementList, width, heigth);
+		
 		initComponents();
 	}
 	
@@ -58,15 +60,14 @@ public class ResearcherListWrapper extends JPanel {
     public void selectResearcher(ActionListener actionListener) {
     	viewButton.addActionListener(actionListener);
     }
-
-
-	public ResearcherListContainer getListContainer() {
+    public ListContainer getListContainer() {
 		return listContainer;
 	}
 
-	public void setListContainer(ResearcherListContainer listContainer) {
+	public void setListContainer(ListContainer listContainer) {
 		this.listContainer = listContainer;
 	}
+
 
 
 }

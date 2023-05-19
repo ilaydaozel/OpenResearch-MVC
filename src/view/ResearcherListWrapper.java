@@ -5,13 +5,20 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
+import java.util.Observable;
+
+import model.Researcher;
+import model.ResearcherCollection;
 
 public class ResearcherListWrapper extends JPanel {
     private JLabel label = new JLabel("Researchers Page");
     private Color blue = new Color(144, 219, 244);
-    private ResearcherListContainer listContainer = new ResearcherListContainer();
+    private ArrayList<Researcher> researcherList = (ArrayList<Researcher>) new ResearcherCollection().getResearchersList();
+    private ResearcherListContainer listContainer = new ResearcherListContainer(researcherList, 500, 100);
     private JButton viewButton = new JButton("View more");
     
 	public ResearcherListWrapper() {
@@ -46,6 +53,11 @@ public class ResearcherListWrapper extends JPanel {
 	public void setViewButton(JButton viewButton) {
 		this.viewButton = viewButton;
 	}
+	
+    public void selectResearcher(ActionListener actionListener) {
+    	viewButton.addActionListener(actionListener);
+    }
+
 
 	public ResearcherListContainer getListContainer() {
 		return listContainer;

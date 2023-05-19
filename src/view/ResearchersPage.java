@@ -14,8 +14,10 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
     private ResearcherDetailedContainer detailedContainer;
     private ResearcherListWrapper researcherListWrapper = new ResearcherListWrapper();
     private GridBagConstraints gridBagConstraints = new GridBagConstraints();
+    private Researcher model;
 
-    public ResearchersPage() {
+    public ResearchersPage(Researcher model) {
+    	this.model = model;
     	initComponents();
     }
 
@@ -24,7 +26,7 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         add(researcherListWrapper, gridBagConstraints);    
-        addDetailedContainer(new Researcher());
+        addDetailedContainer(new Researcher("", ""));
     }
 
 	public void addDetailedContainer(Researcher selectedResearcher) {
@@ -57,6 +59,22 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
 	public void selectResearcher(ActionListener actionListener) {
     	researcherListWrapper.getViewButton().addActionListener(actionListener);
     }
+
+	public ResearcherDetailedContainer getDetailedContainer() {
+		return detailedContainer;
+	}
+
+	public void setDetailedContainer(ResearcherDetailedContainer detailedContainer) {
+		this.detailedContainer = detailedContainer;
+	}
+
+	public Researcher getModel() {
+		return model;
+	}
+
+	public void setModel(Researcher model) {
+		this.model = model;
+	}
 
 
 

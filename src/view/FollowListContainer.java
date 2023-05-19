@@ -24,7 +24,7 @@ public class FollowListContainer extends JPanel {
         list.setLayoutOrientation(JList.VERTICAL);
         list.setVisibleRowCount(-1);
         JScrollPane listScroller = new JScrollPane(list);  
-        listScroller.setPreferredSize(new Dimension(500,100));
+        listScroller.setPreferredSize(new Dimension(100,30));
         add(listScroller);
     }
     

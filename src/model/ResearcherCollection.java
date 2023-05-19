@@ -13,10 +13,10 @@ import org.w3c.dom.NodeList;
 
 public class ResearcherCollection  {
 	private ArrayList<Researcher> researchersList;
+	//private ArrayList<String> researchersListNames;
 	
 	public ResearcherCollection() {
-		researchersList = new ArrayList<Researcher>();
-		readAndAddAllResearchersFromXML();
+		researchersList = readAllResearchersFromXML();
 	}
 	
 	public ArrayList<Researcher> getResearchersList() {
@@ -27,7 +27,8 @@ public class ResearcherCollection  {
 		this.researchersList = researchersList;
 	}
 
-	public void readAndAddAllResearchersFromXML() {
+	public ArrayList<Researcher> readAllResearchersFromXML() {
+		ArrayList<Researcher> researchersListFromXML = new ArrayList<Researcher>();
 		try {
             File inputFile = new File("OpenResearch-MVC/src/users.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -44,16 +45,18 @@ public class ResearcherCollection  {
 
                   String username =  eElement.getElementsByTagName("researcher_name").item(0).getTextContent();
                   String password = eElement.getElementsByTagName("password").item(0).getTextContent();
-                  String following_researcher_names =  eElement.getElementsByTagName("following_researcher_names").item(0).getTextContent();
-                  String follower_researcher_names = eElement.getElementsByTagName("follower_researcher_names").item(0).getTextContent();
+                  //String following_researcher_names =  eElement.getElementsByTagName("following_researcher_names").item(0).getTextContent();
+                  //String follower_researcher_names = eElement.getElementsByTagName("follower_researcher_names").item(0).getTextContent();
                   //liste olarak okumayı yap
                   //researcherList in constructorını güncelle
-                  researchersList.add(new Researcher(username, password));
+                  researchersListFromXML.add(new Researcher(username, password));
                }
             }
          } catch (Exception e) {
             e.printStackTrace();
          }
+		return researchersListFromXML;
 	}
+	
 	
 }

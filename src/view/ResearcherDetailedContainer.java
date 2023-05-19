@@ -2,13 +2,17 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
+
 import javax.swing.*;
 
 import model.Researcher;
 import model.ResearcherCollection;
 
 @SuppressWarnings("serial")
-public class ResearcherDetailedContainer extends JPanel {
+public class ResearcherDetailedContainer extends JPanel implements Observer {
 	private Researcher model ;
 	private JLabel usernameLabel = new JLabel("User:");
 	private JLabel username = new JLabel();
@@ -16,10 +20,14 @@ public class ResearcherDetailedContainer extends JPanel {
 	private JLabel followingLabel = new JLabel("Followings:");
 	private JButton followButton = new JButton("Follow");
 	private JButton unfollowButton = new JButton("Unfollow");
+	private FollowListContainer followerList;
+	private FollowListContainer followingList;
     private Color blue = new Color(144, 219, 244);
 	
     public ResearcherDetailedContainer(Researcher researcher) {
     	this.model = researcher;
+    	this.followerList = new FollowListContainer(researcher.getFollowerResearchers());
+    	this.followingList = new FollowListContainer(researcher.getFollowingResearchers());
     	username.setText(researcher.getUsername());
     	initComponents();
     }
@@ -37,8 +45,7 @@ public class ResearcherDetailedContainer extends JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = gridBagConstraints.WEST;
         add(usernamePanel, gridBagConstraints);
-        
-        
+    
         JPanel followPanel = new JPanel();
         followPanel.setLayout(new FlowLayout()); 
         followPanel.setBackground(Color.white);
@@ -47,13 +54,13 @@ public class ResearcherDetailedContainer extends JPanel {
         followerPanel.setLayout(new FlowLayout());
         followerPanel.setBackground(Color.white);
         followerPanel.add(followerLabel);
-        followerPanel.add(new JLabel(model.getUsername()));
+        followerPanel.add(followerList);
         
         JPanel followingPanel = new JPanel();
         followingPanel.setLayout(new FlowLayout());
         followingPanel.setBackground(Color.white);
         followingPanel.add(followingLabel);
-        followingPanel.add(username);
+        followingPanel.add(followingList);
         
         followPanel.add(followerPanel);
         followPanel.add(followingPanel);
@@ -78,11 +85,24 @@ public class ResearcherDetailedContainer extends JPanel {
         
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        //gridBagConstraints.insets = new Insets(0, 10, 0, 0);
-        //gridBagConstraints.anchor = gridBagConstraints.PAGE_END;
         add(buttonPanel, gridBagConstraints); 
 
     }
+    public void followResearcher(ActionListener actionListener) {
+    	followButton.addActionListener(actionListener);
+    	SwingUtilities.updateComponentTreeUI(this);
+    	System.out.println(model.getFollowingResearchers());
+    }
+    public void unfollowResearcher(ActionListener actionListener) {
+    	unfollowButton.addActionListener(actionListener);
+    	SwingUtilities.updateComponentTreeUI(this);
+    }
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 }

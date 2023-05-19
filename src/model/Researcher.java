@@ -2,7 +2,8 @@ package model;
 
 import java.util.*;
 
-public class Researcher extends java.util.Observable {
+@SuppressWarnings("deprecation")
+public class Researcher extends java.util.Observable{
 	private String username;
 	private String password;
 	private ArrayList<String> followingResearchers;
@@ -10,9 +11,6 @@ public class Researcher extends java.util.Observable {
 	private ArrayList<ReadingList> readingLists;
 	private boolean loggedIn = false;
 	
-	public Researcher() {
-		
-	}
 	
 	public Researcher(String username, String password) {
 		this.username = username;
@@ -98,11 +96,15 @@ public class Researcher extends java.util.Observable {
 	public void follow(Researcher researcher) {
 		this.followingResearchers.add(researcher.getUsername());
 		researcher.getFollowerResearchers().add(username);
+		System.out.println(this.username + " Followed " + researcher.getUsername());
+		System.out.println(this.username + " Following list " + this.followingResearchers.toString());
 	}
 		
 	public void unfollow(Researcher researcher) {
 		this.followingResearchers.remove(researcher.getUsername());
-		researcher.getFollowerResearchers().add(username);
+		researcher.getFollowerResearchers().remove(username);
+		System.out.println(this.username + " Unfollowed " + researcher.getUsername());
+		System.out.println(this.username + " Follower list " + this.followingResearchers.toString());
 	}
 	
 	public void addNewReadingList(String name) {

@@ -2,6 +2,8 @@ package model;
 
 import java.util.*;
 
+import fileIO.XmlFileIO;
+
 @SuppressWarnings("deprecation")
 public class Researcher extends java.util.Observable{
 	private String username;
@@ -44,6 +46,11 @@ public class Researcher extends java.util.Observable{
 		setChanged();	
 		notifyObservers();
 	}
+    public void updateXmlFile() {
+    	String xmlFilePath = "OpenResearch-MVC/src/users.xml";
+        XmlFileIO xmlFileIO = new XmlFileIO();
+        xmlFileIO.updateXmlWithNewResearcher(xmlFilePath, this);
+    }
 
 	public void follow(Researcher researcher) {
 		this.followingResearchers.add(researcher.getUsername());
@@ -52,6 +59,7 @@ public class Researcher extends java.util.Observable{
 		System.out.println(this.username + " Following list " + this.followingResearchers.toString());
 		setChanged();	
 		notifyObservers();
+		updateXmlFile();
 	}
 		
 	public void unfollow(Researcher researcher) {
@@ -61,6 +69,7 @@ public class Researcher extends java.util.Observable{
 		System.out.println(this.username + " Follower list " + this.followingResearchers.toString());
 		setChanged();	
 		notifyObservers();
+		updateXmlFile();
 	}
 	
 	public void addNewReadingList(String name) {

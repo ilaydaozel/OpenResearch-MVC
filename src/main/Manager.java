@@ -3,6 +3,7 @@ package main;
 import controller.*;
 import model.Collection;
 import model.PaperCollection;
+import model.Researcher;
 import model.ResearcherCollection;
 import store.UserStore;
 import view.*;
@@ -27,20 +28,20 @@ public class Manager {
 	
 	public void onLogin(UserStore session) {
 		if(session.getUser()!= null) {
-			
+			Researcher researcher = session.getUser();
 			//creating homepage after login
 			this.navbar = new Navbar(session);
 			NavbarController navbarController = new NavbarController(navbar, this);
 			
 			this.homeView = new HomePage(navbar);
 			HomeController homeController = new HomeController(homeView);
-			this.accountView = new AccountPage(session.getUser());
+			this.accountView = new AccountPage(researcher);
 			//Account accountController = new AccountPage();
 			
 			this.researcherCollection = new ResearcherCollection();
 			this.researcherView = new ResearchersPage(researcherCollection);
 			ResearcherController researcherController 
-						= new ResearcherController(researcherView,(ResearcherCollection) researcherCollection, session.getUser());
+						= new ResearcherController(researcherView,(ResearcherCollection) researcherCollection, researcher);
 			
 			this.paperCollection = new PaperCollection();
 			this.paperView = new PapersPage(paperCollection);

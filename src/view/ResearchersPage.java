@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Observable;
 import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
 
 import model.Collection;
 import model.Researcher;
@@ -15,7 +16,8 @@ import model.ResearcherCollection;
 public class ResearchersPage extends JPanel implements java.util.Observer{
 	private Collection researcherCollection;
     private List<Object> researcherList;
-    private ListWrapper researcherListWrapper;
+    //private ListWrapper researcherListWrapper;
+    private ListContainer listContainer; 
     private GridBagConstraints gridBagConstraints = new GridBagConstraints();
     private JPanel detailedContainer = new JPanel();
     //private Researcher model;
@@ -29,7 +31,8 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
     public ResearchersPage(Collection researcherCollection) {
     	this.researcherCollection = researcherCollection;
     	this.researcherList = researcherCollection.getCollection();
-    	this.researcherListWrapper = new ListWrapper("Researchers", researcherList,500, 100);
+		this.listContainer = new ListContainer(researcherList, 500, 100);
+    	//this.researcherListWrapper = new ListWrapper("Researchers", researcherList,500, 100);
     	researcherCollection.addObserver(this);
     	//this.model = model;
     	initComponents();
@@ -39,7 +42,7 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
         setLayout(new GridBagLayout());
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        add(researcherListWrapper, gridBagConstraints);    
+        add(listContainer, gridBagConstraints);    
         addDetailedContainer(new Researcher());
     }
 
@@ -105,17 +108,17 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
 		// TODO Auto-generated method stub
 	}
 	
-    public ListWrapper getResearcherListWrapper() {
-		return researcherListWrapper;
-	}
-
-	public void setResearcherListWrapper(ListWrapper researcherListWrapper) {
-		this.researcherListWrapper = researcherListWrapper;
-	}
-
-	public void selectResearcher(ActionListener actionListener) {
-    	researcherListWrapper.getViewButton().addActionListener(actionListener);
+	public void selectResearcher(ListSelectionListener listSelectionListener) {
+		listContainer.getList().addListSelectionListener(listSelectionListener);
     }
+
+	public ListContainer getListContainer() {
+		return listContainer;
+	}
+
+	public void setListContainer(ListContainer listContainer) {
+		this.listContainer = listContainer;
+	}
 
 
 }

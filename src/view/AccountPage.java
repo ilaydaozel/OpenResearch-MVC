@@ -18,9 +18,11 @@ public class AccountPage extends JPanel implements java.util.Observer{
 	private JLabel followingLabel = new JLabel("Following Researchers:");
     private ListContainer followingList;
     private ListContainer followerList;
+    private Color blue = new Color(144, 219, 244);
     
     public AccountPage( Researcher researcher) {
     	this.researcher = researcher;
+    	researcher.addObserver(this);
     	initComponents();
     }
 
@@ -35,6 +37,7 @@ public class AccountPage extends JPanel implements java.util.Observer{
         
         //label
         usernameLabel.setFont(new Font("", Font.BOLD, 18));
+        usernameLabel.setForeground(blue);
         username.setFont(new Font("", Font.PLAIN, 16));
     	username.setVerticalAlignment(SwingConstants.BOTTOM);
     	
@@ -42,6 +45,7 @@ public class AccountPage extends JPanel implements java.util.Observer{
         JPanel nameInfoPanel = new JPanel();
     	
         nameInfoPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        nameInfoPanel.setBackground(Color.white);;
         nameInfoPanel.add(usernameLabel);
         nameInfoPanel.add(username);
         username.setAlignmentY(BOTTOM_ALIGNMENT);
@@ -98,14 +102,16 @@ public class AccountPage extends JPanel implements java.util.Observer{
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = GridBagConstraints.WEST;
         add(followPanel, gridBagConstraints);
-        
+
         
     }
 
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		System.out.println("update/ mainpage");
+		System.out.println("********inside update method accountpage");
+		System.out.println(researcher.getFollowingResearchers());
+		System.out.println("--------------updated Accountpage----------");
 		
 	}
    

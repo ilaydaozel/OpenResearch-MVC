@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.SwingUtilities;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import model.*;
 import view.*;
@@ -23,18 +25,18 @@ public class ResearcherController{
 		researchersView.unfollowResearcher(new UnfollowListener());
 	}
 
-	class SelectResearcherListener implements ActionListener{
-		public void actionPerformed(ActionEvent e) {
-			Object selected = researchersView.getResearcherListWrapper().getListContainer().getList().getSelectedValue();
+	class SelectResearcherListener implements ListSelectionListener{
+		public void valueChanged(ListSelectionEvent e) {
+			Object selected = researchersView.getListContainer().getList().getSelectedValue();
 			if(selected!= null) {
 				researchersView.addDetailedContainer((Researcher) selected);
 			}
-
+			
 		}
 	}
 	class FollowListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			Object selected = researchersView.getResearcherListWrapper().getListContainer().getList().getSelectedValue();
+			Object selected = researchersView.getListContainer().getList().getSelectedValue();
 			if(selected!= null) {
 				System.out.println(selected + "followed / controller");
 				researcher.follow((Researcher) selected);
@@ -45,7 +47,7 @@ public class ResearcherController{
 	}
 	class UnfollowListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			Object selected = researchersView.getResearcherListWrapper().getListContainer().getList().getSelectedValue();
+			Object selected = researchersView.getListContainer().getList().getSelectedValue();
 			if(selected!= null) {
 				System.out.println(selected + "unfollowed / controller");
 				researcher.unfollow((Researcher) selected);

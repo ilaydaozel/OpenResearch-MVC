@@ -48,10 +48,12 @@ public class Researcher extends java.util.Observable{
 	}
     public void updateXmlFile() {
     	
-    	String xmlFilePath = "OpenResearch-MVC/src/users.xml";
+    	String xmlFilePath = "src/users.xml";
         XmlFileIO xmlFileIO = new XmlFileIO();
         xmlFileIO.updateXmlWithNewResearcher(xmlFilePath, this);
         System.out.println("---------updatexmlFile method");
+		setChanged();	
+		notifyObservers();
     }
 
 	public void follow(Researcher researcher) {
@@ -91,18 +93,24 @@ public class Researcher extends java.util.Observable{
 	}
 	public void setFollowingResearchers(List<Object> followingResearchers) {
 		this.followingResearchers = followingResearchers;
+		setChanged();	
+		notifyObservers();
 	}
 	public List<Object> getFollowerResearchers() {
 		return followerResearchers;
 	}
 	public void setFollowerResearchers(List<Object> followerResearchers) {
 		this.followerResearchers = followerResearchers;
+		setChanged();	
+		notifyObservers();
 	}
 	public List<Object> getReadingLists() {
 		return readingLists;
 	}
 	public void setReadingLists(List<Object> readingLists) {
 		this.readingLists = readingLists;
+		setChanged();	
+		notifyObservers();
 	}
 	
 }

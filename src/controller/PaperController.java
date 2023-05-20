@@ -10,6 +10,8 @@ import java.util.List;
 
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import model.*;
 import view.*;
@@ -27,13 +29,14 @@ public class PaperController {
 		papersView.downloadFile(new DownloadPaperListener());
 	}
 
-	class SelectPaperListener implements ActionListener{
-		public void actionPerformed(ActionEvent e) {
-			selectedPaper = (Paper) papersView.getPaperListWrapper().getListContainer().getList().getSelectedValue();
-			if(selectedPaper!= null) {
-				papersView.addDetailedContainer(selectedPaper);
+	class SelectPaperListener implements ListSelectionListener{
+		public void valueChanged(ListSelectionEvent e) {
+			Object selected = papersView.getListContainer().getList().getSelectedValue();
+			if(selected!= null) {
+				papersView.addDetailedContainer((Paper) selected);
+				selectedPaper = (Paper) selected;
 			}
-
+			
 		}
 	}
 	class DownloadPaperListener implements ActionListener {

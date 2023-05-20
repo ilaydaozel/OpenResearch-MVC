@@ -16,11 +16,9 @@ import model.ResearcherCollection;
 public class ResearchersPage extends JPanel implements java.util.Observer{
 	private Collection researcherCollection;
     private List<Object> researcherList;
-    //private ListWrapper researcherListWrapper;
     private ListContainer listContainer; 
     private GridBagConstraints gridBagConstraints = new GridBagConstraints();
     private JPanel detailedContainer = new JPanel();
-    //private Researcher model;
 	private JLabel usernameLabel = new JLabel("User:");
 	private JLabel username = new JLabel();
 	private JButton followButton = new JButton("Follow");
@@ -32,9 +30,7 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
     	this.researcherCollection = researcherCollection;
     	this.researcherList = researcherCollection.getCollection();
 		this.listContainer = new ListContainer(researcherList, 500, 100);
-    	//this.researcherListWrapper = new ListWrapper("Researchers", researcherList,500, 100);
     	researcherCollection.addObserver(this);
-    	//this.model = model;
     	initComponents();
     }
 

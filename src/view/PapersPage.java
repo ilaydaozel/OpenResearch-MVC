@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.event.ListSelectionListener;
 
 import model.Article;
 import model.Collection;
@@ -15,7 +16,7 @@ import java.util.List;
 public class PapersPage extends JPanel implements java.util.Observer {
 	private Collection paperCollection;
     private List<Object> paperList;
-    private ListWrapper paperListWrapper;
+    private ListContainer listContainer; 
     private GridBagConstraints gridBagConstraints = new GridBagConstraints();
     private JPanel detailedContainer = new JPanel();
 	private Paper _paper ;
@@ -27,7 +28,7 @@ public class PapersPage extends JPanel implements java.util.Observer {
     public PapersPage(Collection paperCollection) {
     	this.paperCollection = paperCollection;
     	this.paperList = paperCollection.getCollection();
-    	this.paperListWrapper = new ListWrapper("Papers", paperList, 700, 100);
+		this.listContainer = new ListContainer(paperList, 500, 100);
     	initComponents();
     }
 
@@ -35,7 +36,7 @@ public class PapersPage extends JPanel implements java.util.Observer {
         setLayout(new GridBagLayout());
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        add(paperListWrapper, gridBagConstraints);    
+        add(listContainer, gridBagConstraints);    
         addDetailedContainer(new Article("", "", "", "", "", "", "", 0));
     }
 
@@ -89,10 +90,10 @@ public class PapersPage extends JPanel implements java.util.Observer {
     public void update(java.util.Observable o, Object arg) {
 		// TODO Auto-generated method stub
     }
-	public void selectPaper(ActionListener actionListener) {
-    	paperListWrapper.getViewButton().addActionListener(actionListener);
+	
+	public void selectPaper(ListSelectionListener listSelectionListener) {
+		listContainer.getList().addListSelectionListener(listSelectionListener);
     }
-
 	public List<Object> getPaperList() {
 		return paperList;
 	}
@@ -101,14 +102,14 @@ public class PapersPage extends JPanel implements java.util.Observer {
 		this.paperList = paperList;
 	}
 
-
-	public ListWrapper getPaperListWrapper() {
-		return paperListWrapper;
+	public ListContainer getListContainer() {
+		return listContainer;
 	}
 
-	public void setPaperListWrapper(ListWrapper paperListWrapper) {
-		this.paperListWrapper = paperListWrapper;
+	public void setListContainer(ListContainer listContainer) {
+		this.listContainer = listContainer;
 	}
+
 
 
 }

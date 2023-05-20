@@ -1,13 +1,11 @@
 package view;
 
 import java.awt.Dimension;
-import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionListener;
 
 @SuppressWarnings("serial")
 public class ListContainer extends JPanel {
@@ -22,6 +20,7 @@ public class ListContainer extends JPanel {
     @SuppressWarnings("unchecked")
 	private void createList(int width, int heigth) {
     	list = new JList(elementList.toArray());
+    	//System.out.println("JList get model: "+ list.getModel());
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
         list.setVisibleRowCount(-1);

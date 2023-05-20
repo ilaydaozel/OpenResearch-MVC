@@ -30,8 +30,9 @@ public class Navbar extends JPanel {
     	researchersButton.setBackground(blue);
     	accountButton.setPreferredSize(new Dimension(200, 30));
     	accountButton.setBackground(blue);
-    	logoutButton.setPreferredSize(new Dimension(200, 30));
-    	logoutButton.setBackground(blue);
+    	logoutButton.setPreferredSize(new Dimension(80, 30));
+    	logoutButton.setForeground(Color.WHITE);
+    	logoutButton.setBackground(Color.gray);
 
     	setLayout(new GridBagLayout());
     	setBackground(Color.white);

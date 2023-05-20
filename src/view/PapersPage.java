@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 
 import model.Article;
 import model.Collection;
@@ -18,8 +19,8 @@ public class PapersPage extends JPanel implements java.util.Observer {
     private GridBagConstraints gridBagConstraints = new GridBagConstraints();
     private JPanel detailedContainer = new JPanel();
 	private Paper _paper ;
-	private JLabel bookLabel = new JLabel("Book Title:");
-	private JLabel bookTitle = new JLabel();
+	private JLabel paperTitleLabel = new JLabel("Book Title:");
+	private JLabel paperTitle;
     private Color blue = new Color(144, 219, 244);
     private JButton downloadButton = new JButton("Download File");
     
@@ -39,19 +40,30 @@ public class PapersPage extends JPanel implements java.util.Observer {
     }
 
 	public void addDetailedContainer(Paper selectedPaper) {
+		//get info of paper
+        this.paperTitle = new JLabel(selectedPaper.getTitle());
 		detailedContainer.removeAll();
+		
+		//detailed Container
 		detailedContainer.setBackground(Color.white);
 		detailedContainer.setPreferredSize(new Dimension(900,300));
 		detailedContainer.setLayout(new GridBagLayout());
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
-        JPanel bookTitlePanel = new JPanel();
-        bookTitlePanel.setLayout(new FlowLayout());
-        bookTitlePanel.setBackground(Color.white);
-        bookTitlePanel.add(bookLabel);
-        bookTitlePanel.add(new JLabel(selectedPaper.getTitle()));
+        
+        //paper title panel
+        JPanel paperTitlePanel = new JPanel();
+        paperTitlePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        paperTitlePanel.setBackground(Color.white);
+        paperTitlePanel.add(paperTitleLabel);
+        paperTitlePanel.add(paperTitle);
+        
+        paperTitleLabel.setAlignmentY(BOTTOM_ALIGNMENT);
+        paperTitle.setAlignmentY(BOTTOM_ALIGNMENT);
+        Border paperTitleBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
+        paperTitlePanel.setBorder(paperTitleBorder);
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = gridBagConstraints.WEST;
-        detailedContainer.add(bookTitlePanel, gridBagConstraints);
+        detailedContainer.add(paperTitlePanel, gridBagConstraints);
     
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.white);

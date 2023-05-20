@@ -14,8 +14,8 @@ public class AccountPage extends JPanel implements java.util.Observer{
     private JLabel label = new JLabel("Account page" );
     private JLabel usernameLabel = new JLabel("Username:", SwingConstants.RIGHT);
     private JLabel username;
-	private JLabel followerLabel = new JLabel("Followers:");
-	private JLabel followingLabel = new JLabel("Followings:");
+	private JLabel followerLabel = new JLabel("Follower Researchers:");
+	private JLabel followingLabel = new JLabel("Following Researchers:");
     private ListContainer followingList;
     private ListContainer followerList;
     
@@ -26,8 +26,8 @@ public class AccountPage extends JPanel implements java.util.Observer{
 
     private void initComponents() {
     	username = new JLabel(researcher.getUsername(), SwingConstants.RIGHT);
-		followerList = new ListContainer(researcher.getFollowerResearchers(), 200, 50);
-		followingList = new ListContainer(researcher.getFollowingResearchers(), 200, 50);
+		followerList = new ListContainer(researcher.getFollowerResearchers(), 250, 70);
+		followingList = new ListContainer(researcher.getFollowingResearchers(), 250, 70);
     	
     	//panel design
         setLayout(new GridBagLayout());

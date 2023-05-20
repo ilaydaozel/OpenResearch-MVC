@@ -21,13 +21,10 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
     //private Researcher model;
 	private JLabel usernameLabel = new JLabel("User:");
 	private JLabel username = new JLabel();
-	private JLabel followerLabel = new JLabel("Followers:");
-	private JLabel followingLabel = new JLabel("Followings:");
 	private JButton followButton = new JButton("Follow");
 	private JButton unfollowButton = new JButton("Unfollow");
     private Color blue = new Color(144, 219, 244);
-    private ListContainer followingList;
-    private ListContainer followerList;
+
     
     public ResearchersPage(Collection researcherCollection) {
     	this.researcherCollection = researcherCollection;
@@ -48,8 +45,7 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
 
 	public void addDetailedContainer(Researcher selectedResearcher) {
 		detailedContainer.removeAll();
-		followerList = new ListContainer(selectedResearcher.getFollowerResearchers(), 200, 50);
-		followingList = new ListContainer(selectedResearcher.getFollowingResearchers(), 200, 50);
+
 		detailedContainer.setBackground(Color.white);
 		detailedContainer.setPreferredSize(new Dimension(900,300));
 		detailedContainer.setLayout(new GridBagLayout());
@@ -63,44 +59,19 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = gridBagConstraints.WEST;
         detailedContainer.add(usernamePanel, gridBagConstraints);
-    
-        JPanel followPanel = new JPanel();
-        followPanel.setLayout(new FlowLayout()); 
-        followPanel.setBackground(Color.white);
         
-        JPanel followerPanel = new JPanel();
-        followerPanel.setLayout(new FlowLayout());
-        followerPanel.setBackground(Color.white);
-        followerPanel.add(followerLabel);
-        followerPanel.add(followerList);
-        
-        JPanel followingPanel = new JPanel();
-        followingPanel.setLayout(new FlowLayout());
-        followingPanel.setBackground(Color.white);
-        followingPanel.add(followingLabel);
-        followingPanel.add(followingList);
-        
-        followPanel.add(followerPanel);
-        followPanel.add(followingPanel);
- 
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        detailedContainer.add(followPanel, gridBagConstraints);
-        
-        
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        
+        //buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.white);
+        //follow button
         followButton.setBackground(Color.white);
         followButton.setPreferredSize(new Dimension(100,20));
         buttonPanel.add(followButton);
-       
+        //unfollow button
         unfollowButton.setBackground(Color.white);
         unfollowButton.setPreferredSize(new Dimension(100,20));
         buttonPanel.add(unfollowButton);
-        
+        //add button panel to panel
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         detailedContainer.add(buttonPanel, gridBagConstraints); 

@@ -33,7 +33,6 @@
 <researcher_name>Berke Tınas</researcher_name>
 <password>123</password>
 <following_researcher_names>
-<following_researcher_name/>
 </following_researcher_names>
 <follower_researcher_names>
 <follower_researcher_name>Göktay İncekara</follower_researcher_name>
@@ -44,9 +43,10 @@
 <researcher_name>İlayda</researcher_name>
 <password>123</password>
 <following_researcher_names>
-<following_researcher_name/>
 <following_researcher_name>serhatcaner</following_researcher_name>
 <following_researcher_name>tugkantuglular</following_researcher_name>
+<following_researcher_name>serhatcaner</following_researcher_name>
+<following_researcher_name>Mert</following_researcher_name>
 </following_researcher_names>
 <follower_researcher_names>
 <follower_researcher_name>Juan</follower_researcher_name>

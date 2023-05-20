@@ -43,6 +43,7 @@ public class ResearcherCollection extends Collection  {
 		System.out.println("username: "+ data.get("username"));
 		System.out.println("follwing: "+ data.get("following_researchers"));
 		System.out.println("follower: "+ data.get("follower_researchers"));
+		System.out.println("test follwing "+ researcher.getFollowingResearchers().toString());
 		return researcher;		
 	}
 

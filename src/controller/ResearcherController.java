@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -38,21 +39,37 @@ public class ResearcherController{
 	}
 	class FollowListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
+			
+			if(researcher.getFollowingResearchers().contains( selectedResearcher.getUsername())) {
+				JOptionPane.showMessageDialog(researchersView, "You are already following selected researcher.");
+				return;
+			}
 			if(selectedResearcher!= null) {
 				System.out.println(selectedResearcher + "followed / controller");
 				researcher.follow((Researcher) selectedResearcher);
 				researchersView.refresh();
 			}
 
+			else {
+	            JOptionPane.showMessageDialog(researchersView, "No researcher selected.");
+	        }
+
 		}
 	}
 	class UnfollowListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			if(selectedResearcher!= null) {
+			if(!researcher.getFollowingResearchers().contains( selectedResearcher.getUsername())) {
+				JOptionPane.showMessageDialog(researchersView, "You are not following selected researcher.");
+				return;
+			}
+			if(selectedResearcher!= null ) {
 				System.out.println(selectedResearcher + "unfollowed / controller");
 				researcher.unfollow((Researcher) selectedResearcher);
 				//SwingUtilities.updateComponentTreeUI(researchersView);
 			}
+			else {
+	            JOptionPane.showMessageDialog(researchersView, "No researcher selected.");
+	        }
 
 
 		}

@@ -3,6 +3,7 @@ package model;
 import java.util.*;
 
 import fileIO.XmlFileIO;
+import interfaces.IFileWriter;
 
 @SuppressWarnings("deprecation")
 public class Researcher extends java.util.Observable{
@@ -48,9 +49,15 @@ public class Researcher extends java.util.Observable{
 	}
     public void updateXmlFile() {
     	
+<<<<<<< Updated upstream
     	String xmlFilePath = "src/users.xml";
         XmlFileIO xmlFileIO = new XmlFileIO();
         xmlFileIO.updateXmlWithNewResearcher(xmlFilePath, this);
+=======
+    	String xmlFilePath = "OpenResearch-MVC/src/users.xml";
+        IFileWriter xmlFileIO = new XmlFileIO();
+        xmlFileIO.updateFile(xmlFilePath, this);
+>>>>>>> Stashed changes
         System.out.println("---------updatexmlFile method");
 		setChanged();	
 		notifyObservers();

@@ -6,6 +6,12 @@ public class Article extends Paper {
  private String number;
  private String journal;
 
+ public Article() {
+	 super();
+     this.volume = "";
+     this.number = "";
+     this.journal = "";
+ }
  public Article(String authors, String title, String year, String doi, String volume, String number, String journal,int downloadNumber) {
      super(authors, title, year, doi, downloadNumber);
      this.volume = volume;

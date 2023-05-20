@@ -8,6 +8,14 @@ public abstract class Paper {
     private String doi;
     private int downloadNumber;
     
+    public Paper() {
+    	this.authors = "";
+        this.title = "";
+        this.year = "";
+        this.doi = "";
+        this.downloadNumber = 0;
+    }
+    
     public Paper(String authors, String title, String year, String doi, int downloadNumber) {
         this.authors = authors;
         this.title = title;

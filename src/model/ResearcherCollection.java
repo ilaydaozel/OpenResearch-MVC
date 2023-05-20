@@ -24,7 +24,7 @@ public class ResearcherCollection extends Collection  {
 	public void createCollection() {
 		List<Map<String, String>> allResearchers;
 
-		allResearchers = getReader().readAllElements("users.xml");
+		allResearchers = getReader().readAllElements("OpenResearch-MVC/src/users.xml");
 
     	for (Map<String, String> data : allResearchers) {
     		System.out.println("inside "+ data);
@@ -37,8 +37,12 @@ public class ResearcherCollection extends Collection  {
 
 	@Override
 	public Researcher createCollectionElement(Map<String, String> data) {
-		Researcher researcher = new Researcher(data.get("username"), data.get("password"));
-		
+		Researcher researcher = new Researcher(data.get("username"),
+											data.get("password"),
+											new ArrayList<>(Arrays.asList(data.get("following_researchers").split(", "))),
+											new ArrayList<>(Arrays.asList(data.get("follower_researchers").split(", "))));
+		System.out.println("follwing: "+ data.get("following_researchers"));
+		System.out.println("follower: "+ data.get("follower_researchers"));
 		return researcher;		
 	}
 

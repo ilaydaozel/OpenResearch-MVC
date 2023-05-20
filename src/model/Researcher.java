@@ -10,15 +10,23 @@ public class Researcher extends java.util.Observable{
 	private List<Object> followerResearchers;
 	private List<Object> readingLists;
 	
-	
-	public Researcher(String username, String password) {
-		this.username = username;
-		this.password = password;
+	public Researcher() {
+		this.username = "";
+		this.password = "";
 		this.followingResearchers = new ArrayList<>();
 		this.followerResearchers = new ArrayList<>();
 		this.readingLists = new ArrayList<>();
+	};
+	public Researcher(String username, String password,
+					List<Object> followingResearchers,List<Object> followerResearchers) {
+		this.username = username;
+		this.password = password;
+		this.followingResearchers = followingResearchers;
+		this.followerResearchers = followerResearchers;
+		this.readingLists = new ArrayList<>();
 		
 	};
+
 	public String getUsername() {
 		return username;
 	}

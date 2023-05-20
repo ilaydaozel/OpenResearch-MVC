@@ -18,6 +18,7 @@ public class AccountPage extends JPanel implements java.util.Observer{
 	private JLabel followingLabel = new JLabel("Following Researchers:");
     private JList followingList;
     private JList followerList;
+    private JButton createRLButton = new JButton("Create Reading List");
     private Color blue = new Color(144, 219, 244);
     
     public AccountPage( Researcher researcher) {
@@ -78,6 +79,7 @@ public class AccountPage extends JPanel implements java.util.Observer{
         //follow panel
         JPanel followPanel = new JPanel();
         followPanel.setLayout(new GridBagLayout());
+        followPanel.setPreferredSize(new Dimension(600,150));
         GridBagConstraints followGridBagConstraints = new GridBagConstraints();
         //follower panel
         JPanel followerPanel = new JPanel();
@@ -117,6 +119,21 @@ public class AccountPage extends JPanel implements java.util.Observer{
         gridBagConstraints.anchor = GridBagConstraints.WEST;
         add(followPanel, gridBagConstraints);
         
+        //readingList panel
+        JPanel readingListPanel = new JPanel();
+        readingListPanel.setLayout(new GridBagLayout());
+        readingListPanel.setPreferredSize(new Dimension(600,200));
+        GridBagConstraints rlGridBagConstraints = new GridBagConstraints();
+        Border rlPanelBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
+        readingListPanel.setBorder(rlPanelBorder);
+        readingListPanel.add(createRLButton);
+        
+        //ad readingList panel
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = GridBagConstraints.WEST;
+        add(readingListPanel, gridBagConstraints);
+
     }
 
 	@Override

@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Observable;
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.event.ListSelectionListener;
 
 import model.Collection;
@@ -48,7 +49,9 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
 		detailedContainer.setBackground(Color.white);
 		detailedContainer.setPreferredSize(new Dimension(900,300));
 		detailedContainer.setLayout(new GridBagLayout());
-		
+        Border detailedContainerBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
+        detailedContainer.setBorder(detailedContainerBorder);
+
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         JPanel usernamePanel = new JPanel();
         usernamePanel.setLayout(new FlowLayout());

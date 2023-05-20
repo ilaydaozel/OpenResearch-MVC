@@ -49,6 +49,9 @@ public class PapersPage extends JPanel implements java.util.Observer {
 		detailedContainer.setBackground(Color.white);
 		detailedContainer.setPreferredSize(new Dimension(900,300));
 		detailedContainer.setLayout(new GridBagLayout());
+        Border detailedContainerBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
+        detailedContainer.setBorder(detailedContainerBorder);
+
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         
         //paper title panel

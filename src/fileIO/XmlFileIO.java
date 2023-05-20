@@ -25,10 +25,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import interfaces.IFileReader;
+import interfaces.IFileWriter;
+import model.ReadingList;
 import model.Researcher;
 import model.ResearcherCollection;
 
-public class XmlFileIO implements IFileReader {
+public class XmlFileIO implements IFileReader,IFileWriter {
 
     @Override
     public List<Map<String, String>> readAllElements(String path) {
@@ -107,15 +109,22 @@ public class XmlFileIO implements IFileReader {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public void updateXmlWithNewResearcher(String path, Researcher newResearcher) {
+	@Override
+	public void updateFile(String path, Object newResearcherObject) {
 	    try {
+		    if (!(newResearcherObject instanceof ReadingList)) {
+		        throw new IllegalArgumentException("Invalid object type. Expected ReadingList.");
+		    }
+		    
+		    Researcher newResearcher = (Researcher) newResearcherObject;
+	    	
 	        File inputFile = new File(path);
 	        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 	        Document doc = dBuilder.parse(inputFile);
 	        doc.getDocumentElement().normalize();
 	        
-	        removeExistingResearcher(doc, newResearcher.getUsername());
+	        removeExistingResearcher(doc, (newResearcher).getUsername());
 	        
 	        
 	        Element researcherElement = createResearcherElement(doc, newResearcher);
@@ -225,10 +234,16 @@ public class XmlFileIO implements IFileReader {
 
 	        // Update the XML file with the new researcher
 	        XmlFileIO xmlFileIO = new XmlFileIO();
-	        xmlFileIO.updateXmlWithNewResearcher(xmlFilePath, newResearcher);
+	        xmlFileIO.updateFile(xmlFilePath, newResearcher);
 	        ResearcherCollection rc = new ResearcherCollection();
 	        rc.createCollection();
 	    }
+
+	@Override
+	public void writeAllPapers(List<Object> list) {
+		// TODO Auto-generated method stub
+		
+	}
 	 
 	
 	}

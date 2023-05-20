@@ -18,14 +18,11 @@ import model.Paper;
 import java.util.Random;
 public class CsvFileIO implements IFileWriter{
 
-	@Override
-	public void write() {
-		
-	}
+
 	@Override
 	public void writeAllPapers(List<Object> allPapers) {
 		try {
-			FileWriter writer = new FileWriter("src/data/papers.csv");
+			FileWriter writer = new FileWriter("OpenResearch-MVC/src/data/papers.csv");
 		for (Object paper : allPapers) {
 			paper = (Paper) paper;
 			if (paper instanceof ConferencePaper) {
@@ -76,6 +73,12 @@ public class CsvFileIO implements IFileWriter{
 		}catch (IOException e) {
             e.printStackTrace();
         }	
+	}
+
+	@Override
+	public void updateFile(String path, Object object) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

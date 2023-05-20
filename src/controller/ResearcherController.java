@@ -15,6 +15,7 @@ public class ResearcherController{
 	private ResearchersPage researchersView;
 	private ResearcherCollection researcherList;
 	private Researcher researcher;
+	protected Researcher selectedResearcher;
 	
 	public ResearcherController(ResearchersPage researchersView, ResearcherCollection researcherCollection, Researcher researcher) {
 		this.researchersView = researchersView;
@@ -30,16 +31,16 @@ public class ResearcherController{
 			Object selected = researchersView.getListContainer().getList().getSelectedValue();
 			if(selected!= null) {
 				researchersView.addDetailedContainer((Researcher) selected);
+				selectedResearcher = (Researcher) selected;
 			}
 			
 		}
 	}
 	class FollowListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			Object selected = researchersView.getListContainer().getList().getSelectedValue();
-			if(selected!= null) {
-				System.out.println(selected + "followed / controller");
-				researcher.follow((Researcher) selected);
+			if(selectedResearcher!= null) {
+				System.out.println(selectedResearcher + "followed / controller");
+				researcher.follow((Researcher) selectedResearcher);
 				researchersView.refresh();
 			}
 
@@ -47,10 +48,9 @@ public class ResearcherController{
 	}
 	class UnfollowListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			Object selected = researchersView.getListContainer().getList().getSelectedValue();
-			if(selected!= null) {
-				System.out.println(selected + "unfollowed / controller");
-				researcher.unfollow((Researcher) selected);
+			if(selectedResearcher!= null) {
+				System.out.println(selectedResearcher + "unfollowed / controller");
+				researcher.unfollow((Researcher) selectedResearcher);
 				//SwingUtilities.updateComponentTreeUI(researchersView);
 			}
 

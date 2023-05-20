@@ -37,7 +37,7 @@ public class PapersPage extends JPanel implements java.util.Observer {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         add(listContainer, gridBagConstraints);    
-        addDetailedContainer(new Article("", "", "", "", "", "", "", 0));
+        addDetailedContainer(new Article());
     }
 
 	public void addDetailedContainer(Paper selectedPaper) {
@@ -54,6 +54,7 @@ public class PapersPage extends JPanel implements java.util.Observer {
         //paper title panel
         JPanel paperTitlePanel = new JPanel();
         paperTitlePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        paperTitlePanel.setPreferredSize(new Dimension(700,30));
         paperTitlePanel.setBackground(Color.white);
         paperTitlePanel.add(paperTitleLabel);
         paperTitlePanel.add(paperTitle);

@@ -30,9 +30,12 @@ public class AccountController{
 		public void actionPerformed(ActionEvent e) {
 			String rlName = accountView.getNewRLName().getText();
 			System.out.println("Create new rl named " + rlName);
+			System.out.println("r: "+ researcher.getUsername());
 			ReadingList newReadingList = new ReadingList(rlName, researcher);
 			researcher.addNewReadingList(newReadingList);
-			rLList.addToCollection(newReadingList);
+		
+	
+			System.out.println("rlist collection: "+ rLList.getCollection().toString());
 		}
 	}
 

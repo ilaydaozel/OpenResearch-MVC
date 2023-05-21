@@ -9,8 +9,10 @@ import fileIO.JSONFileIO;
 
 
 public class ReadingListCollection extends Collection{
+	public ResearcherCollection researcherCollection;
 	
-	public ReadingListCollection() {
+	public ReadingListCollection(ResearcherCollection researcherCollection) {
+		this.researcherCollection = researcherCollection;
 		setReader(new JSONFileIO());
 		setWriter(new JSONFileIO());
 		createCollection();
@@ -19,8 +21,9 @@ public class ReadingListCollection extends Collection{
 	public void createCollection() {
 		List<Map<String, String>> allReadingLists;
 		allReadingLists = getReader().readAllElements("readingList.json");
-
+		
     	for (Map<String, String> data : allReadingLists) {
+    		
     		addToCollection(createCollectionElement(data));
         }  
 		
@@ -29,20 +32,20 @@ public class ReadingListCollection extends Collection{
 	@Override
 	public Object createCollectionElement(Map<String, String> data) {
 		
-		ResearcherCollection researcherCollection = new ResearcherCollection();
-		Researcher researcher =researcherCollection.getResearcherByResearcherName(data.get("creator_researcher_name"));
 		
+		Researcher researcher = this.researcherCollection.getResearcherByResearcherName(data.get("creator_researcher_name"));
+		
+
+        
 		ReadingList readingList = new ReadingList(
 											Integer.parseInt(data.get("readinglist_id")),
 											Integer.parseInt(data.get("number_of_papers")),
 											data.get("name_of_papers").split(","),
 											data.get("creator_researcher_name"),
 											researcher);
-				
-		//System.out.println("readinglist_id: "+ data.get("readinglist_id"));
-		//System.out.println("number_of_papers: "+ data.get("number_of_papers"));
-		//System.out.println("name_of_papers: "+ data.get("name_of_papers"));
-		//System.out.println("test follwing "+ readingList.getCreatorResearcher().getUsername());
+
+        researcher.addNewReadingList(readingList);
+
 		return readingList;		
 		
 	}

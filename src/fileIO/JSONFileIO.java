@@ -185,7 +185,7 @@ public class JSONFileIO implements IFileWriter, IFileReader{
             }
             
             System.out.println();
-        }*/
+        }
     	Researcher newResearcher = new Researcher();
         newResearcher.setUsername("Berke Tınas");
         newResearcher.setPassword("123");
@@ -198,6 +198,7 @@ public class JSONFileIO implements IFileWriter, IFileReader{
     	ReadingListCollection rc= new ReadingListCollection();
     	rc.createCollection();
     	rl =  (ReadingList) rc.getCollection().get(0);
-    	System.out.println("rcr :" +rl.getReadingListName());
+    	System.out.println("rcr :" +rl.getReadingListName());*/
+    	
     }
 }

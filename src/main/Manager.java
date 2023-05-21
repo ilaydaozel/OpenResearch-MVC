@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Iterator;
+
 import controller.*;
 import model.Collection;
 import model.PaperCollection;
@@ -38,16 +40,26 @@ public class Manager {
 			this.homeView = new HomePage(navbar);
 			HomeController homeController = new HomeController(homeView);
 			
-			this.readingListCollection = new ReadingListCollection();
-			this.accountView = new AccountPage(researcher);
-			AccountController accountController = new AccountController(accountView, (ReadingListCollection) readingListCollection, researcher);
 			
 			this.researcherCollection = new ResearcherCollection();
 			this.researcherView = new ResearchersPage(researcherCollection);
 			ResearcherController researcherController 
 						= new ResearcherController(researcherView,(ResearcherCollection) researcherCollection, researcher);
 			
+			
+			this.readingListCollection = new ReadingListCollection((ResearcherCollection)this.researcherCollection);
+			System.out.println("manager collection: "+ readingListCollection.getCollection());
+			this.accountView = new AccountPage(researcher);
+			AccountController accountController = new AccountController(accountView, (ReadingListCollection) readingListCollection, researcher);
+			
+			for(Object res :  researcherCollection.getCollection() ) {
+				System.out.println("fordayım res collection "+ ((Researcher)res).getReadingLists());
+			}
+			
+			System.out.println("manager-----------------"+ researcherCollection.getCollection()); 
+			
 			this.paperCollection = new PaperCollection();
+			
 			this.paperView = new PapersPage(paperCollection);
 			PaperController paperController = new PaperController(paperView, (PaperCollection) paperCollection);
 			

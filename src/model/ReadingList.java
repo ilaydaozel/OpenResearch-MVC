@@ -72,15 +72,9 @@ public class ReadingList {
 
 	@Override
 	public String toString() {
-		return "ReadingList [readingListId=" + readingListId + ", readingListName=" + readingListName
-				+ ", creatorResearcher=" + creatorResearcher + ", numOfPapers=" + numOfPapers + ", nameOfPapers="
-				+ Arrays.toString(nameOfPapers) + "]";
+		return "ReadingList "+ creatorResearcher.getUsername();
 	}
 	
-	
-	@Override
-	public String toString() {
-		return this.readingListName;
-	}
+
 	
 }

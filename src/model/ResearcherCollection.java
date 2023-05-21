@@ -17,6 +17,7 @@ public class ResearcherCollection extends Collection  {
 	
 	public ResearcherCollection() {
 		setReader(new XmlFileIO());
+		setWriter(new XmlFileIO());
 		createCollection();
 	}
 	
@@ -28,8 +29,6 @@ public class ResearcherCollection extends Collection  {
 
     	for (Map<String, String> data : allResearchers) {
     		addToCollection(createCollectionElement(data));
-    		
-    		
         }  
 		
 	}

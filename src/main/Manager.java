@@ -43,6 +43,7 @@ public class Manager {
 			
 			
 			this.researcherCollection = new ResearcherCollection();
+			
 			ResearcherCollection resCol =  (ResearcherCollection) researcherCollection;
 			Researcher researcherFromCollection = resCol.getResearcherByResearcherName(researcher.getUsername());
 			
@@ -58,7 +59,7 @@ public class Manager {
 
 			
 			this.paperCollection = new PaperCollection();
-			this.paperView = new PapersPage(paperCollection);
+			this.paperView = new PapersPage(paperCollection, researcherFromCollection );
 			PaperController paperController = new PaperController(paperView, (PaperCollection) paperCollection);
 			
 		}

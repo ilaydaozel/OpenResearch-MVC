@@ -29,6 +29,7 @@ public class PaperController {
 		this.paperList = (PaperCollection) paperList;
 		papersView.selectPaper(new SelectPaperListener());
 		papersView.downloadFile(new DownloadPaperListener());
+		papersView.selectReadingList(new SelectReadingListListener());
 	}
 
 	class SelectPaperListener implements ListSelectionListener{
@@ -38,9 +39,16 @@ public class PaperController {
 				papersView.addDetailedContainer((Paper) selected);
 				selectedPaper = (Paper) selected;
 			}
-			
 		}
 	}
+	
+	class SelectReadingListListener implements ListSelectionListener{
+		public void valueChanged(ListSelectionEvent e) {
+			Object objSelectedReadingListName = papersView.getRlList().getSelectedValue();		
+			selectedReadingListName = (String) objSelectedReadingListName;
+		}
+	}
+	
 	class DownloadPaperListener implements ActionListener {
 	    public void actionPerformed(ActionEvent e) {
 

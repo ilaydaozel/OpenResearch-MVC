@@ -9,17 +9,18 @@ import fileIO.CsvFileIO;
 import interfaces.IFileWriter;
 
 public class PaperCollection extends Collection{
-    private IFileWriter csvWriter = new CsvFileIO();
+
     
     public PaperCollection() {
 		setReader(new BibTeXFileIO());
+		setWriter(new CsvFileIO());
 		createCollection();
-        csvWriter.writeAllPapers(getCollection());
+        getWriter().writeAllPapers(getCollection());
     }
     
     public void createCollection() {
     	List<Map<String, String>> allPapers;
-    	allPapers = getReader().readAllElements("src/data/");
+    	allPapers = getReader().readAllElements("OpenResearch-MVC/src/data/");
 
     	for (Map<String, String> data : allPapers) {
     		addToCollection(createCollectionElement(data));
@@ -51,9 +52,6 @@ public class PaperCollection extends Collection{
 			return conferencePaper;
 		}
     }
-    public void updateCsvFile() {
-        csvWriter.writeAllPapers(getCollection());
-    }
-   
+
 
 }

@@ -97,8 +97,6 @@ public class ReadingList extends Observable{
 	                sb.append(", ");
 	            }
 	        }
-	        sb.deleteCharAt(0);
-	        sb.deleteCharAt(sb.length() - 1);
 	    }
 
 	    String result = sb.toString();

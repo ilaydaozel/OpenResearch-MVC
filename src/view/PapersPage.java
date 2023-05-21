@@ -40,6 +40,7 @@ public class PapersPage extends JPanel implements java.util.Observer {
     	this.paperCollection = paperCollection;
     	this.paperList = paperCollection.getCollection();
     	this.researcher = researcher;
+    	researcher.addObserver(this);
 		this.listContainer = new ListContainer(paperList, 700, 100);
     	initComponents();
     }
@@ -212,22 +213,6 @@ public class PapersPage extends JPanel implements java.util.Observer {
         return infoLinePanel;
 	}
 	
-	public JPanel addDetailedRL(ReadingList readingList) {
-		/*this.selectedReadingList = selectedReadingList;
-		selectedReadingList.deleteObserver(this);
-		detailedRLContainer.removeAll();
-		selectedReadingList.addObserver(this);
-		
-		detailedRLContainer.setBackground(Color.white);
-		detailedRLContainer.setPreferredSize(new Dimension(200,40));
-		detailedRLContainer.setLayout(new GridBagLayout());
-		
-        GridBagConstraints gridBagConstraints = new GridBagConstraints();
-        
-        */
-		return detailedRLContainer;		
-	}
-	
     public void downloadFile(ActionListener actionListener) {
         downloadButton.addActionListener(actionListener);
     }
@@ -244,6 +229,7 @@ public class PapersPage extends JPanel implements java.util.Observer {
 		System.out.println("********inside update method paperspage");
 		//selectedPaper.setListData(researcher.getFollowerResearchers().toArray());
 		downloadNum.setText(this.selectedPaper.getDownloadNumber()+"");
+		rlList.setListData(researcher.getReadingLists().toArray());	
     }
 	
 	public void selectPaper(ListSelectionListener listSelectionListener) {

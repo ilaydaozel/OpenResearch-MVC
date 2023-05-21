@@ -20,7 +20,7 @@ public class ReadingList {
 	
 	public void updateJsonFile() {
 		IFileWriter createReadingListJSONFile = new JSONFileIO();
-		System.out.println("num of papers test "+ this.getNumOfPapers());
+		System.out.println("JSON fıle updated with :  "+ this);
 		createReadingListJSONFile.updateFile("readingList.json", this);
 	}
 	public ReadingList(int readingListId,int numOfPapers,String[] nameOfPapers,String name, Researcher researcher) {
@@ -65,6 +65,11 @@ public class ReadingList {
 	public void setNameOfPapers(String[] nameOfPapers) {
 		this.nameOfPapers = nameOfPapers;
 		updateJsonFile();
+	}
+	
+	@Override
+	public String toString() {
+		return this.readingListName;
 	}
 	
 }

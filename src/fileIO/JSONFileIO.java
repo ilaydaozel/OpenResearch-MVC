@@ -23,38 +23,79 @@ import model.ReadingListCollection;
 
 public class JSONFileIO implements IFileWriter, IFileReader{
 	
-	@Override
-    public void updateFile(String path, Object readingListObject) {
+	public void updateFile(String path, Object readingListObject) {
 		
-		if (!(readingListObject instanceof ReadingList)) {
-            throw new IllegalArgumentException("Invalid object type. Expected ReadingList.");
-        }
-        
-        ReadingList readingList = (ReadingList) readingListObject;
-        
-        JSONObject jsonReadingList = new JSONObject();
-        jsonReadingList.put("readinglist_id", readingList.getReadingListId());
-        jsonReadingList.put("creator_researcher_name", readingList.getCreatorResearcher().getUsername());
-        jsonReadingList.put("readinglist_name", readingList.getReadingListName());
-        jsonReadingList.put("number_of_papers", readingList.getNumOfPapers());
-        
-        JSONArray jsonPapers = new JSONArray();
-        
-        if(readingList.getNameOfPapers() != null) {
-        	for (String paperName : readingList.getNameOfPapers()) {
-                jsonPapers.put(paperName);
-            }
-        }
-
-        jsonReadingList.put("name_of_papers", jsonPapers);
-        
-        try (FileWriter fileWriter = new FileWriter(path)) {
-            fileWriter.write(jsonReadingList.toString(4)); // Generate formatted JSON with indentation
-            System.out.println("JSON file has been written successfully.");
-        } catch (IOException e) {
-            System.out.println("An error occurred while writing the JSON file: " + e.getMessage());
-        }
-    }
+	        if (!(readingListObject instanceof ReadingList)) {
+	            throw new IllegalArgumentException("Invalid object type. Expected ReadingList.");
+	        }
+	        
+	        ReadingList readingList = (ReadingList) readingListObject;
+	        
+	        JSONArray jsonArray = null;
+	        JSONArray updatedArray = new JSONArray();
+	        
+	        try (FileReader fileReader = new FileReader(path)) {
+	            JSONTokener tokener = new JSONTokener(fileReader);
+	            jsonArray = new JSONArray(tokener);
+	            
+	            boolean found = false;
+	            
+	            for (int i = 0; i < jsonArray.length(); i++) {
+	                JSONObject jsonObject = jsonArray.getJSONObject(i);
+	                String readingListName = jsonObject.getString("readinglist_name");
+	                
+	                if (readingListName.equals(readingList.getReadingListName())) {
+	                    // Object with the same readinglist_name already exists, update it
+	                    jsonObject.put("readinglist_id", readingList.getReadingListId());
+	                    jsonObject.put("creator_researcher_name", readingList.getCreatorResearcher().getUsername());
+	                    jsonObject.put("number_of_papers", readingList.getNumOfPapers());
+	                    
+	                    JSONArray jsonPapers = new JSONArray();
+	                    if(readingList.getNameOfPapers()!=null) {
+	                    	 for (String paperName : readingList.getNameOfPapers()) {
+	 	                        jsonPapers.put(paperName);
+	 	                    }
+	                    }
+	                   
+	                    jsonObject.put("name_of_papers", jsonPapers);
+	                    
+	                    found = true;
+	                }
+	                
+	                updatedArray.put(jsonObject);
+	            }
+	            
+	            // Object with the readinglist_name does not exist, add it
+	            if (!found) {
+	                JSONObject jsonObject = new JSONObject();
+	                jsonObject.put("readinglist_id", readingList.getReadingListId());
+	                jsonObject.put("creator_researcher_name", readingList.getCreatorResearcher().getUsername());
+	                jsonObject.put("readinglist_name", readingList.getReadingListName());
+	                jsonObject.put("number_of_papers", readingList.getNumOfPapers());
+	                
+	                JSONArray jsonPapers = new JSONArray();
+	                if(readingList.getNameOfPapers()!=null) {
+	                	for (String paperName : readingList.getNameOfPapers()) {
+		                    jsonPapers.put(paperName);
+		                }
+	                }
+	                
+	                jsonObject.put("name_of_papers", jsonPapers);
+	                
+	                updatedArray.put(jsonObject);
+	            }
+	        } catch (IOException e) {
+	            System.out.println("An error occurred while reading the JSON file: " + e.getMessage());
+	        }
+	        
+	        try (FileWriter fileWriter = new FileWriter(path)) {
+	            fileWriter.write(updatedArray.toString(4)); // Generate formatted JSON with indentation
+	            System.out.println("JSON file has been updated successfully.");
+	        } catch (IOException e) {
+	            System.out.println("An error occurred while writing the JSON file: " + e.getMessage());
+	        }
+	   
+	  }
     
 	@Override
 	public void writeAllPapers(List<Object> list) {
@@ -70,32 +111,37 @@ public class JSONFileIO implements IFileWriter, IFileReader{
 
 	@Override
 	public List<Map<String, String>> readAllElements(String path) {
-		
-		 List<Map<String, String>> elements = new ArrayList<>();
+	
+	        List<Map<String, String>> elements = new ArrayList<>();
 
 	        try (FileReader fileReader = new FileReader(path)) {
 	            JSONTokener tokener = new JSONTokener(fileReader);
-	            JSONObject jsonObject = new JSONObject(tokener);
+	            JSONArray jsonArray = new JSONArray(tokener);
 
-	            Map<String, String> element = new HashMap<>();
-	            element.put("readinglist_id", String.valueOf(jsonObject.getInt("readinglist_id")));
-	            element.put("creator_researcher_name", jsonObject.getString("creator_researcher_name"));
-	            element.put("readinglist_name", jsonObject.getString("readinglist_name"));
-	            element.put("number_of_papers", String.valueOf(jsonObject.getInt("number_of_papers")));
+	            for (int i = 0; i < jsonArray.length(); i++) {
+	                JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-	            JSONArray jsonPapers = jsonObject.getJSONArray("name_of_papers");
-	            List<String> papers = new ArrayList<>();
-	            for (int i = 0; i < jsonPapers.length(); i++) {
-	                papers.add(jsonPapers.getString(i));
+	                Map<String, String> element = new HashMap<>();
+	                element.put("readinglist_id", String.valueOf(jsonObject.getInt("readinglist_id")));
+	                element.put("creator_researcher_name", jsonObject.getString("creator_researcher_name"));
+	                element.put("readinglist_name", jsonObject.getString("readinglist_name"));
+	                element.put("number_of_papers", String.valueOf(jsonObject.getInt("number_of_papers")));
+
+	                JSONArray jsonPapers = jsonObject.getJSONArray("name_of_papers");
+	                List<String> papers = new ArrayList<>();
+	                for (int j = 0; j < jsonPapers.length(); j++) {
+	                    papers.add(jsonPapers.getString(j));
+	                }
+	                element.put("name_of_papers", papers.toString());
+
+	                elements.add(element);
 	            }
-	            element.put("name_of_papers", papers.toString());
-
-	            elements.add(element);
 	        } catch (IOException e) {
 	            System.out.println("An error occurred while reading the JSON file: " + e.getMessage());
 	        }
 
-	        return elements;}
+	        return elements;
+	    }
     public static void main(String[] args) {
     	
         // Create a sample ReadingList object

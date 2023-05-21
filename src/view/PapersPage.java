@@ -182,7 +182,6 @@ public class PapersPage extends JPanel implements java.util.Observer {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = gridBagConstraints.WEST;
-        // gridBagConstraints.insets = new Insets(10, 0, 10, 0);
         detailedContainer.add(rlPanel, gridBagConstraints);
 
         gridBagConstraints.gridx = 0;
@@ -222,8 +221,6 @@ public class PapersPage extends JPanel implements java.util.Observer {
 
     @Override
     public void update(java.util.Observable o, Object arg) {
-        System.out.println("********inside update method paperspage");
-        // selectedPaper.setListData(researcher.getFollowerResearchers().toArray());
         downloadNum.setText(this.selectedPaper.getDownloadNumber() + "");
         rlList.setListData(researcher.getReadingLists().toArray());
     }
@@ -234,7 +231,6 @@ public class PapersPage extends JPanel implements java.util.Observer {
 
     public void selectReadingList(ListSelectionListener listSelectionListener) {
         rlList.addListSelectionListener(listSelectionListener);
-        System.out.println("SELECET READING LIST");
     }
 
     public List<Object> getPaperList() {

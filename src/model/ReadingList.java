@@ -94,7 +94,7 @@ public class ReadingList extends Observable{
 	        for (int i = 0; i < nameOfPapers.size(); i++) {
 	            sb.append(nameOfPapers.get(i));
 	            if (i < nameOfPapers.size() - 1) {
-	                sb.append(", ");
+	                sb.append("; ");
 	            }
 	        }
 	    }

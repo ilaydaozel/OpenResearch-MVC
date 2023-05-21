@@ -138,8 +138,6 @@ public class AccountPage extends JPanel implements java.util.Observer{
         newRLPanel.add(new JLabel("New reading list name:  "));
         newRLPanel.add(newRLName);
         createRLButton.setBackground(blue);
-        //Border newRlPanelBorder = BorderFactory.createLineBorder(Color.gray, 1);
-        //newRLPanel.setBorder(newRlPanelBorder);
         
         newRLPanel.add(createRLButton);
         rlGridBagConstraints.gridy = 0;
@@ -174,10 +172,8 @@ public class AccountPage extends JPanel implements java.util.Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println("********inside update method accountpage");
 		followerList.setListData(researcher.getFollowerResearchers().toArray());
 		followingList.setListData(researcher.getFollowingResearchers().toArray());
-		System.out.println("rl: " + researcher.getReadingLists().toString());
 		rlList.setListData(researcher.getReadingLists().toArray());
 		
 	}

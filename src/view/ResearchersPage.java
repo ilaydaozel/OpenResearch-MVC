@@ -55,9 +55,7 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
 
 	public void addDetailedContainer(Researcher selectedResearcher) {
 		this.selectedResearcher = selectedResearcher;
-		
-		System.out.println(selectedResearcher.getUsername() +" : researcher rL in researcherspage: " + selectedResearcher.getReadingLists());
-    	//selectedResearcher.deleteObserver(this);
+
 		detailedContainer.removeAll();
     	selectedResearcher.addObserver(this);
 
@@ -153,14 +151,9 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
     	unfollowButton.addActionListener(actionListener);
     }
     
-    public void refresh() {
-    	System.out.println();
-    	SwingUtilities.updateComponentTreeUI(this);
-    }
     
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println("updated researcher ********************");
 		
 		rlList.setListData(selectedResearcher.getReadingLists().toArray());
 		// TODO Auto-generated method stub

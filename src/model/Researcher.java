@@ -75,7 +75,6 @@ public class Researcher extends java.util.Observable{
 	
 	public void addNewReadingList(ReadingList newReadingList) {
 		readingLists.add(newReadingList);
-		System.out.println("added new reading list /researcher: " + newReadingList.getReadingListName());
 		setChanged();	
 		notifyObservers();
 	}

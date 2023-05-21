@@ -18,8 +18,7 @@ import org.json.JSONTokener;
 import interfaces.IFileReader;
 import interfaces.IFileWriter;
 import model.ReadingList;
-import model.Researcher;
-import model.ReadingListCollection;
+
 
 public class JSONFileIO implements IFileWriter, IFileReader{
 	
@@ -90,7 +89,6 @@ public class JSONFileIO implements IFileWriter, IFileReader{
 	        
 	        try (FileWriter fileWriter = new FileWriter(path)) {
 	            fileWriter.write(updatedArray.toString(4)); // Generate formatted JSON with indentation
-	            System.out.println("JSON file has been updated successfully.");
 	        } catch (IOException e) {
 	            System.out.println("An error occurred while writing the JSON file: " + e.getMessage());
 	        }
@@ -142,63 +140,5 @@ public class JSONFileIO implements IFileWriter, IFileReader{
 
 	        return elements;
 	    }
-    public static void main(String[] args) {
-    	
-        // Create a sample ReadingList object
-        /*
-        
-        ReadingList readingList = new ReadingList("test",newResearcher);
-        readingList.setReadingListId(1);
-        readingList.setReadingListName("My Reading List");
-        readingList.setNumOfPapers(3);
-        readingList.setNameOfPapers(new String[]{"test 1", "Paper 2", "Paper 3"});
-        
-        
-        // Specify the file path to write the JSON file
-        String filePath = "readingList.json";
-        
-        JSONFileIO jsonFileIO = new JSONFileIO();
-		// Write the ReadingList object to a JSON file
-        jsonFileIO.updateFile(filePath,readingList);
-    	// Specify the file path to read the JSON file
-    	// Specify the file path to read the JSON file
-        
-        
-        // Create an instance of JSONFileIO
-    	String filePath = "readingList.json";
-    	JSONFileIO jsonFileIO = new JSONFileIO();
-        // Test the readAllElements method
-        List<Map<String, String>> elements = jsonFileIO.readAllElements(filePath);
-        
-        // Display the results
-        for (Map<String, String> element : elements) {
-            System.out.println("Reading List ID: " + element.get("readinglist_id"));
-            System.out.println("Creator Researcher Name: " + element.get("creator_researcher_name"));
-            System.out.println("Reading List Name: " + element.get("readinglist_name"));
-            System.out.println("Number of Papers: " + element.get("number_of_papers"));
-            
-            // Access the name_of_papers array
-            String[] papers = element.get("name_of_papers").split(",");
-            System.out.println("Name of Papers:");
-            for (String paper : papers) {
-                System.out.println("- " + paper);
-            }
-            
-            System.out.println();
-        }
-    	Researcher newResearcher = new Researcher();
-        newResearcher.setUsername("Berke Tınas");
-        newResearcher.setPassword("123");
-        newResearcher.setFollowingResearchers(Arrays.asList(""));
-        newResearcher.setFollowerResearchers(Arrays.asList("Göktay İncekara","抑菌"));
-        
-    	ReadingList rl = new ReadingList("Readling list name",newResearcher);
-    	rl.setNumOfPapers(2);
-    	
-    	ReadingListCollection rc= new ReadingListCollection();
-    	rc.createCollection();
-    	rl =  (ReadingList) rc.getCollection().get(0);
-    	System.out.println("rcr :" +rl.getReadingListName());*/
-    	
-    }
+   
 }

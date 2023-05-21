@@ -41,7 +41,7 @@ public class Navbar extends JPanel {
     	name = new JLabel("Welcome "+ userStore.getUser().getUsername()+ " !");
     	name.setFont(new Font("", Font.BOLD, 16));
 		GridBagConstraints navbarConstraints = new GridBagConstraints();
-		//pageConstraints.fill = GridBagConstraints.PAGE_START;
+		
     	navbar.add(papersButton, navbarConstraints);
     	navbarConstraints.gridx = 1;
     	navbar.add(researchersButton, navbarConstraints);
@@ -63,14 +63,12 @@ public class Navbar extends JPanel {
     }
 
     public void navigate(ActionListener actionListener) {
-    	System.out.println("press button in navbar");
     	researchersButton.addActionListener(actionListener);
     	papersButton.addActionListener(actionListener);
     	accountButton.addActionListener(actionListener);
     }
  
     public void logout(ActionListener actionListener) {
-    	System.out.println("logout / mainpage");
     	logoutButton.addActionListener(actionListener);
     }
 

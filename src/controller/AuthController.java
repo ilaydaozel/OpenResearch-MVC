@@ -26,7 +26,7 @@ public class AuthController {
 		public void actionPerformed(ActionEvent e) {
 			isValidUser(loginView.getUsernameInput(), loginView.getPasswordInput());
 	        if(userStore.getUser() != null)
-	        {	System.out.println("Logged in User: "+ userStore.getUser());
+	        {
 	            loginView.dispose();
 	            manager.onLogin(userStore);
 	            

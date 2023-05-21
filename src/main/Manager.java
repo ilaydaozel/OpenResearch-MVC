@@ -1,6 +1,5 @@
 package main;
 
-import java.util.Iterator;
 
 import controller.*;
 import model.Collection;
@@ -67,7 +66,6 @@ public class Manager {
 	
 	public void onLogout(UserStore session) {
 		if(session.getUser() == null) {
-			System.out.println("after logout: " + session.getUser());
 			homeView.dispose();			
 		}
 	}

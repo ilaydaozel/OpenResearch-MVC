@@ -212,32 +212,13 @@ public class XmlFileIO implements IFileReader,IFileWriter {
             if (researcherNode.getNodeType() == Node.ELEMENT_NODE) {
                 Element researcherElement = (Element) researcherNode;
                 String existingUsername = researcherElement.getElementsByTagName("researcher_name").item(0).getTextContent();
-                System.out.println("exist "+ existingUsername +" given: "+ username);
                 if (existingUsername.equals(username)) {
-                	System.out.println("girdim");
                     researcherNode.getParentNode().removeChild(researcherNode);
                     break;
                 }
             }
         }
     }
-	 public static void main(String[] args) {
-	        // Path to the XML file
-	        String xmlFilePath = "OpenResearch-MVC/src/users.xml";
-
-	        // Create a new researcher
-	        Researcher newResearcher = new Researcher();
-	        newResearcher.setUsername("Berke Tınas");
-	        newResearcher.setPassword("123");
-	        newResearcher.setFollowingResearchers(Arrays.asList(""));
-	        newResearcher.setFollowerResearchers(Arrays.asList("Göktay İncekara","抑菌"));
-
-	        // Update the XML file with the new researcher
-	        XmlFileIO xmlFileIO = new XmlFileIO();
-	        xmlFileIO.updateFile(xmlFilePath, newResearcher);
-	        ResearcherCollection rc = new ResearcherCollection();
-	        rc.createCollection();
-	    }
 
 	@Override
 	public void writeAllPapers(List<Object> list) {

@@ -1,41 +1,25 @@
 [
     {
-        "number_of_papers": 2,
-        "readinglist_id": 0,
-        "readinglist_name": "Readling list name",
-        "name_of_papers": [],
-        "creator_researcher_name": "Berke Tınas"
-    },
-    {
         "number_of_papers": 0,
         "readinglist_id": 0,
-        "readinglist_name": "berkenin reading list",
-        "name_of_papers": [],
-        "creator_researcher_name": "Berke Tınas"
-    },
-    {
-        "number_of_papers": 0,
-        "readinglist_id": 0,
-        "readinglist_name": "dene",
-        "name_of_papers": ["Test-Driven Development: Concepts, Taxonomy, and Future Direction"],
-        "creator_researcher_name": "İlayda"
-    },
-    {
-        "number_of_papers": 0,
-        "readinglist_id": 0,
-        "readinglist_name": "alo",
+        "readinglist_name": "science",
         "name_of_papers": [
-            
+            "[[[Test-Driven Development: Concepts",
+            "Taxonomy",
+            "and Future Direction",
+            "On the Effectiveness of the Test-First Approach to Programming]",
             "Test-Driven Development: Concepts",
             "Taxonomy",
-            "and Future Direction"
+            "and Future Direction]",
+            "On the Effectiveness of the Test-First Approach to Programming]",
+            "Test-Driven Development: Concepts, Taxonomy, and Future Direction"
         ],
         "creator_researcher_name": "İlayda"
     },
     {
         "number_of_papers": 0,
         "readinglist_id": 0,
-        "readinglist_name": "başardık",
+        "readinglist_name": "learning",
         "name_of_papers": [],
         "creator_researcher_name": "İlayda"
     }

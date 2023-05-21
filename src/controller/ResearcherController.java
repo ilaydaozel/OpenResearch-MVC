@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -45,9 +44,7 @@ public class ResearcherController{
 				return;
 			}
 			if(selectedResearcher!= null) {
-				System.out.println(selectedResearcher + "followed / controller");
 				researcher.follow((Researcher) selectedResearcher);
-				//researchersView.refresh();
 			}
 
 			else {
@@ -63,7 +60,6 @@ public class ResearcherController{
 				return;
 			}
 			if(selectedResearcher!= null ) {
-				System.out.println(selectedResearcher + "unfollowed / controller");
 				researcher.unfollow((Researcher) selectedResearcher);
 			}
 			else {

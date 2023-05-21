@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -37,7 +35,6 @@ public class PaperController {
 
 	class SelectPaperListener implements ListSelectionListener{
 		public void valueChanged(ListSelectionEvent e) {
-			System.out.println("HEHEHHEHE");
 			if( papersView.getListContainer().getList().getSelectedValue() !=null) {
 				Object selected = papersView.getListContainer().getList().getSelectedValue();
 				
@@ -51,13 +48,9 @@ public class PaperController {
 	
 	class SelectReadingListListener implements ListSelectionListener{
 		public void valueChanged(ListSelectionEvent e) {
-			System.out.println("GHERE");
 			Object objSelectedReadingListName = papersView.getRlList().getSelectedValue();		
-			System.out.println("objSelectedReadingListName: " + objSelectedReadingListName);
 			if(objSelectedReadingListName!= null) {
 				selectedReadingListName = ((ReadingList )objSelectedReadingListName).getReadingListName();
-				System.out.println("objSelectedReadingListName: " + objSelectedReadingListName);
-				System.out.println("selectedReadingListName : " + selectedReadingListName);
 			}
 
 		}
@@ -100,45 +93,58 @@ public class PaperController {
 	
 	class AddPaperToReadingListListener implements ActionListener {
 	    public void actionPerformed(ActionEvent e) {
-	    	if (selectedPaper != null) {
-	    		if(researcher.getReadingLists()!= null) {
-	    			if(researcher.addToReadingList(selectedReadingListName, selectedPaper.getTitle())) {
-	    				JOptionPane.showMessageDialog(papersView, "Paper added successfully!");
-	    				return;
-	    			}
-	    			else {
-	    				JOptionPane.showMessageDialog(papersView, "Paper already exist in the "+ selectedReadingListName );
-	    			}
-	    		}
-	    		else {
-	    			JOptionPane.showMessageDialog(papersView, "Researcher has no reading list.");
-	    		}
-	    	}
+	    	if(selectedReadingListName != null) {
+	    		if (selectedPaper != null) {
+		    		if(researcher.getReadingLists()!= null) {
+		    			if(researcher.addToReadingList(selectedReadingListName, selectedPaper.getTitle())) {
+		    				JOptionPane.showMessageDialog(papersView, "Paper added successfully!");
+		    				return;
+		    			}
+		    			else {
+		    				JOptionPane.showMessageDialog(papersView, "Paper already exist in the "+ selectedReadingListName );
+		    			}
+		    		}
+		    		else {
+		    			JOptionPane.showMessageDialog(papersView, "Researcher has no reading list.");
+		    		}
+		    	}
+		    	else {
+		    		JOptionPane.showMessageDialog(papersView, "No paper selected.");
+		    	}
+		    }
 	    	else {
-	    		JOptionPane.showMessageDialog(papersView, "No paper selected.");
+	    		JOptionPane.showMessageDialog(papersView, "No reading list selected. Login again and select a reading list first.");
 	    	}
 	    }
+	    	
 	}
 	class RemovePaperfromReadingListListener implements ActionListener {
 	    public void actionPerformed(ActionEvent e) {
-	    	if (selectedPaper != null) {
-	    		if(researcher.getReadingLists()!= null) {
-	    			if(researcher.removeFromReadingList(selectedReadingListName, selectedPaper.getTitle())) {
-	    				JOptionPane.showMessageDialog(papersView, "Paper removed successfully!");
-	    				return;
-	    			}
-	    			else {
-	    				JOptionPane.showMessageDialog(papersView, "Paper do not exist in the "+ selectedReadingListName );
-	    			}
-	    		}
-	    		else {
-	    			JOptionPane.showMessageDialog(papersView, "Researcher has no reading list.");
-	    		}
-	    	}
-	    	else {
-	    		JOptionPane.showMessageDialog(papersView, "No paper selected.");
-	    	}
+	    	if(selectedReadingListName != null) {
+	    		if (selectedPaper != null) {
+		    		if(researcher.getReadingLists()!= null) {
+		    			if(researcher.removeFromReadingList(selectedReadingListName, selectedPaper.getTitle())) {
+		    				JOptionPane.showMessageDialog(papersView, "Paper removed successfully!");
+		    				return;
+		    			}
+		    			else {
+		    				JOptionPane.showMessageDialog(papersView, "Paper do not exist in the "+ selectedReadingListName );
+		    			}
+		    		}
+		    		else {
+		    			JOptionPane.showMessageDialog(papersView, "Researcher has no reading list.");
+		    		}
+		    	}
+		    	else {
+		    		JOptionPane.showMessageDialog(papersView, "No paper selected.");
+		    	}
+		    }
+		    else {
+		    	JOptionPane.showMessageDialog(papersView, "No reading list selected. Login again  and select a reading list first.");
+		    }
 	    }
+
+	    	
 	}
 	
 	

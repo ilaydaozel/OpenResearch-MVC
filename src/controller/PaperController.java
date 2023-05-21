@@ -37,11 +37,14 @@ public class PaperController {
 
 	class SelectPaperListener implements ListSelectionListener{
 		public void valueChanged(ListSelectionEvent e) {
-			Object selected = papersView.getListContainer().getList().getSelectedValue();
-			if(selected!= null) {
-				papersView.addDetailedContainer((Paper) selected);
-				selectedPaper = (Paper) selected;
+			if( papersView.getListContainer().getList().getSelectedValue() !=null) {
+				Object selected = papersView.getListContainer().getList().getSelectedValue();
+				if(selected!= null) {
+					papersView.addDetailedContainer((Paper) selected);
+					selectedPaper = (Paper) selected;
+				}
 			}
+			
 		}
 	}
 	

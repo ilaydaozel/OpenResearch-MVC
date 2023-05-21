@@ -124,6 +124,7 @@ public class Researcher extends java.util.Observable{
 	                }
 	                // Add the paperName to the nameOfPapers list
 	                readingList.getNameOfPapers().add(paperName);
+	                readingList.updateJsonFile();
 	        		setChanged();	
 	        		notifyObservers();
 	                return true; // Return 1 to indicate success
@@ -146,6 +147,9 @@ public class Researcher extends java.util.Observable{
 	                if (readingList.getNameOfPapers().contains(paperName)) {
 	                    // Remove the paperName from the nameOfPapers list
 	                    readingList.getNameOfPapers().remove(paperName);
+	                    readingList.updateJsonFile();
+	                    setChanged();	
+		        		notifyObservers();
 	                    return true; // Return 1 to indicate success
 	                } else {
 	                    return false; // Return 0 if the paper name doesn't exist

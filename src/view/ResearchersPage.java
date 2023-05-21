@@ -25,6 +25,7 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
 	private JButton followButton = new JButton("Follow");
 	private JButton unfollowButton = new JButton("Unfollow");
     private Color blue = new Color(144, 219, 244);
+    private JList rlList;
 
     
     public ResearchersPage(Collection researcherCollection) {
@@ -55,16 +56,20 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
 		detailedContainer.setBackground(Color.white);
 		detailedContainer.setPreferredSize(new Dimension(800,300));
 		detailedContainer.setLayout(new GridBagLayout());
-        Border detailedContainerBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
+        Border detailedContainerBorder = BorderFactory.createLineBorder(blue, 1);
         detailedContainer.setBorder(detailedContainerBorder);
 
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
+        //create upPanel
+        JPanel upPanel = new JPanel();
+        upPanel.setBackground(Color.white);
         
+        //create nameInfo panel
         JPanel nameInfoPanel = new JPanel();
-        nameInfoPanel.setPreferredSize(new Dimension(200,40));
-        usernameLabel.setFont(new Font("", Font.BOLD, 20));
+        nameInfoPanel.setPreferredSize(new Dimension(200,30));
+        usernameLabel.setFont(new Font("", Font.BOLD, 18));
         usernameLabel.setForeground(blue);
-        username.setFont(new Font("", Font.PLAIN, 18));
+        username.setFont(new Font("", Font.PLAIN, 16));
     	username.setVerticalAlignment(SwingConstants.CENTER);
         nameInfoPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         nameInfoPanel.setBackground(Color.white);
@@ -76,7 +81,7 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
         nameInfoPanel.setBorder(border);
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = gridBagConstraints.WEST;
-        detailedContainer.add(nameInfoPanel, gridBagConstraints);
+        upPanel.add(nameInfoPanel, gridBagConstraints);
         
         //buttons
         JPanel buttonPanel = new JPanel();
@@ -90,12 +95,39 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
         unfollowButton.setBackground(blue);
         unfollowButton.setPreferredSize(new Dimension(150,30));
         buttonPanel.add(unfollowButton);
-        //add button panel to panel
+        //add button panel to upPanel
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = gridBagConstraints.WEST;
-        detailedContainer.add(buttonPanel, gridBagConstraints); 
-
+        upPanel.add(buttonPanel, gridBagConstraints); 
+        //ad upPanel to detailedContainer
+        gridBagConstraints.gridy = 0;
+        detailedContainer.add(upPanel, gridBagConstraints);
+ 
+        //reading list list label
+        JPanel readingListPanel = new JPanel(new GridBagLayout());
+        readingListPanel.setBackground(Color.white);
+        GridBagConstraints rlGridBagConstraints = new GridBagConstraints();
+        rlGridBagConstraints.gridy = 1;
+    	JLabel rlLabel = new JLabel("Reading lists of " + selectedResearcher.getUsername());
+    	rlLabel.setFont(new Font("", Font.BOLD, 14));
+    	rlLabel.setForeground(blue);
+    	rlGridBagConstraints.anchor = GridBagConstraints.WEST;
+        readingListPanel.add(rlLabel, rlGridBagConstraints);
+        
+        //reading lists list
+        rlList = new JList(selectedResearcher.getReadingLists().toArray());
+        rlList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        rlList.setLayoutOrientation(JList.VERTICAL);
+        rlList.setVisibleRowCount(-1);
+        JScrollPane rlListScroller = new JScrollPane(rlList);  
+        rlListScroller.setPreferredSize(new Dimension(600,70));
+        rlGridBagConstraints.gridy = 2;
+        rlGridBagConstraints.insets = new Insets(10, 0, 10, 0);
+        readingListPanel.add(rlListScroller, rlGridBagConstraints);
+        gridBagConstraints.gridy = 1;
+        detailedContainer.add(readingListPanel, gridBagConstraints);
+        
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new Insets(20, 0, 10, 0);

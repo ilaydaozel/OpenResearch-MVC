@@ -152,5 +152,22 @@ public class AccountPage extends JPanel implements java.util.Observer{
     public void createNewReadingList(ActionListener actionListener) {
     	createRLButton.addActionListener(actionListener);
     }
+
+	public JTextField getNewRLName() {
+		return newRLName;
+	}
+
+	public void setNewRLName(JTextField newRLName) {
+		this.newRLName = newRLName;
+	}
+
+	public JButton getCreateRLButton() {
+		return createRLButton;
+	}
+
+	public void setCreateRLButton(JButton createRLButton) {
+		this.createRLButton = createRLButton;
+	}
+    
    
 }

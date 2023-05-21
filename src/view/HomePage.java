@@ -20,7 +20,7 @@ public class HomePage extends JFrame{
     }
 
     private void initComponents() {
-    	setMinimumSize(new Dimension(1000, 600));
+    	setMinimumSize(new Dimension(1200, 600));
     	container.setLayout(new GridBagLayout());
     	GridBagConstraints containerConstraints = new GridBagConstraints();    	
     	containerConstraints.fill = GridBagConstraints.HORIZONTAL;

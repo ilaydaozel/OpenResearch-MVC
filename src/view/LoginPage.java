@@ -24,6 +24,7 @@ public class LoginPage extends JFrame {
 
 	private void initComponents() {
     	container.setBackground(white);
+    	container.setPreferredSize(new Dimension(600, 400));
 		loginButton.setPreferredSize(new Dimension(240, 40));
 		loginButton.setBackground(blue);
 		

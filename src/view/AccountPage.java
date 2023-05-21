@@ -82,7 +82,7 @@ public class AccountPage extends JPanel implements java.util.Observer{
         //follow panel
         JPanel followPanel = new JPanel();
         followPanel.setLayout(new GridBagLayout());
-        followPanel.setPreferredSize(new Dimension(600,120));
+        followPanel.setPreferredSize(new Dimension(600,150));
         GridBagConstraints followGridBagConstraints = new GridBagConstraints();
         //follower panel
         JPanel followerPanel = new JPanel();

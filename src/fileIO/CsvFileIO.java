@@ -22,7 +22,7 @@ public class CsvFileIO implements IFileWriter{
 	@Override
 	public void writeAllPapers(List<Object> allPapers) {
 		try {
-			FileWriter writer = new FileWriter("OpenResearch-MVC/src/data/papers.csv");
+			FileWriter writer = new FileWriter("src/data/papers.csv");
 		for (Object paper : allPapers) {
 			paper = (Paper) paper;
 			if (paper instanceof ConferencePaper) {

@@ -25,7 +25,7 @@ public class ResearcherCollection extends Collection  {
 	public void createCollection() {
 		List<Map<String, String>> allResearchers;
 
-		allResearchers = getReader().readAllElements("OpenResearch-MVC/src/users.xml");
+		allResearchers = getReader().readAllElements("src/users.xml");
 
     	for (Map<String, String> data : allResearchers) {
     		addToCollection(createCollectionElement(data));

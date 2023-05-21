@@ -20,7 +20,7 @@ public class PaperCollection extends Collection{
     
     public void createCollection() {
     	List<Map<String, String>> allPapers;
-    	allPapers = getReader().readAllElements("OpenResearch-MVC/src/data/");
+    	allPapers = getReader().readAllElements("src/data/");
 
     	for (Map<String, String> data : allPapers) {
     		addToCollection(createCollectionElement(data));

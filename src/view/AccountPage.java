@@ -82,7 +82,7 @@ public class AccountPage extends JPanel implements java.util.Observer{
         //follow panel
         JPanel followPanel = new JPanel();
         followPanel.setLayout(new GridBagLayout());
-        followPanel.setPreferredSize(new Dimension(600,150));
+        followPanel.setPreferredSize(new Dimension(600,120));
         GridBagConstraints followGridBagConstraints = new GridBagConstraints();
         //follower panel
         JPanel followerPanel = new JPanel();
@@ -125,13 +125,19 @@ public class AccountPage extends JPanel implements java.util.Observer{
         //readingList panel
         JPanel readingListPanel = new JPanel();
         readingListPanel.setLayout(new GridBagLayout());
+        readingListPanel.setBackground(Color.white);
         readingListPanel.setPreferredSize(new Dimension(600,200));
         GridBagConstraints rlGridBagConstraints = new GridBagConstraints();
         Border rlPanelBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
         readingListPanel.setBorder(rlPanelBorder);
-        readingListPanel.add(new JLabel("New reading list name:  "));
-        readingListPanel.add(newRLName);
-        readingListPanel.add(createRLButton);
+        
+        //new reading list
+        JPanel newRLPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        newRLPanel.add(new JLabel("New reading list name:  "));
+        newRLPanel.add(newRLName);
+        newRLPanel.add(createRLButton);
+        
+        readingListPanel.add(newRLPanel);
         
         //ad readingList panel
         gridBagConstraints.gridx = 0;

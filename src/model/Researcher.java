@@ -73,8 +73,8 @@ public class Researcher extends java.util.Observable{
 		notifyObservers();
 	}
 	
-	public void addNewReadingList(String name) {
-		readingLists.add(new ReadingList(name, this));
+	public void addNewReadingList(ReadingList newReadingList) {
+		readingLists.add(newReadingList);
 		setChanged();	
 		notifyObservers();
 	}

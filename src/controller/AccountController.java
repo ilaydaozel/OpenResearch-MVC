@@ -16,7 +16,6 @@ public class AccountController{
 	private AccountPage accountView;
 	private ReadingListCollection rLList;
 	private Researcher researcher;
-	//protected Researcher selectedResearcher;
 	
 	public AccountController(AccountPage accountView, ReadingListCollection rLCollection, Researcher researcher) {
 		this.accountView = accountView;
@@ -30,6 +29,10 @@ public class AccountController{
 	class CreateNewReadingListListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			String rlName = accountView.getNewRLName().getText();
+			System.out.println("Create new rl named " + rlName);
+			ReadingList newReadingList = new ReadingList(rlName, researcher);
+			researcher.addNewReadingList(newReadingList);
+			rLList.addToCollection(newReadingList);
 		}
 	}
 

@@ -132,6 +132,27 @@ public class Researcher extends java.util.Observable{
 	    System.out.println("Reading list '" + readingListName + "' not found.");
 	    return false; // Return -1 to indicate failure
 	}
+	public boolean removeFromReadingList(String readingListName, String paperName) {
+	    // Find the ReadingList object with the given readingListName
+	    for (Object obj : readingLists) {
+	        if (obj instanceof ReadingList) {
+	            ReadingList readingList = (ReadingList) obj;
+	            if (readingList.getReadingListName().equals(readingListName)) {
+	                // Check if the paperName exists in the nameOfPapers list
+	                if (readingList.getNameOfPapers().contains(paperName)) {
+	                    // Remove the paperName from the nameOfPapers list
+	                    readingList.getNameOfPapers().remove(paperName);
+	                    return true; // Return 1 to indicate success
+	                } else {
+	                    return false; // Return 0 if the paper name doesn't exist
+	                }
+	            }
+	        }
+	    }
+	    // If the reading list is not found, you can handle the case accordingly
+	    System.out.println("Reading list '" + readingListName + "' not found.");
+	    return false; // Return -1 to indicate failure
+	}
 
 	
 }

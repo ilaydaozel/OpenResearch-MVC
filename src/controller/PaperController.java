@@ -114,6 +114,27 @@ public class PaperController {
 	    	}
 	    }
 	}
+	class RemovePaperfromReadingListListener implements ActionListener {
+	    public void actionPerformed(ActionEvent e) {
+	    	if (selectedPaper != null) {
+	    		if(researcher.getReadingLists()!= null) {
+	    			if(researcher.removeFromReadingList(selectedReadingListName, selectedPaper.getTitle())) {
+	    				JOptionPane.showMessageDialog(papersView, "Paper removed successfully!");
+	    				return;
+	    			}
+	    			else {
+	    				JOptionPane.showMessageDialog(papersView, "Paper do not exist in the "+ selectedReadingListName );
+	    			}
+	    		}
+	    		else {
+	    			JOptionPane.showMessageDialog(papersView, "Researcher has no reading list.");
+	    		}
+	    	}
+	    	else {
+	    		JOptionPane.showMessageDialog(papersView, "No paper selected.");
+	    	}
+	    }
+	}
 	
 	
 }

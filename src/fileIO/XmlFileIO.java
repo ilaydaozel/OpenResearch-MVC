@@ -112,7 +112,7 @@ public class XmlFileIO implements IFileReader,IFileWriter {
 	@Override
 	public void updateFile(String path, Object newResearcherObject) {
 	    try {
-		    if (!(newResearcherObject instanceof ReadingList)) {
+		    if (!(newResearcherObject instanceof Researcher)) {
 		        throw new IllegalArgumentException("Invalid object type. Expected ReadingList.");
 		    }
 		    

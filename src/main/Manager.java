@@ -3,6 +3,7 @@ package main;
 import controller.*;
 import model.Collection;
 import model.PaperCollection;
+import model.ReadingListCollection;
 import model.Researcher;
 import model.ResearcherCollection;
 import store.UserStore;
@@ -17,6 +18,7 @@ public class Manager {
 	private PapersPage paperView;
 	private Collection paperCollection;
 	private Collection researcherCollection;
+	private Collection readingListCollection;
 	
 	public void initialize() {
 		//initializing login
@@ -35,8 +37,10 @@ public class Manager {
 			
 			this.homeView = new HomePage(navbar);
 			HomeController homeController = new HomeController(homeView);
+			
+			this.readingListCollection = new ReadingListCollection();
 			this.accountView = new AccountPage(researcher);
-			//Account accountController = new AccountPage();
+			AccountController accountController = new AccountController(accountView, (ReadingListCollection) readingListCollection, researcher);
 			
 			this.researcherCollection = new ResearcherCollection();
 			this.researcherView = new ResearchersPage(researcherCollection);

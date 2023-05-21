@@ -20,6 +20,7 @@ public class AccountPage extends JPanel implements java.util.Observer{
 	private JLabel followingLabel = new JLabel("Following Researchers:");
     private JList followingList;
     private JList followerList;
+    private JList rlList;
     private JTextField newRLName = new JTextField(20);
     private JButton createRLButton = new JButton("Create Reading List");
     private Color blue = new Color(144, 219, 244);
@@ -126,20 +127,44 @@ public class AccountPage extends JPanel implements java.util.Observer{
         JPanel readingListPanel = new JPanel();
         readingListPanel.setLayout(new GridBagLayout());
         readingListPanel.setBackground(Color.white);
-        readingListPanel.setPreferredSize(new Dimension(600,200));
+        readingListPanel.setPreferredSize(new Dimension(600,250));
         GridBagConstraints rlGridBagConstraints = new GridBagConstraints();
         Border rlPanelBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
         readingListPanel.setBorder(rlPanelBorder);
         
         //new reading list
         JPanel newRLPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        newRLPanel.setBackground(Color.white);
         newRLPanel.add(new JLabel("New reading list name:  "));
         newRLPanel.add(newRLName);
+        createRLButton.setBackground(blue);
+        //Border newRlPanelBorder = BorderFactory.createLineBorder(Color.gray, 1);
+        //newRLPanel.setBorder(newRlPanelBorder);
+        
         newRLPanel.add(createRLButton);
+        rlGridBagConstraints.gridy = 0;
+        readingListPanel.add(newRLPanel, rlGridBagConstraints);
         
-        readingListPanel.add(newRLPanel);
+        //reading list list label
+        rlGridBagConstraints.gridy = 1;
+    	JLabel rlLabel = new JLabel("Reading lists of " + researcher.getUsername());
+    	rlLabel.setFont(new Font("", Font.BOLD, 14));
+    	rlLabel.setForeground(blue);
+    	rlGridBagConstraints.anchor = GridBagConstraints.WEST;
+        readingListPanel.add(rlLabel, rlGridBagConstraints);
         
-        //ad readingList panel
+        //reading lists list
+        rlList = new JList(researcher.getReadingLists().toArray());
+        rlList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        rlList.setLayoutOrientation(JList.VERTICAL);
+        rlList.setVisibleRowCount(-1);
+        JScrollPane rlListScroller = new JScrollPane(rlList);  
+        rlListScroller.setPreferredSize(new Dimension(500,70));
+        rlGridBagConstraints.gridy = 2;
+        rlGridBagConstraints.insets = new Insets(10, 0, 10, 0);
+        readingListPanel.add(rlListScroller, rlGridBagConstraints);
+        
+        //add readingList panel
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = GridBagConstraints.WEST;
@@ -152,6 +177,8 @@ public class AccountPage extends JPanel implements java.util.Observer{
 		System.out.println("********inside update method accountpage");
 		followerList.setListData(researcher.getFollowerResearchers().toArray());
 		followingList.setListData(researcher.getFollowingResearchers().toArray());
+		System.out.println("rl: " + researcher.getReadingLists().toString());
+		rlList.setListData(researcher.getReadingLists().toArray());
 		
 	}
     

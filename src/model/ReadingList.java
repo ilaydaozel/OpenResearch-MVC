@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Arrays;
+
 import fileIO.JSONFileIO;
 import interfaces.*;
 
@@ -23,6 +25,7 @@ public class ReadingList {
 		System.out.println("num of papers test "+ this.getNumOfPapers());
 		createReadingListJSONFile.updateFile("readingList.json", this);
 	}
+	
 	public ReadingList(int readingListId,int numOfPapers,String[] nameOfPapers,String name, Researcher researcher) {
 		this.readingListId = readingListId;
 		this.numOfPapers = numOfPapers;
@@ -66,5 +69,13 @@ public class ReadingList {
 		this.nameOfPapers = nameOfPapers;
 		updateJsonFile();
 	}
+
+	@Override
+	public String toString() {
+		return "ReadingList [readingListId=" + readingListId + ", readingListName=" + readingListName
+				+ ", creatorResearcher=" + creatorResearcher + ", numOfPapers=" + numOfPapers + ", nameOfPapers="
+				+ Arrays.toString(nameOfPapers) + "]";
+	}
+	
 	
 }

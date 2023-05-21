@@ -62,7 +62,7 @@ public class PaperController {
 	                selectedPaper.setDownloadNumber(selectedPaper.getDownloadNumber() + 1);
 	             
 	                // Update paperList if selectedPaper is in the list
-	                paperList.updateCsvFile();
+	                paperList.updateFile();
 	                
 	            } catch (IOException ex) {
 	                ex.printStackTrace();

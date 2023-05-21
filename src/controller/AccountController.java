@@ -8,11 +8,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import interfaces.IAccountController;
 import model.*;
 import view.*;
 
 
-public class AccountController{
+public class AccountController implements IAccountController{
 	private AccountPage accountView;
 	private ReadingListCollection rLList;
 	private Researcher researcher;

@@ -2,7 +2,9 @@ package model;
 
 import java.util.Observable;
 
-public abstract class Paper extends Observable{
+import interfaces.IPaper;
+
+public abstract class Paper extends Observable implements IPaper{
     private String authors;
     private String title;
     private String year;

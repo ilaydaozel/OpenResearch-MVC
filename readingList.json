@@ -17,17 +17,19 @@
         "number_of_papers": 0,
         "readinglist_id": 0,
         "readinglist_name": "dene",
-        "name_of_papers": [
- 
-            "Test-Driven Development: Concepts, Taxonomy, and Future Direction"
-        ],
+        "name_of_papers": ["Test-Driven Development: Concepts, Taxonomy, and Future Direction"],
         "creator_researcher_name": "İlayda"
     },
     {
         "number_of_papers": 0,
         "readinglist_id": 0,
         "readinglist_name": "alo",
-        "name_of_papers": [],
+        "name_of_papers": [
+            
+            "Test-Driven Development: Concepts",
+            "Taxonomy",
+            "and Future Direction"
+        ],
         "creator_researcher_name": "İlayda"
     },
     {

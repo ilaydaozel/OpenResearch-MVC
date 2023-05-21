@@ -18,261 +18,254 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class PapersPage extends JPanel implements java.util.Observer {
-	private Collection paperCollection;
+    private Collection paperCollection;
     private List<Object> paperList;
-    private ListContainer listContainer; 
+    private ListContainer listContainer;
     private GridBagConstraints gridBagConstraints = new GridBagConstraints();
     private JPanel detailedContainer = new JPanel();
     private JPanel detailedRLContainer = new JPanel();
-	private Paper _paper ;
+    private Paper _paper;
     private Color blue = new Color(144, 219, 244);
     private JButton downloadButton = new JButton("Download File");
     private JLabel downloadNum;
     private Paper selectedPaper = new Article();
-    private JList rlList;
+    private JList<Object> rlList; // Use JList<Object> instead of raw type JList
     private List<Object> rlElementList;
     private JTextField rLName = new JTextField(20);
     private JButton addToRLButton = new JButton("Add To This Reading List");
     private JButton removeFromRLButton = new JButton("Remove From This Reading List");
     private Researcher researcher;
-    
+
     public PapersPage(Collection paperCollection, Researcher researcher) {
-    	this.paperCollection = paperCollection;
-    	this.paperList = paperCollection.getCollection();
-    	this.researcher = researcher;
-    	researcher.addObserver(this);
-		this.listContainer = new ListContainer(paperList, 700, 100);
-    	initComponents();
+        this.paperCollection = paperCollection;
+        this.paperList = paperCollection.getCollection();
+        this.researcher = researcher;
+        researcher.addObserver(this);
+        this.listContainer = new ListContainer(paperList, 700, 100);
+        initComponents();
     }
 
     private void initComponents() {
         setLayout(new GridBagLayout());
-    	JLabel pageLabel = new JLabel("PAPERS");
-    	pageLabel.setFont(new Font("", Font.BOLD, 20));
-    	pageLabel.setForeground(blue);
+        JLabel pageLabel = new JLabel("PAPERS");
+        pageLabel.setFont(new Font("", Font.BOLD, 20));
+        pageLabel.setForeground(blue);
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        add(pageLabel,gridBagConstraints);
+        add(pageLabel, gridBagConstraints);
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        add(listContainer, gridBagConstraints);    
+        add(listContainer, gridBagConstraints);
         addDetailedContainer(selectedPaper);
     }
 
-	public void addDetailedContainer(Paper selectedPaper) {
-		this.selectedPaper = selectedPaper;
-		selectedPaper.deleteObserver(this);
-		detailedContainer.removeAll();
-		selectedPaper.addObserver(this);
-		//detailed Container
-		detailedContainer.setBackground(Color.white);
-		detailedContainer.setPreferredSize(new Dimension(800,300));
-		detailedContainer.setLayout(new GridBagLayout());
+    public void addDetailedContainer(Paper selectedPaper) {
+        this.selectedPaper = selectedPaper;
+        selectedPaper.deleteObserver(this);
+        detailedContainer.removeAll();
+        selectedPaper.addObserver(this);
+        // detailed Container
+        detailedContainer.setBackground(Color.white);
+        detailedContainer.setPreferredSize(new Dimension(800, 300));
+        detailedContainer.setLayout(new GridBagLayout());
         Border detailedContainerBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
         detailedContainer.setBorder(detailedContainerBorder);
 
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
-        
-        //paper title panel
+
+        // paper title panel
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = gridBagConstraints.WEST;
         JPanel titlePanel = addInformationLine("Paper Title: ", selectedPaper.getTitle(), 700, 25);
         detailedContainer.add(titlePanel, gridBagConstraints);
-        //author panel
+        // author panel
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = gridBagConstraints.WEST;
-        JPanel authorPanel = addInformationLine("Author(s): ", selectedPaper.getAuthors() , 700, 25);
+        JPanel authorPanel = addInformationLine("Author(s): ", selectedPaper.getAuthors(), 700, 25);
         detailedContainer.add(authorPanel, gridBagConstraints);
-        //doi panel
+        // doi panel
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = gridBagConstraints.WEST;
         JPanel doiPanel = addInformationLine("DOI: ", selectedPaper.getDoi(), 700, 25);
         detailedContainer.add(doiPanel, gridBagConstraints);
-        //year panel
+        // year panel
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = gridBagConstraints.WEST;
         JPanel yearPanel = addInformationLine("Year: ", selectedPaper.getYear(), 700, 25);
         detailedContainer.add(yearPanel, gridBagConstraints);
-        
-        if( selectedPaper instanceof ConferencePaper) {
-        	ConferencePaper conferencePaper = (ConferencePaper) selectedPaper;
-            //book title panel
+
+        if (selectedPaper instanceof ConferencePaper) {
+            ConferencePaper conferencePaper = (ConferencePaper) selectedPaper;
+            // book title panel
             gridBagConstraints.gridy = 4;
             gridBagConstraints.anchor = gridBagConstraints.WEST;
             JPanel bookTitlePanel = addInformationLine("Book Title: ", conferencePaper.getBookTitle(), 700, 25);
             detailedContainer.add(bookTitlePanel, gridBagConstraints);
-        }
-        else if( selectedPaper instanceof Article) {
-        	Article article = (Article) selectedPaper;
-        	
-        	JPanel threePanel = new JPanel(new FlowLayout());
-        	threePanel.setBackground(Color.white);
+        } else if (selectedPaper instanceof Article) {
+            Article article = (Article) selectedPaper;
 
-            //volume panel
+            JPanel threePanel = new JPanel(new FlowLayout());
+            threePanel.setBackground(Color.white);
+
+            // volume panel
             JPanel volumePanel = addInformationLine("Volume: ", article.getVolume(), 230, 25);
             threePanel.add(volumePanel, gridBagConstraints);
-            //number panel
+            // number panel
             JPanel numberPanel = addInformationLine("Number: ", article.getNumber(), 230, 25);
             threePanel.add(numberPanel, gridBagConstraints);
-            //journal panel
+            // journal panel
             JPanel journalPanel = addInformationLine("Journal: ", article.getJournal(), 240, 25);
             threePanel.add(journalPanel, gridBagConstraints);
-            
+
             gridBagConstraints.gridy = 4;
             gridBagConstraints.gridx = 0;
             gridBagConstraints.anchor = gridBagConstraints.WEST;
             gridBagConstraints.insets = new Insets(0, 0, 0, 0);
             detailedContainer.add(threePanel, gridBagConstraints);
         }
-    
-        //download button panel
+
+        // download button panel
         JPanel downloadButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         downloadButton.setBackground(blue);
-        downloadButton.setPreferredSize(new Dimension(150,30));
+        downloadButton.setPreferredSize(new Dimension(150, 30));
         downloadButtonPanel.setBackground(Color.white);
         downloadButtonPanel.add(downloadButton);
-        //download number panel
-		JPanel downloadNumberPanel = new JPanel();
+        // download number panel
+        JPanel downloadNumberPanel = new JPanel();
         JLabel titleLabel = new JLabel("Download number: ");
-        downloadNum = new JLabel(selectedPaper.getDownloadNumber()+"");
+        downloadNum = new JLabel(selectedPaper.getDownloadNumber() + "");
         downloadNumberPanel.setLayout(new BoxLayout(downloadNumberPanel, BoxLayout.Y_AXIS));
-		titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		downloadNum.setAlignmentX(Component.CENTER_ALIGNMENT);
-		downloadNumberPanel.add(titleLabel);
-		downloadNumberPanel.add(downloadNum);
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        downloadNum.setAlignmentX(Component.CENTER_ALIGNMENT);
+        downloadNumberPanel.add(titleLabel);
+        downloadNumberPanel.add(downloadNum);
         downloadButtonPanel.add(downloadNumberPanel);
-              
+
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = gridBagConstraints.WEST;
         gridBagConstraints.insets = new Insets(10, 0, 0, 0);
         detailedContainer.add(downloadButtonPanel, gridBagConstraints);
 
-        //paperlist panel
-		JPanel rlPanel = new JPanel();
-		rlPanel.setBackground(Color.white);
-		 //reading lists list
-		rlElementList = researcher.getReadingLists();
-        rlList = new JList(rlElementList.toArray());
+        // paperlist panel
+        JPanel rlPanel = new JPanel();
+        rlPanel.setBackground(Color.white);
+        // reading lists list
+        rlElementList = researcher.getReadingLists();
+        rlList = new JList<>(rlElementList.toArray()); // Use JList<Object> instead of raw type JList
         rlList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         rlList.setLayoutOrientation(JList.VERTICAL);
         rlList.setVisibleRowCount(-1);
-        JScrollPane rlListScroller = new JScrollPane(rlList);  
+        JScrollPane rlListScroller = new JScrollPane(rlList);
         rlListScroller.setPreferredSize(new Dimension(300, 60));
         gridBagConstraints.gridy = 0;
         rlPanel.add(rlListScroller, gridBagConstraints);
-        
-        //button
-        JPanel buttonPanel =new JPanel();
+
+        // button
+        JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.white);
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         addToRLButton.setBackground(blue);
         addToRLButton.setPreferredSize(new Dimension(200, 30));
-        
+
         addToRLButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		removeFromRLButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		removeFromRLButton.setBackground(blue);
-		removeFromRLButton.setPreferredSize(new Dimension(250, 30));
-		buttonPanel.add(addToRLButton);
-		buttonPanel.add(removeFromRLButton);
+        removeFromRLButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        removeFromRLButton.setBackground(blue);
+        removeFromRLButton.setPreferredSize(new Dimension(250, 30));
+        buttonPanel.add(addToRLButton);
+        buttonPanel.add(removeFromRLButton);
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = gridBagConstraints.WEST;
         rlPanel.add(buttonPanel, gridBagConstraints);
-        
-        
+
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = gridBagConstraints.WEST;
-        //gridBagConstraints.insets = new Insets(10, 0, 10, 0);
+        // gridBagConstraints.insets = new Insets(10, 0, 10, 0);
         detailedContainer.add(rlPanel, gridBagConstraints);
-        
-        
-        
+
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new Insets(20, 0, 10, 0);
-		add(detailedContainer, gridBagConstraints);
-		SwingUtilities.updateComponentTreeUI(this);
-		
-	}
-	
-	public JPanel addInformationLine(String title, String text, int width, int heigth) {
+        add(detailedContainer, gridBagConstraints);
+        SwingUtilities.updateComponentTreeUI(this);
+    }
+
+    public JPanel addInformationLine(String title, String text, int width, int height) {
         JPanel infoLinePanel = new JPanel();
         JLabel infoLineLabel = new JLabel(title);
-    	JLabel infoLineText = new JLabel(text);
-    	infoLineLabel.setFont(new Font("", Font.PLAIN, 14));
-    	infoLineText.setFont(new Font("", Font.ITALIC, 12));
+        JLabel infoLineText = new JLabel(text);
+        infoLineLabel.setFont(new Font("", Font.PLAIN, 14));
+        infoLineText.setFont(new Font("", Font.ITALIC, 12));
         infoLinePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        infoLinePanel.setPreferredSize(new Dimension(width,heigth));
+        infoLinePanel.setPreferredSize(new Dimension(width, height));
         infoLinePanel.setBackground(Color.white);
         infoLinePanel.add(infoLineLabel);
         infoLinePanel.add(infoLineText);
         Border infoLineBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
         infoLinePanel.setBorder(infoLineBorder);
         return infoLinePanel;
-	}
-	
+    }
+
     public void downloadFile(ActionListener actionListener) {
         downloadButton.addActionListener(actionListener);
     }
-    
+
     public void addToReadingList(ActionListener actionListener) {
         addToRLButton.addActionListener(actionListener);
     }
+
     public void removeFromReadingList(ActionListener actionListener) {
         removeFromRLButton.addActionListener(actionListener);
     }
-    
+
     @Override
     public void update(java.util.Observable o, Object arg) {
-		System.out.println("********inside update method paperspage");
-		//selectedPaper.setListData(researcher.getFollowerResearchers().toArray());
-		downloadNum.setText(this.selectedPaper.getDownloadNumber()+"");
-		rlList.setListData(researcher.getReadingLists().toArray());	
+        System.out.println("********inside update method paperspage");
+        // selectedPaper.setListData(researcher.getFollowerResearchers().toArray());
+        downloadNum.setText(this.selectedPaper.getDownloadNumber() + "");
+        rlList.setListData(researcher.getReadingLists().toArray());
     }
-	
-	public void selectPaper(ListSelectionListener listSelectionListener) {
-		listContainer.getList().addListSelectionListener(listSelectionListener);
+
+    public void selectPaper(ListSelectionListener listSelectionListener) {
+        listContainer.getList().addListSelectionListener(listSelectionListener);
     }
-	
-	public void selectReadingList(ListSelectionListener listSelectionListener) {
-		rlList.addListSelectionListener(listSelectionListener);
-		System.out.println("SELECET READING LIST");
+
+    public void selectReadingList(ListSelectionListener listSelectionListener) {
+        rlList.addListSelectionListener(listSelectionListener);
+        System.out.println("SELECET READING LIST");
     }
-	
-	public List<Object> getPaperList() {
-		return paperList;
-	}
 
-	public void setPaperList(List<Object> paperList) {
-		this.paperList = paperList;
-	}
+    public List<Object> getPaperList() {
+        return paperList;
+    }
 
-	public ListContainer getListContainer() {
-		return listContainer;
-	}
+    public void setPaperList(List<Object> paperList) {
+        this.paperList = paperList;
+    }
 
-	public void setListContainer(ListContainer listContainer) {
-		this.listContainer = listContainer;
-	}
+    public ListContainer getListContainer() {
+        return listContainer;
+    }
 
-	public JList getRlList() {
-		return rlList;
-	}
+    public void setListContainer(ListContainer listContainer) {
+        this.listContainer = listContainer;
+    }
 
-	public void setRlList(JList rlList) {
-		this.rlList = rlList;
-	}
+    public JList getRlList() {
+        return rlList;
+    }
 
-	public List<Object> getRlElementList() {
-		return rlElementList;
-	}
+    public void setRlList(JList rlList) {
+        this.rlList = rlList;
+    }
 
-	public void setRlElementList(List<Object> rlElementList) {
-		this.rlElementList = rlElementList;
-	}
+    public List<Object> getRlElementList() {
+        return rlElementList;
+    }
 
-
-
+    public void setRlElementList(List<Object> rlElementList) {
+        this.rlElementList = rlElementList;
+    }
 }

@@ -7,10 +7,12 @@ import java.util.Observable;
 import fileIO.CsvFileIO;
 
 import java.util.ArrayList;
+
+import interfaces.ICollection;
 import interfaces.IFileReader;
 import interfaces.IFileWriter;
 
-public abstract class Collection extends Observable {
+public abstract class Collection extends Observable implements ICollection{
     private List<Object> collection = new ArrayList<>();
     private IFileReader reader;
     private IFileWriter writer;

@@ -39,9 +39,13 @@ public class JSONFileIO implements IFileWriter, IFileReader{
         jsonReadingList.put("number_of_papers", readingList.getNumOfPapers());
         
         JSONArray jsonPapers = new JSONArray();
-        for (String paperName : readingList.getNameOfPapers()) {
-            jsonPapers.put(paperName);
+        
+        if(readingList.getNameOfPapers() != null) {
+        	for (String paperName : readingList.getNameOfPapers()) {
+                jsonPapers.put(paperName);
+            }
         }
+
         jsonReadingList.put("name_of_papers", jsonPapers);
         
         try (FileWriter fileWriter = new FileWriter(path)) {
@@ -95,11 +99,7 @@ public class JSONFileIO implements IFileWriter, IFileReader{
     public static void main(String[] args) {
     	
         // Create a sample ReadingList object
-        /*Researcher newResearcher = new Researcher();
-        newResearcher.setUsername("Berke Tınas");
-        newResearcher.setPassword("123");
-        newResearcher.setFollowingResearchers(Arrays.asList(""));
-        newResearcher.setFollowerResearchers(Arrays.asList("Göktay İncekara","抑菌"));
+        /*
         
         ReadingList readingList = new ReadingList("test",newResearcher);
         readingList.setReadingListId(1);
@@ -140,7 +140,18 @@ public class JSONFileIO implements IFileWriter, IFileReader{
             
             System.out.println();
         }*/
+    	Researcher newResearcher = new Researcher();
+        newResearcher.setUsername("Berke Tınas");
+        newResearcher.setPassword("123");
+        newResearcher.setFollowingResearchers(Arrays.asList(""));
+        newResearcher.setFollowerResearchers(Arrays.asList("Göktay İncekara","抑菌"));
+        
+    	ReadingList rl = new ReadingList("Readling list name",newResearcher);
+    	rl.setNumOfPapers(2);
+    	
     	ReadingListCollection rc= new ReadingListCollection();
     	rc.createCollection();
+    	rl =  (ReadingList) rc.getCollection().get(0);
+    	System.out.println("rcr :" +rl.getReadingListName());
     }
 }

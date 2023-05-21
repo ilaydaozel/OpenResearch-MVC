@@ -1,7 +1,8 @@
 package model;
 
-// Paper.java
-public abstract class Paper {
+import java.util.Observable;
+
+public abstract class Paper extends Observable{
     private String authors;
     private String title;
     private String year;
@@ -24,38 +25,20 @@ public abstract class Paper {
         this.downloadNumber = downloadNumber;
     }
 
-    // Getters and setters
-
     public String getAuthors() {
         return authors;
-    }
-
-    public void setAuthors(String authors) {
-        this.authors = authors;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getYear() {
         return year;
     }
-
-    public void setYear(String year) {
-        this.year = year;
-    }
-
+    
     public String getDoi() {
         return doi;
-    }
-
-    public void setDoi(String doi) {
-        this.doi = doi;
     }
 
 	public int getDownloadNumber() {
@@ -64,5 +47,7 @@ public abstract class Paper {
 
 	public void setDownloadNumber(int downloadNumber) {
 		this.downloadNumber = downloadNumber;
+		setChanged();	
+		notifyObservers();
 	}
 }

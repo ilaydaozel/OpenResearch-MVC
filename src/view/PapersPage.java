@@ -23,6 +23,8 @@ public class PapersPage extends JPanel implements java.util.Observer {
 	private Paper _paper ;
     private Color blue = new Color(144, 219, 244);
     private JButton downloadButton = new JButton("Download File");
+    private JLabel downloadNum;
+    private Paper selectedPaper = new Article();
     
     public PapersPage(Collection paperCollection) {
     	this.paperCollection = paperCollection;
@@ -42,12 +44,14 @@ public class PapersPage extends JPanel implements java.util.Observer {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         add(listContainer, gridBagConstraints);    
-        addDetailedContainer(new Article());
+        addDetailedContainer(selectedPaper);
     }
 
 	public void addDetailedContainer(Paper selectedPaper) {
+		this.selectedPaper = selectedPaper;
+		selectedPaper.deleteObserver(this);
 		detailedContainer.removeAll();
-		
+		selectedPaper.addObserver(this);
 		//detailed Container
 		detailedContainer.setBackground(Color.white);
 		detailedContainer.setPreferredSize(new Dimension(800,300));
@@ -112,7 +116,14 @@ public class PapersPage extends JPanel implements java.util.Observer {
         downloadButtonPanel.setBackground(Color.white);
         downloadButtonPanel.add(downloadButton);
         //download number panel
-        JPanel downloadNumberPanel = addVerticalInfo("Download number: ", selectedPaper.getDownloadNumber()+"");
+		JPanel downloadNumberPanel = new JPanel();
+        JLabel titleLabel = new JLabel("Download number: ");
+        downloadNum = new JLabel(selectedPaper.getDownloadNumber()+"");
+        downloadNumberPanel.setLayout(new BoxLayout(downloadNumberPanel, BoxLayout.Y_AXIS));
+		titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		downloadNum.setAlignmentX(Component.CENTER_ALIGNMENT);
+		downloadNumberPanel.add(titleLabel);
+		downloadNumberPanel.add(downloadNum);
         downloadButtonPanel.add(downloadNumberPanel);
               
         gridBagConstraints.gridx = 0;
@@ -146,17 +157,6 @@ public class PapersPage extends JPanel implements java.util.Observer {
         return infoLinePanel;
 	}
 	
-	public JPanel addVerticalInfo(String title, String text) {
-		JPanel verticalPanel = new JPanel();
-        JLabel titleLabel = new JLabel(title);
-        JLabel textLabel = new JLabel(text);
-		verticalPanel.setLayout(new BoxLayout(verticalPanel, BoxLayout.Y_AXIS));
-		titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		textLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        verticalPanel.add(titleLabel);
-        verticalPanel.add(textLabel);
-        return verticalPanel;
-	}
 	
     public void downloadFile(ActionListener actionListener) {
         downloadButton.addActionListener(actionListener);
@@ -164,7 +164,9 @@ public class PapersPage extends JPanel implements java.util.Observer {
     
     @Override
     public void update(java.util.Observable o, Object arg) {
-		// TODO Auto-generated method stub
+		System.out.println("********inside update method paperspage");
+		//selectedPaper.setListData(researcher.getFollowerResearchers().toArray());
+		downloadNum.setText(this.selectedPaper.getDownloadNumber()+"");
     }
 	
 	public void selectPaper(ListSelectionListener listSelectionListener) {

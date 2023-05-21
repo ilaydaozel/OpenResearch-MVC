@@ -6,6 +6,8 @@ import java.util.Observable;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicSliderUI.ActionScroller;
+
 import model.Researcher;
 
 public class AccountPage extends JPanel implements java.util.Observer{
@@ -18,6 +20,7 @@ public class AccountPage extends JPanel implements java.util.Observer{
 	private JLabel followingLabel = new JLabel("Following Researchers:");
     private JList followingList;
     private JList followerList;
+    private JTextField newRLName = new JTextField(20);
     private JButton createRLButton = new JButton("Create Reading List");
     private Color blue = new Color(144, 219, 244);
     
@@ -60,7 +63,7 @@ public class AccountPage extends JPanel implements java.util.Observer{
         JPanel nameInfoPanel = new JPanel();
     	
         nameInfoPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        nameInfoPanel.setBackground(Color.white);;
+        nameInfoPanel.setBackground(Color.white);
         nameInfoPanel.add(usernameLabel);
         nameInfoPanel.add(username);
         username.setAlignmentY(BOTTOM_ALIGNMENT);
@@ -126,6 +129,8 @@ public class AccountPage extends JPanel implements java.util.Observer{
         GridBagConstraints rlGridBagConstraints = new GridBagConstraints();
         Border rlPanelBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
         readingListPanel.setBorder(rlPanelBorder);
+        readingListPanel.add(new JLabel("New reading list name:  "));
+        readingListPanel.add(newRLName);
         readingListPanel.add(createRLButton);
         
         //ad readingList panel
@@ -138,12 +143,31 @@ public class AccountPage extends JPanel implements java.util.Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
 		System.out.println("********inside update method accountpage");
-		System.out.println(researcher.getFollowingResearchers());
 		followerList.setListData(researcher.getFollowerResearchers().toArray());
 		followingList.setListData(researcher.getFollowingResearchers().toArray());
 		
 	}
+    
+    public void createNewReadingList(ActionListener actionListener) {
+    	createRLButton.addActionListener(actionListener);
+    }
+
+	public JTextField getNewRLName() {
+		return newRLName;
+	}
+
+	public void setNewRLName(JTextField newRLName) {
+		this.newRLName = newRLName;
+	}
+
+	public JButton getCreateRLButton() {
+		return createRLButton;
+	}
+
+	public void setCreateRLButton(JButton createRLButton) {
+		this.createRLButton = createRLButton;
+	}
+    
    
 }

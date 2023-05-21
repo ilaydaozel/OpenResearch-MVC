@@ -37,8 +37,14 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
 
     private void initComponents() {
         setLayout(new GridBagLayout());
+    	JLabel pageLabel = new JLabel("RESEARCHERS");
+    	pageLabel.setFont(new Font("", Font.BOLD, 20));
+    	pageLabel.setForeground(blue);
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        add(pageLabel,gridBagConstraints);
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
         add(listContainer, gridBagConstraints);    
         addDetailedContainer(new Researcher());
     }
@@ -47,39 +53,51 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
 		detailedContainer.removeAll();
 
 		detailedContainer.setBackground(Color.white);
-		detailedContainer.setPreferredSize(new Dimension(900,300));
+		detailedContainer.setPreferredSize(new Dimension(800,300));
 		detailedContainer.setLayout(new GridBagLayout());
         Border detailedContainerBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
         detailedContainer.setBorder(detailedContainerBorder);
 
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
-        JPanel usernamePanel = new JPanel();
-        usernamePanel.setLayout(new FlowLayout());
-        usernamePanel.setBackground(Color.white);
-        usernamePanel.add(usernameLabel);
-        usernamePanel.add(new JLabel(selectedResearcher.getUsername()));
+        
+        JPanel nameInfoPanel = new JPanel();
+        nameInfoPanel.setPreferredSize(new Dimension(200,40));
+        usernameLabel.setFont(new Font("", Font.BOLD, 20));
+        usernameLabel.setForeground(blue);
+        username.setFont(new Font("", Font.PLAIN, 18));
+    	username.setVerticalAlignment(SwingConstants.CENTER);
+        nameInfoPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        nameInfoPanel.setBackground(Color.white);
+        nameInfoPanel.add(usernameLabel);
+        nameInfoPanel.add(new JLabel(selectedResearcher.getUsername()));
+        username.setAlignmentY(BOTTOM_ALIGNMENT);
+        usernameLabel.setAlignmentY(BOTTOM_ALIGNMENT);;
+        Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
+        nameInfoPanel.setBorder(border);
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = gridBagConstraints.WEST;
-        detailedContainer.add(usernamePanel, gridBagConstraints);
+        detailedContainer.add(nameInfoPanel, gridBagConstraints);
         
         //buttons
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setPreferredSize(new Dimension(350, 40));
         buttonPanel.setBackground(Color.white);
         //follow button
-        followButton.setBackground(Color.white);
-        followButton.setPreferredSize(new Dimension(100,20));
+        followButton.setBackground(blue);
+        followButton.setPreferredSize(new Dimension(150,30));
         buttonPanel.add(followButton);
         //unfollow button
-        unfollowButton.setBackground(Color.white);
-        unfollowButton.setPreferredSize(new Dimension(100,20));
+        unfollowButton.setBackground(blue);
+        unfollowButton.setPreferredSize(new Dimension(150,30));
         buttonPanel.add(unfollowButton);
         //add button panel to panel
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = gridBagConstraints.WEST;
         detailedContainer.add(buttonPanel, gridBagConstraints); 
 
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new Insets(20, 0, 10, 0);
 		add(detailedContainer, gridBagConstraints);
 		SwingUtilities.updateComponentTreeUI(this);
@@ -93,7 +111,6 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
     
     public void unfollowResearcher(ActionListener actionListener) {
     	unfollowButton.addActionListener(actionListener);
-    	SwingUtilities.updateComponentTreeUI(this);
     }
     
     public void refresh() {

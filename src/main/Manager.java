@@ -33,6 +33,7 @@ public class Manager {
 	public void onLogin(UserStore session) {
 		if(session.getUser()!= null) {
 			Researcher researcher = session.getUser();
+
 			//creating homepage after login
 			this.navbar = new Navbar(session);
 			NavbarController navbarController = new NavbarController(navbar, this);
@@ -42,24 +43,23 @@ public class Manager {
 			
 			
 			this.researcherCollection = new ResearcherCollection();
+			ResearcherCollection resCol =  (ResearcherCollection) researcherCollection;
+			Researcher researcherFromCollection = resCol.getResearcherByResearcherName(researcher.getUsername());
+			
 			this.researcherView = new ResearchersPage(researcherCollection);
 			ResearcherController researcherController 
-						= new ResearcherController(researcherView,(ResearcherCollection) researcherCollection, researcher);
+						= new ResearcherController(researcherView,(ResearcherCollection) researcherCollection, researcherFromCollection);
 			
 			
 			this.readingListCollection = new ReadingListCollection((ResearcherCollection)this.researcherCollection);
-			System.out.println("manager collection: "+ readingListCollection.getCollection());
-			this.accountView = new AccountPage(researcher);
-			AccountController accountController = new AccountController(accountView, (ReadingListCollection) readingListCollection, researcher);
+			//System.out.println("manager collection: "+ readingListCollection.getCollection());
 			
-			for(Object res :  researcherCollection.getCollection() ) {
-				System.out.println("fordayım res collection "+ ((Researcher)res).getReadingLists());
-			}
-			
-			System.out.println("manager-----------------"+ researcherCollection.getCollection()); 
+
+			this.accountView = new AccountPage(researcherFromCollection);
+			AccountController accountController = new AccountController(accountView, (ReadingListCollection) readingListCollection, researcherFromCollection);
+
 			
 			this.paperCollection = new PaperCollection();
-			
 			this.paperView = new PapersPage(paperCollection);
 			PaperController paperController = new PaperController(paperView, (PaperCollection) paperCollection);
 			

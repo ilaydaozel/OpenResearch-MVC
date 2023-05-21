@@ -29,15 +29,22 @@ public abstract class Collection extends Observable {
 
     public void setCollection(List<Object> collection) {
         this.collection = collection;
+		setChanged();	
+		notifyObservers();
     }
 
     
     public void addToCollection(Object item) {
-    	collection.add(item);
+    	collection.add(item);		
+    	setChanged();	
+		notifyObservers();
+    	
     }
 
     public void removeFromItems(Object item) {
     	collection.remove(item);
+		setChanged();	
+		notifyObservers();
     }
 
 	public IFileReader getReader() {
@@ -46,6 +53,8 @@ public abstract class Collection extends Observable {
 
 	public void setReader(IFileReader reader) {
 		this.reader = reader;
+		setChanged();	
+		notifyObservers();
 	}
 
 	public IFileWriter getWriter() {
@@ -54,9 +63,13 @@ public abstract class Collection extends Observable {
 
 	public void setWriter(IFileWriter writer) {
 		this.writer = writer;
+		setChanged();	
+		notifyObservers();
 	}
     public void updateFile() {
         this.writer.writeAllPapers(this.collection);
+		setChanged();	
+		notifyObservers();
     }
    
 }

@@ -1,11 +1,12 @@
 package model;
 
 import java.util.Arrays;
+import java.util.Observable;
 
 import fileIO.JSONFileIO;
 import interfaces.*;
 
-public class ReadingList {
+public class ReadingList extends Observable{
 	private int readingListId;
 	private String readingListName;
 	private Researcher creatorResearcher;	
@@ -24,6 +25,8 @@ public class ReadingList {
 		IFileWriter createReadingListJSONFile = new JSONFileIO();
 		System.out.println("JSON fıle updated with :  "+ this);
 		createReadingListJSONFile.updateFile("readingList.json", this);
+		setChanged();	
+		notifyObservers();
 	}
 	
 	public ReadingList(int readingListId,int numOfPapers,String[] nameOfPapers,String name, Researcher researcher) {
@@ -39,6 +42,8 @@ public class ReadingList {
 	public void setReadingListId(int readingListId) {
 		this.readingListId = readingListId;
 		updateJsonFile();
+		setChanged();	
+		notifyObservers();
 	}
 	public Researcher getCreatorResearcher() {
 		return creatorResearcher;
@@ -46,6 +51,8 @@ public class ReadingList {
 	public void setCreatorResearcherName(Researcher creatorResearcher) {
 		this.creatorResearcher = creatorResearcher;
 		updateJsonFile();
+		setChanged();	
+		notifyObservers();
 	}
 	public String getReadingListName() {
 		return readingListName;
@@ -53,6 +60,8 @@ public class ReadingList {
 	public void setReadingListName(String readingListName) {
 		this.readingListName = readingListName;
 		updateJsonFile();
+		setChanged();	
+		notifyObservers();
 	}
 	public int getNumOfPapers() {
 		return numOfPapers;
@@ -61,6 +70,8 @@ public class ReadingList {
 		
 		this.numOfPapers = numOfPapers;
 		updateJsonFile();
+		setChanged();	
+		notifyObservers();
 	}
 	public String[] getNameOfPapers() {
 		return nameOfPapers;
@@ -68,6 +79,8 @@ public class ReadingList {
 	public void setNameOfPapers(String[] nameOfPapers) {
 		this.nameOfPapers = nameOfPapers;
 		updateJsonFile();
+		setChanged();	
+		notifyObservers();
 	}
 
 	@Override

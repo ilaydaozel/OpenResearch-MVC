@@ -9,7 +9,9 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.event.ListSelectionListener;
 
+import model.Article;
 import model.Collection;
+import model.Paper;
 import model.Researcher;
 import model.ResearcherCollection;
 
@@ -26,6 +28,7 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
 	private JButton unfollowButton = new JButton("Unfollow");
     private Color blue = new Color(144, 219, 244);
     private JList rlList;
+    private Researcher selectedResearcher = new Researcher();
 
     
     public ResearchersPage(Collection researcherCollection) {
@@ -47,11 +50,16 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         add(listContainer, gridBagConstraints);    
-        addDetailedContainer(new Researcher());
+        addDetailedContainer(selectedResearcher);
     }
 
 	public void addDetailedContainer(Researcher selectedResearcher) {
+		this.selectedResearcher = selectedResearcher;
+		
+		System.out.println(selectedResearcher.getUsername() +" : researcher rL in researcherspage: " + selectedResearcher.getReadingLists());
+    	//selectedResearcher.deleteObserver(this);
 		detailedContainer.removeAll();
+    	selectedResearcher.addObserver(this);
 
 		detailedContainer.setBackground(Color.white);
 		detailedContainer.setPreferredSize(new Dimension(800,300));
@@ -152,7 +160,9 @@ public class ResearchersPage extends JPanel implements java.util.Observer{
     
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println("updated researcher");
+		System.out.println("updated researcher ********************");
+		
+		rlList.setListData(selectedResearcher.getReadingLists().toArray());
 		// TODO Auto-generated method stub
 	}
 	

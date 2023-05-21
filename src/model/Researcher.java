@@ -5,7 +5,6 @@ import java.util.*;
 import fileIO.XmlFileIO;
 import interfaces.IFileWriter;
 
-@SuppressWarnings("deprecation")
 public class Researcher extends java.util.Observable{
 	private String username;
 	private String password;
@@ -20,6 +19,7 @@ public class Researcher extends java.util.Observable{
 		this.followerResearchers = new ArrayList<>();
 		this.readingLists = new ArrayList<>();
 	};
+	
 	public Researcher(String username, String password,
 					List<Object> followingResearchers,List<Object> followerResearchers) {
 		this.username = username;
@@ -75,6 +75,7 @@ public class Researcher extends java.util.Observable{
 	
 	public void addNewReadingList(ReadingList newReadingList) {
 		readingLists.add(newReadingList);
+		System.out.println("added new reading list /researcher: " + newReadingList.getReadingListName());
 		setChanged();	
 		notifyObservers();
 	}

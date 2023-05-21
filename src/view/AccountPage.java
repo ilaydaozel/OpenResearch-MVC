@@ -25,7 +25,7 @@ public class AccountPage extends JPanel implements java.util.Observer{
     private JButton createRLButton = new JButton("Create Reading List");
     private Color blue = new Color(144, 219, 244);
     
-    public AccountPage( Researcher researcher) {
+    public AccountPage(Researcher researcher) {
     	this.researcher = researcher;
     	researcher.addObserver(this);
     	initComponents();
@@ -178,7 +178,7 @@ public class AccountPage extends JPanel implements java.util.Observer{
 		followerList.setListData(researcher.getFollowerResearchers().toArray());
 		followingList.setListData(researcher.getFollowingResearchers().toArray());
 		System.out.println("rl: " + researcher.getReadingLists().toString());
-		rlList.setListData(researcher.getReadingLists().toArray());
+		rlList.setListData(researcher.getReadingLists().toArray());	
 		
 	}
     

@@ -47,7 +47,7 @@ public class ResearcherController{
 			if(selectedResearcher!= null) {
 				System.out.println(selectedResearcher + "followed / controller");
 				researcher.follow((Researcher) selectedResearcher);
-				researchersView.refresh();
+				//researchersView.refresh();
 			}
 
 			else {

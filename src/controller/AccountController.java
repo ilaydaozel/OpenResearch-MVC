@@ -29,13 +29,14 @@ public class AccountController{
 	class CreateNewReadingListListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			String rlName = accountView.getNewRLName().getText();
-			System.out.println("Create new rl named " + rlName);
-			System.out.println("r: "+ researcher.getUsername());
 			ReadingList newReadingList = new ReadingList(rlName, researcher);
 			researcher.addNewReadingList(newReadingList);
-		
-	
-			System.out.println("rlist collection: "+ rLList.getCollection().toString());
+			rLList.addToCollection(newReadingList);
+			System.out.println("Ekle dedikten sonra bublar gücelleniyo mu?");
+			System.out.println("Readinglist collection /Account controller : " + rLList.getCollection().toString());
+			System.out.println("researcher coll / Account controller: " + researcher.getReadingLists());
+			
+
 		}
 	}
 

@@ -32,6 +32,7 @@ public class PaperController {
 		papersView.downloadFile(new DownloadPaperListener());
 		papersView.selectReadingList(new SelectReadingListListener());
 		papersView.addToReadingList(new AddPaperToReadingListListener());
+		papersView.removeFromReadingList(new RemovePaperfromReadingListListener());
 	}
 
 	class SelectPaperListener implements ListSelectionListener{

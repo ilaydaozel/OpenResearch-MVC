@@ -45,5 +45,17 @@ public class ResearcherCollection extends Collection  {
 		System.out.println("test follwing "+ researcher.getFollowingResearchers().toString());
 		return researcher;		
 	}
+	public Researcher getResearcherByResearcherName(String name) {
+		
+		for (Object researcher : this.getCollection()) {
+			Researcher res = (Researcher) researcher;
+			
+			if(res.getUsername().equals(name)) {
+				System.out.println("girdim");
+				
+			}
+		}
+		return null;
+	}
 
 }

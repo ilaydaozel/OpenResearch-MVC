@@ -39,10 +39,10 @@ public class ReadingListCollection extends Collection{
 											data.get("creator_researcher_name"),
 											researcher);
 				
-		System.out.println("readinglist_id: "+ data.get("readinglist_id"));
-		System.out.println("number_of_papers: "+ data.get("number_of_papers"));
-		System.out.println("name_of_papers: "+ data.get("name_of_papers"));
-		System.out.println("test follwing "+ readingList.getCreatorResearcher().getUsername());
+		//System.out.println("readinglist_id: "+ data.get("readinglist_id"));
+		//System.out.println("number_of_papers: "+ data.get("number_of_papers"));
+		//System.out.println("name_of_papers: "+ data.get("name_of_papers"));
+		//System.out.println("test follwing "+ readingList.getCreatorResearcher().getUsername());
 		return readingList;		
 		
 	}

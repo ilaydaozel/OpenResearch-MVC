@@ -49,10 +49,9 @@ public class ResearcherCollection extends Collection  {
 		
 		for (Object researcher : this.getCollection()) {
 			Researcher res = (Researcher) researcher;
-			
 			if(res.getUsername().equals(name)) {
-				System.out.println("girdim");
-				
+	
+				return res;
 			}
 		}
 		return null;

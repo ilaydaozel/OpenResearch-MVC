@@ -112,5 +112,26 @@ public class Researcher extends java.util.Observable{
 		setChanged();	
 		notifyObservers();
 	}
+	public boolean addToReadingList(String readingListName, String paperName) {
+	    // Find the ReadingList object with the given readingListName
+	    for (Object obj : readingLists) {
+	        if (obj instanceof ReadingList) {
+	            ReadingList readingList = (ReadingList) obj;
+	            if (readingList.getReadingListName().equals(readingListName)) {
+	                // Check if the paperName already exists in the nameOfPapers list
+	                if (readingList.getNameOfPapers().contains(paperName)) {
+	                    return false; // Return 0 if the paper name already exists
+	                }
+	                // Add the paperName to the nameOfPapers list
+	                readingList.getNameOfPapers().add(paperName);
+	                return true; // Return 1 to indicate success
+	            }
+	        }
+	    }
+	    // If the reading list is not found, you can handle the case accordingly
+	    System.out.println("Reading list '" + readingListName + "' not found.");
+	    return false; // Return -1 to indicate failure
+	}
+
 	
 }

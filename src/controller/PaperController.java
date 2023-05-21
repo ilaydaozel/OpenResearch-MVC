@@ -20,7 +20,9 @@ import view.*;
 public class PaperController {
 	private PapersPage papersView;
 	protected Paper selectedPaper;
+	protected String selectedReadingListName;
 	private PaperCollection paperList;
+	private Researcher researcher;
 	
 	public PaperController(PapersPage papersView, Collection paperList) {
 		this.papersView = papersView;
@@ -71,6 +73,28 @@ public class PaperController {
 	        } else {
 	            JOptionPane.showMessageDialog(papersView, "No paper selected.");
 	        }
+	    }
+	}
+	
+	class AddPaperToReadingListListener implements ActionListener {
+	    public void actionPerformed(ActionEvent e) {
+	    	if (selectedPaper != null) {
+	    		if(researcher.getReadingLists()!= null) {
+	    			if(researcher.addToReadingList(selectedReadingListName, selectedPaper.getTitle())) {
+	    				JOptionPane.showMessageDialog(papersView, "Paper added successfully!");
+	    				return;
+	    			}
+	    			else {
+	    				JOptionPane.showMessageDialog(papersView, "Paper already exist in the "+ selectedReadingListName );
+	    			}
+	    		}
+	    		else {
+	    			JOptionPane.showMessageDialog(papersView, "Researcher has no reading list.");
+	    		}
+	    	}
+	    	else {
+	    		JOptionPane.showMessageDialog(papersView, "No paper selected.");
+	    	}
 	    }
 	}
 	

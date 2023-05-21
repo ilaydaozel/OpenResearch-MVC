@@ -41,7 +41,7 @@ public class ReadingListCollection extends Collection{
 											Integer.parseInt(data.get("readinglist_id")),
 											Integer.parseInt(data.get("number_of_papers")),
 											data.get("name_of_papers").split(","),
-											data.get("creator_researcher_name"),
+											data.get("readinglist_name"),
 											researcher);
 
         researcher.addNewReadingList(readingList);

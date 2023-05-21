@@ -72,7 +72,7 @@ public class ReadingList {
 
 	@Override
 	public String toString() {
-		return "ReadingList "+ creatorResearcher.getUsername();
+		return "Creator name: "+ creatorResearcher.getUsername() +"Reading list name: "+ getReadingListName();
 	}
 	
 

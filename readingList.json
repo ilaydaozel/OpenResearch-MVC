@@ -1,7 +1,44 @@
-{
-    "number_of_papers": 0,
-    "readinglist_id": 0,
-    "readinglist_name": "alo",
-    "name_of_papers": [],
-    "creator_researcher_name": "İlayda"
-}
+[
+    {
+        "number_of_papers": 0,
+        "readinglist_id": 0,
+        "readinglist_name": "asdasdasdasd",
+        "name_of_papers": [],
+        "creator_researcher_name": "İlayda"
+    },
+    {
+        "number_of_papers": 2,
+        "readinglist_id": 0,
+        "readinglist_name": "Readling list name",
+        "name_of_papers": [],
+        "creator_researcher_name": "Berke Tınas"
+    },
+    {
+        "number_of_papers": 0,
+        "readinglist_id": 0,
+        "readinglist_name": "asd",
+        "name_of_papers": [],
+        "creator_researcher_name": "İlayda"
+    },
+    {
+        "number_of_papers": 0,
+        "readinglist_id": 0,
+        "readinglist_name": "oha",
+        "name_of_papers": [],
+        "creator_researcher_name": "İlayda"
+    },
+    {
+        "number_of_papers": 0,
+        "readinglist_id": 0,
+        "readinglist_name": "test",
+        "name_of_papers": [],
+        "creator_researcher_name": "İlayda"
+    },
+    {
+        "number_of_papers": 0,
+        "readinglist_id": 0,
+        "readinglist_name": "berkenin reading list",
+        "name_of_papers": [],
+        "creator_researcher_name": "Berke Tınas"
+    }
+]

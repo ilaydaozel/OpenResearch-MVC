@@ -11,6 +11,16 @@ public class ReadingList {
 		this.readingListName = name;
 		this.creatorResearcher = researcher;
 	}
+	public ReadingList(int readingListId,int numOfPapers,String[] nameOfPapers,String name, Researcher researcher) {
+		this.readingListId = readingListId;
+		this.numOfPapers = numOfPapers;
+		this.nameOfPapers = nameOfPapers;
+		this.readingListName = name;
+		this.creatorResearcher = researcher;
+		
+		
+		
+	}
 	public int getReadingListId() {
 		return readingListId;
 	}

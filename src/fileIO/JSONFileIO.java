@@ -4,15 +4,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import interfaces.IFileReader;
 import interfaces.IFileWriter;
 import model.ReadingList;
 import model.Researcher;
 
-public class JSONFileIO implements IFileWriter{
+public class JSONFileIO implements IFileWriter, IFileReader{
 	
 	@Override
     public void updateFile(String path, Object readingListObject) {
@@ -71,5 +73,17 @@ public class JSONFileIO implements IFileWriter{
 	public void writeAllPapers(List<Object> list) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Map<String, String> readFile(String filePath) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Map<String, String>> readAllElements(String path) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

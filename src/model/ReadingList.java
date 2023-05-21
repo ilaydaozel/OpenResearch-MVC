@@ -1,6 +1,8 @@
 package model;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Observable;
 
 import fileIO.JSONFileIO;
@@ -11,12 +13,14 @@ public class ReadingList extends Observable{
 	private String readingListName;
 	private Researcher creatorResearcher;	
 	private int numOfPapers;
-	private String[] nameOfPapers;
+	private List<String> nameOfPapers;
 	
 	
 	public ReadingList(String name, Researcher researcher) {
 		this.readingListName = name;
 		this.creatorResearcher = researcher;
+		this.numOfPapers = 0;
+		this.nameOfPapers = new ArrayList<>();
 		updateJsonFile();
 		
 	}
@@ -29,7 +33,7 @@ public class ReadingList extends Observable{
 		notifyObservers();
 	}
 	
-	public ReadingList(int readingListId,int numOfPapers,String[] nameOfPapers,String name, Researcher researcher) {
+	public ReadingList(int readingListId,int numOfPapers,List<String> nameOfPapers,String name, Researcher researcher) {
 		this.readingListId = readingListId;
 		this.numOfPapers = numOfPapers;
 		this.nameOfPapers = nameOfPapers;
@@ -73,10 +77,10 @@ public class ReadingList extends Observable{
 		setChanged();	
 		notifyObservers();
 	}
-	public String[] getNameOfPapers() {
+	public List<String> getNameOfPapers() {
 		return nameOfPapers;
 	}
-	public void setNameOfPapers(String[] nameOfPapers) {
+	public void setNameOfPapers(List<String> nameOfPapers) {
 		this.nameOfPapers = nameOfPapers;
 		updateJsonFile();
 		setChanged();	
@@ -85,7 +89,21 @@ public class ReadingList extends Observable{
 
 	@Override
 	public String toString() {
-		return "Creator name: "+ creatorResearcher.getUsername() +"Reading list name: "+ getReadingListName();
+	    StringBuilder sb = new StringBuilder();
+	    if (nameOfPapers != null && !nameOfPapers.isEmpty()) {
+	        for (int i = 0; i < nameOfPapers.size(); i++) {
+	            sb.append(nameOfPapers.get(i));
+	            if (i < nameOfPapers.size() - 1) {
+	                sb.append(", ");
+	            }
+	        }
+	        sb.deleteCharAt(0);
+	        sb.deleteCharAt(sb.length() - 1);
+	    }
+
+	    String result = sb.toString();
+
+	    return getReadingListName() + ": " + result;
 	}
 	
 

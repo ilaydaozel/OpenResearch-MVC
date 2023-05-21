@@ -52,9 +52,7 @@ public class Manager {
 			
 			
 			this.readingListCollection = new ReadingListCollection((ResearcherCollection)this.researcherCollection);
-			//System.out.println("manager collection: "+ readingListCollection.getCollection());
 			
-
 			this.accountView = new AccountPage(researcherFromCollection);
 			AccountController accountController = new AccountController(accountView, (ReadingListCollection) readingListCollection, researcherFromCollection);
 

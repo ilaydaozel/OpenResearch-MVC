@@ -32,11 +32,6 @@ public class AccountController{
 			ReadingList newReadingList = new ReadingList(rlName, researcher);
 			researcher.addNewReadingList(newReadingList);
 			rLList.addToCollection(newReadingList);
-			System.out.println("Ekle dedikten sonra bublar gücelleniyo mu?");
-			System.out.println("Readinglist collection /Account controller : " + rLList.getCollection().toString());
-			System.out.println("researcher coll / Account controller: " + researcher.getReadingLists());
-			
-
 		}
 	}
 

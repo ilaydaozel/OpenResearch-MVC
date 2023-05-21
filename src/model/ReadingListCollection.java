@@ -40,7 +40,7 @@ public class ReadingListCollection extends Collection{
 		ReadingList readingList = new ReadingList(
 											Integer.parseInt(data.get("readinglist_id")),
 											Integer.parseInt(data.get("number_of_papers")),
-											data.get("name_of_papers").split(","),
+											new ArrayList<>(Arrays.asList(data.get("name_of_papers").split(", "))),
 											data.get("readinglist_name"),
 											researcher);
 

@@ -60,7 +60,7 @@ public class Manager {
 			
 			this.paperCollection = new PaperCollection();
 			this.paperView = new PapersPage(paperCollection, researcherFromCollection );
-			PaperController paperController = new PaperController(paperView, (PaperCollection) paperCollection);
+			PaperController paperController = new PaperController(paperView, (PaperCollection) paperCollection, researcherFromCollection);
 			
 		}
 	}

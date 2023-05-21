@@ -24,12 +24,14 @@ public class PaperController {
 	private PaperCollection paperList;
 	private Researcher researcher;
 	
-	public PaperController(PapersPage papersView, Collection paperList) {
+	public PaperController(PapersPage papersView, Collection paperList, Researcher researcher) {
 		this.papersView = papersView;
 		this.paperList = (PaperCollection) paperList;
+		this.researcher = researcher;
 		papersView.selectPaper(new SelectPaperListener());
 		papersView.downloadFile(new DownloadPaperListener());
 		papersView.selectReadingList(new SelectReadingListListener());
+		papersView.addToReadingList(new AddPaperToReadingListListener());
 	}
 
 	class SelectPaperListener implements ListSelectionListener{
@@ -44,8 +46,15 @@ public class PaperController {
 	
 	class SelectReadingListListener implements ListSelectionListener{
 		public void valueChanged(ListSelectionEvent e) {
+			System.out.println("GHERE");
 			Object objSelectedReadingListName = papersView.getRlList().getSelectedValue();		
-			selectedReadingListName = (String) objSelectedReadingListName;
+			System.out.println("objSelectedReadingListName: " + objSelectedReadingListName);
+			if(objSelectedReadingListName!= null) {
+				selectedReadingListName = ((ReadingList )objSelectedReadingListName).getReadingListName();
+				System.out.println("objSelectedReadingListName: " + objSelectedReadingListName);
+				System.out.println("selectedReadingListName : " + selectedReadingListName);
+			}
+
 		}
 	}
 	

@@ -30,11 +30,11 @@ public class PapersPage extends JPanel implements java.util.Observer {
     private JLabel downloadNum;
     private Paper selectedPaper = new Article();
     private JList rlList;
+    private List<Object> rlElementList;
     private JTextField rLName = new JTextField(20);
     private JButton addToRLButton = new JButton("Add To This Reading List");
     private JButton removeFromRLButton = new JButton("Remove From This Reading List");
     private Researcher researcher;
-    private ReadingList selectedReadingList;
     
     public PapersPage(Collection paperCollection, Researcher researcher) {
     	this.paperCollection = paperCollection;
@@ -151,7 +151,8 @@ public class PapersPage extends JPanel implements java.util.Observer {
 		JPanel rlPanel = new JPanel();
 		rlPanel.setBackground(Color.white);
 		 //reading lists list
-        rlList = new JList(researcher.getReadingLists().toArray());
+		rlElementList = researcher.getReadingLists();
+        rlList = new JList(rlElementList.toArray());
         rlList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         rlList.setLayoutOrientation(JList.VERTICAL);
         rlList.setVisibleRowCount(-1);
@@ -231,6 +232,13 @@ public class PapersPage extends JPanel implements java.util.Observer {
         downloadButton.addActionListener(actionListener);
     }
     
+    public void addToReadingList(ActionListener actionListener) {
+        addToRLButton.addActionListener(actionListener);
+    }
+    public void removeFromReadingList(ActionListener actionListener) {
+        removeFromRLButton.addActionListener(actionListener);
+    }
+    
     @Override
     public void update(java.util.Observable o, Object arg) {
 		System.out.println("********inside update method paperspage");
@@ -244,6 +252,7 @@ public class PapersPage extends JPanel implements java.util.Observer {
 	
 	public void selectReadingList(ListSelectionListener listSelectionListener) {
 		rlList.addListSelectionListener(listSelectionListener);
+		System.out.println("SELECET READING LIST");
     }
 	
 	public List<Object> getPaperList() {
@@ -268,6 +277,14 @@ public class PapersPage extends JPanel implements java.util.Observer {
 
 	public void setRlList(JList rlList) {
 		this.rlList = rlList;
+	}
+
+	public List<Object> getRlElementList() {
+		return rlElementList;
+	}
+
+	public void setRlElementList(List<Object> rlElementList) {
+		this.rlElementList = rlElementList;
 	}
 
 

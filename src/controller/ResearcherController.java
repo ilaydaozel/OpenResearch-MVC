@@ -65,12 +65,10 @@ public class ResearcherController{
 			if(selectedResearcher!= null ) {
 				System.out.println(selectedResearcher + "unfollowed / controller");
 				researcher.unfollow((Researcher) selectedResearcher);
-				//SwingUtilities.updateComponentTreeUI(researchersView);
 			}
 			else {
 	            JOptionPane.showMessageDialog(researchersView, "No researcher selected.");
 	        }
-
 
 		}
 	}

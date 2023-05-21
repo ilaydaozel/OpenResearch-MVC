@@ -33,6 +33,7 @@ public class Researcher extends java.util.Observable{
 	public String getUsername() {
 		return username;
 	}
+	
 	public void setUsername(String name) {
 		this.username = name;
 		setChanged();	
@@ -49,11 +50,9 @@ public class Researcher extends java.util.Observable{
 	}
     public void updateXmlFile() {
     	
-    	String xmlFilePath = "OpenResearch-MVC/src/users.xml";
+    	String xmlFilePath = "src/users.xml";
         IFileWriter xmlFileIO = new XmlFileIO();
         xmlFileIO.updateFile(xmlFilePath, this);
-
-        System.out.println("---------updatexmlFile method");
 		setChanged();	
 		notifyObservers();
     }
@@ -61,31 +60,29 @@ public class Researcher extends java.util.Observable{
 	public void follow(Researcher researcher) {
 		this.followingResearchers.add(researcher.getUsername());
 		researcher.getFollowerResearchers().add(username);
-		System.out.println(this.username + " Followed " + researcher.getUsername());
-		System.out.println(this.username + " Following list " + this.followingResearchers.toString());
 		updateXmlFile();
 		setChanged();	
 		notifyObservers();
-		System.out.println("---------follow method");
 	}
 		
 	public void unfollow(Researcher researcher) {
 		this.followingResearchers.remove(researcher.getUsername());
 		researcher.getFollowerResearchers().remove(username);
-		System.out.println(this.username + " Unfollowed " + researcher.getUsername());
-		System.out.println(this.username + " Follower list " + this.followingResearchers.toString());
 		updateXmlFile();
 		setChanged();	
 		notifyObservers();
-		System.out.println("---------unfollow method");
 	}
 	
 	public void addNewReadingList(String name) {
 		readingLists.add(new ReadingList(name, this));
+		setChanged();	
+		notifyObservers();
 	}
 	
 	public void removeReadingList(ReadingList readingList) {
 		readingLists.remove(readingList);
+		setChanged();	
+		notifyObservers();
 	}
 	public String toString() {
 		return username;
